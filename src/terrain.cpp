@@ -2,7 +2,13 @@
 
 Terrain::Terrain(Coordinates::Coordinates *coord, int type) : location(*coord), type(type) {}
 
-void Terrain::toggleBlock = {
+Terrain::~Terrain() {
+      delete *coordinates;
+}
+
+bool Terrain::isBlocked() {return blocked;}
+
+void Terrain::toggleBlock() {
     if (Terrain::isBlocked) {
         Terrain::blocked = False;
     }
@@ -11,13 +17,8 @@ void Terrain::toggleBlock = {
     }
 }
 
-bool Terrain::isBlocked = {return blocked;}
+int Terrain::getType() {return type;}
 
-Coordinates::Coordinates Terrain::getLocation = {return location;}
+void Terrain::setType(int newType) {type = newType;}
 
-Terrain::~Terrain() {
-      delete *coordinates;
-}
-int Terrain::getType = {return type;}
-
-void Terrain::setType(int newType) = {type = newType;}
+Coordinates::Coordinates Terrain::getLocation() {return location;}

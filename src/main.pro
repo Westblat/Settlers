@@ -26,10 +26,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    coordinates.cpp
+        coordinates.cpp \
+        terrain.cpp
 
 HEADERS += \
         mainwindow.h \
-    coordinates.h
+        coordinates.h \
+        terrain.h
 
 FORMS +=
