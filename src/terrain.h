@@ -16,9 +16,9 @@ public:
     Coordinates getLocation();
 
 private:
-    bool blocked;
-    Coordinates location;
+    Coordinates *location;
     int type;
+    bool blocked;
 
 };
 

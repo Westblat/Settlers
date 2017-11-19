@@ -1,19 +1,19 @@
 #include "terrain.h"
 
-Terrain::Terrain(Coordinates::Coordinates *coord, int type) : location(*coord), type(type) {}
+Terrain::Terrain(Coordinates *coord, int type) : location(coord), type(type), blocked(false) {}
 
 Terrain::~Terrain() {
-      delete *coordinates;
+      delete location;
 }
 
 bool Terrain::isBlocked() {return blocked;}
 
 void Terrain::toggleBlock() {
-    if (Terrain::isBlocked) {
-        Terrain::blocked = False;
+    if (Terrain::blocked) {
+        Terrain::blocked = false;
     }
     else {
-        Terrain::blocked = True;
+        Terrain::blocked = true;
     }
 }
 
@@ -21,4 +21,4 @@ int Terrain::getType() {return type;}
 
 void Terrain::setType(int newType) {type = newType;}
 
-Coordinates::Coordinates Terrain::getLocation() {return location;}
+Coordinates Terrain::getLocation() {return *location;}
