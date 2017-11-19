@@ -7,6 +7,10 @@
 class Map {
 public:
     Map(int w, int h);
+    ~Map();
+    int get_width() const;
+    int get_height() const;
+    const std::vector<std::vector<Terrain*> >& get_map() const;
     void setMap();
 private:
     int width;
