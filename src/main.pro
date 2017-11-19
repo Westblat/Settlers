@@ -27,11 +27,13 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
         coordinates.cpp \
-        terrain.cpp
+        terrain.cpp \
+        map.cpp
 
 HEADERS += \
         mainwindow.h \
         coordinates.h \
-        terrain.h
+        terrain.h \
+        map.h
 
 FORMS +=
