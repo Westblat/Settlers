@@ -25,9 +25,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+	settler.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+	settler.h
 
 FORMS +=
