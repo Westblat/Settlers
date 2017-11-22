@@ -9,13 +9,13 @@ class Settler
 public:
 	Settler(std::string name, std::string task);
 	~Settler();
-	void addItem(std::string, int size);
-	void removeItem(std::string, int size);
+	void addItem(int name, int size);
+	void removeItem(int name, int size);
 
 private:
 	std::string name;
 	std::string task;
-	std::pair<std::vector<std::string>, int> inventory;
+	std::pair<std::vector<int>, int> inventory;
 };
 
 #endif
