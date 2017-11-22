@@ -15,7 +15,7 @@ void Settler::addItem(int name, int size) {
 }
 
 void Settler::removeItem(int name, int size) {
-	std::vector<Item>::iterator it = find(inventory.first.begin(), inventory.first.end(), name);
+	std::vector<int>::iterator it = std::find(inventory.first.begin(), inventory.first.end(), name);
 	inventory.first.erase(it);
 	inventory.second = inventory.second + size;
 }
