@@ -7,12 +7,24 @@
 class Settler
 {
 public:
-	Settler(std::string name, std::string task);
+	Settler(std::string name);
 	~Settler();
-	void addItem(int name, int size);
-	void removeItem(int name, int size);
+
+	std::vector<int> getItems();
+	bool addItem(int item);
+	bool removeItem(int item);
+
+	std::string getName();
+
+	std::string getTask();
+	bool setTask(std::string newTask);
+
+	int getHP();
+	bool setHP(int hp);
+
 
 private:
+	int hp;
 	std::string name;
 	std::string task;
 	std::pair<std::vector<int>, int> inventory;
