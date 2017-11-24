@@ -27,14 +27,35 @@ Private:
 	std::string task //Current task
 	int hp //Current HitPoints
 	Building *home //Building Settler is tied to, !!might be unneeded!!
-	pair<vector<int> items, int maxsize> //Inventory, first part is content, second max size
+	pair<vector<int> items, int maxsize> //Inventory, first part is content, second max size "-1 for unlimtited, 0 for 0, pos item for defined size"
+	bool playerControlled //Determines if player can control this settler
+	
 
-
-Building()
+Game()
 Public:
-	/!!TODO!!
+	Map& getMap() //Returns reference to game map
+	vector<Building*>& getBuildings() //Returns vector of buildings
+	vector<Settler*>& getSettlers() //Returns vector of Settlers
+	void nextStep
+Private:
+	Map map
+	vector<Building*> buildings
+	vctor<Settler*> units
+	TaskHandler Ai
+	
+	
+Building()
+/*When building is created it is set not ready (you have to build it first), buildings inventory is filled with items required to complete building,
+build-member function removes items from inventory until its empty, then buildin is set ready and functional */
+Public:
+	bool addItem(int item) //Returns true if item added succesfully else false
+	bool removeItem(int item) //Returns true if item found and removed else false
+	bool build(int item) //See Building description for more detailed description,
+	bool setReady() //Works for not ready buildings, automatically completes building, empties inventory and sets isReady->true
 Private:
 	int type //Building "name"
+	pair<vector<int> items, int maxsize> //Same as in Settler
+	bool isReady //Determines  if building is built
 	vector<Settler*> residents //Settlers tied to the building
 	
 	
@@ -45,7 +66,7 @@ Public:
 	vector<vector<Terrain*> >& getMap() //Returns map
 	void setMap() //Sets map from predifined file
 Private:
-	int width //Widht
+	int width //Width
 	int height //Height
 	vector<vector<Terrain*> > map //Vector of vectors containing Terrain objects [x][y]-map
 	
