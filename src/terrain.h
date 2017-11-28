@@ -1,6 +1,7 @@
 #ifndef TERRAIN_H
 #define TERRAIN_H
 #include "coordinates.h"
+#include <ostream>
 
 class Terrain {
 public:
@@ -21,6 +22,7 @@ private:
     bool blocked;
 
 };
+std::ostream& operator<<(std::ostream& os, Terrain terrain);
 
 
 #endif

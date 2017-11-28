@@ -10,10 +10,9 @@ Map::Map(int w, int h) : width(w), height(h) {
     }
 }
 
-
 Map::~Map(){
-    for(auto it = map.begin(); it != map.end(); it++){
-        for(auto iter = it->begin(); iter != it->end(); iter++){
+    for(std::vector<std::vector<Terrain*> >::iterator it = map.begin(); it != map.end(); it++){
+        for(std::vector<Terrain*>::iterator iter = it->begin(); iter != it->end(); iter++){
             delete *iter;
         }
     }
@@ -22,3 +21,15 @@ Map::~Map(){
 int Map::get_width() const {return width;}
 int Map::get_height() const {return height;}
 const std::vector<std::vector<Terrain*> >& Map::get_map() const {return map;}
+
+std::ostream& operator<<(std::ostream& os, Map map){
+    
+    std::vector<std::vector<Terrain*> > temp = map.get_map();
+    
+    for(std::vector<std::vector<Terrain*> >::iterator it = temp.begin(); it != temp.end(); ++it){
+        for(std::vector<Terrain*>::iterator iter = it->begin(); iter != it->end(); ++iter){
+            os << *iter << std::endl;
+        }
+    }
+    return os;
+}

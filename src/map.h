@@ -3,6 +3,7 @@
 #include <vector>
 #include "terrain.h"
 #include "coordinates.h"
+#include <iostream>
 
 class Map {
 public:
@@ -17,5 +18,7 @@ private:
     int height;
     std::vector<std::vector<Terrain*> > map;
 };
+
+std::ostream& operator<<(std::ostream& os, Map map);
 
 #endif
