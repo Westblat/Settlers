@@ -22,7 +22,7 @@ private:
     bool blocked;
 
 };
-std::ostream& operator<<(std::ostream& os, Terrain terrain);
+std::ostream& operator<<(std::ostream& os, Terrain& terrain);
 
 
 #endif
