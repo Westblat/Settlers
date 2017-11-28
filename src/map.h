@@ -19,6 +19,6 @@ private:
     std::vector<std::vector<Terrain*> > map;
 };
 
-std::ostream& operator<<(std::ostream& os, Map map);
+std::ostream& operator<<(std::ostream& os, Map& map);
 
 #endif

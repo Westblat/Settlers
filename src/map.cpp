@@ -22,7 +22,7 @@ int Map::get_width() const {return width;}
 int Map::get_height() const {return height;}
 const std::vector<std::vector<Terrain*> >& Map::get_map() const {return map;}
 
-std::ostream& operator<<(std::ostream& os, Map map){
+std::ostream& operator<<(std::ostream& os, Map& map){
     
     std::vector<std::vector<Terrain*> > temp = map.get_map();
     
