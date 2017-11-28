@@ -20,8 +20,9 @@ Public:
 	bool removeItem(int item) //Returns true if item found and removed else false
 	Building getHome() //Returns home
 	bool setHome(Building *home) //Returns true if succesful else false, also adds Settler to Buildings "residents" 
-	int getHP() //Returns HP value
-	int setHP() //Returns new HP value
+	int getHp() //Returns HP value
+	int removeHp() //Returns new HP value
+	int addHp() //Returns new HP value, cant be higher than maxHp
 	void pushPath(int x, int y) //Push direction to path
 	void setDelay(int time) //Set wait time (actionDelay) for next simulation
 	bool reduceDelay() //Reduces wait time by one, returns true if actionDelay==0
@@ -30,6 +31,7 @@ Private:
 	std::string name //SettlersName
 	std::string task //Current task
 	int hp //Current HitPoints
+	int maxHp //Max value for HP
 	Building *home //Building Settler is tied to, !!might be unneeded!!
 	pair<vector<int> items, int maxsize> //Inventory, first part is content, second max size "-1 for unlimtited, 0 for 0, pos item for defined size"
 	bool playerControlled //Determines if player can control this settler
@@ -94,9 +96,9 @@ Private:
 	
 Coordinates(int x, int y)
 Public:
-	int get_x()
-	int get_y()
-	Coordinates get_next(int x, int y)
+	int getX()
+	int getY()
+	Coordinates getNext(int x, int y)
 	bool updateCoords(int x, int y) //Sets new coordinate
 Private:
 	int x
