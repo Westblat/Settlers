@@ -28,8 +28,9 @@ std::ostream& operator<<(std::ostream& os, Map map){
     
     for(std::vector<std::vector<Terrain*> >::iterator it = temp.begin(); it != temp.end(); ++it){
         for(std::vector<Terrain*>::iterator iter = it->begin(); iter != it->end(); ++iter){
-            os << *iter << std::endl;
+            os << **iter << " ";
         }
+        os << std::endl;
     }
     return os;
 }
