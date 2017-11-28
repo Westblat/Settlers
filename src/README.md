@@ -21,8 +21,8 @@ Public:
 	Building getHome() //Returns home
 	bool setHome(Building *home) //Returns true if succesful else false, also adds Settler to Buildings "residents" 
 	int getHp() //Returns HP value
-	int removeHp() //Returns new HP value
-	int addHp() //Returns new HP value, cant be higher than maxHp
+	int removeHp(int remove) //Returns new HP value
+	int addHp(int add) //Returns new HP value, cant be higher than maxHp
 	void pushPath(int x, int y) //Push direction to path
 	void setDelay(int time) //Set wait time (actionDelay) for next simulation
 	bool reduceDelay() //Reduces wait time by one, returns true if actionDelay==0
