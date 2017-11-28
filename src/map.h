@@ -4,6 +4,11 @@
 #include "terrain.h"
 #include "coordinates.h"
 #include <iostream>
+#include <fstream>
+#include <string>
+#include<cstdlib>
+#include <sstream>
+
 
 class Map {
 public:
