@@ -25,7 +25,7 @@ public:
 	int addHP(int hpChange);
 
 	void pushPath(int x, int y);
-	std::queue <std::pair<int, int>> getPath();
+	std::queue <std::pair<int, int> > getPath();
 	
 	void setDelay(int time);
 	bool reduceDelay();
@@ -37,7 +37,7 @@ private:
 	std::string name; // Settlers name
 	std::string task; // Current task
 	std::pair<std::vector<int>, int> inventory; // Inventory, where the first element of the pair is the item identification number and the latter is the maximum size
-	std::queue<std::pair<int, int>> path; // Movement path, contains directions in the form of x and y coordinates
+	std::queue<std::pair<int, int> > path; // Movement path, contains directions in the form of x and y coordinates
 	int actionDelay; // How much time action takes
 	bool playerControlled; // Determines whether settlers is able to accept commands from player or not
 };

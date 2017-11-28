@@ -29,7 +29,7 @@ bool Settler::setTask(std::string newTask)
 
 // Adds a given item to the inventory vector, assuming the the inventory isn't full (vector.size != maxsize)
 bool Settler::addItem(int item) {
-	if (inventory.first.size() != inventory.second)
+	if ((int)inventory.first.size() != inventory.second)
 	{
 		inventory.first.push_back(item);
 		return true;
@@ -94,7 +94,7 @@ void Settler::pushPath(int x, int y)
 }
 
 // Returns path
-std::queue <std::pair<int, int>> Settler::getPath() { return path; }
+std::queue <std::pair<int, int> > Settler::getPath() { return path; }
 
 // Sets action delay to the given value
 void Settler::setDelay(int delay) { actionDelay = delay; }
