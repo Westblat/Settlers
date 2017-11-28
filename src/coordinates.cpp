@@ -2,10 +2,16 @@
 
 Coordinates::Coordinates(int x, int y) : x(x), y(y){}
 
-int Coordinates::get_x() const {return x;}
-int Coordinates::get_y() const {return y;}
+int Coordinates::getX() const {return x;}
+int Coordinates::getY() const {return y;}
+
+bool Coordinates::updateCoords(int xVal, int yVal) {
+    x = xVal;
+    y = yVal;
+    return true;
+}
 
 bool operator==(Coordinates const&a, Coordinates const&b) {
-    return a.get_x()==b.get_x() && a.get_y()==b.get_y();
+    return a.getX()==b.getX() && a.getY()==b.getY();
 }
 

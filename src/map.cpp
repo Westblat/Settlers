@@ -48,6 +48,10 @@ void Map::setMap() {
     }
 }
 
+bool Map::contains(Coordinates &coord) {
+    return coord.getX()>0 && coord.getY()>0 && coord.getX()<width && coord.getY()<height;
+}
+
 std::ostream& operator<<(std::ostream& os, Map& map){
     
     std::vector<std::vector<Terrain*> > temp = map.get_map();

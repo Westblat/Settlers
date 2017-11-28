@@ -18,6 +18,7 @@ public:
     int get_height() const;
     const std::vector<std::vector<Terrain*> >& get_map() const;
     void setMap();
+    bool contains(Coordinates &coord);
 private:
     int width;
     int height;

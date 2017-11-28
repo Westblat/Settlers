@@ -6,9 +6,9 @@ class Coordinates
 {
 public:
     Coordinates(int x, int y);
-    int get_x() const;
-    int get_y() const;
-    Coordinates get_next(int x, int y);
+    int getX() const;
+    int getY() const;
+    bool updateCoords(int x, int y);
 private:
     int x;
     int y;
