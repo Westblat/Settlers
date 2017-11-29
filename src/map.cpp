@@ -69,6 +69,7 @@ std::vector<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates*
 
     Terrain *start = this->getTerrain(unit);
     Terrain *end = this->getTerrain(target);
+    Coordinates *endpos = end->getLocation();
 
     int size = this->get_height()*this->get_width();
 
@@ -83,13 +84,19 @@ std::vector<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates*
     std::vector<std::pair<int, Terrain*> > heap;
     heap.push_back(std::pair<int, Terrain*> (0,start));
 
-    //*TEST STUFF PLEASE REMOVE
+    /*TEST STUFF PLEASE REMOVE
     heap.push_back(std::pair<int, Terrain*> (4, end));
     heap.push_back(std::pair<int, Terrain*> (3, end));
     heap.push_back(std::pair<int, Terrain*> (5, end));
     //END OF TEST STUFF*/
 
     std::make_heap(heap.begin(), heap.end(), comparison);
+
+    std::vector<std::pair<int,int> > directions;
+    directions.push_back(std::pair<int, int> (1,0));
+    directions.push_back(std::pair<int, int> (0,1));
+    directions.push_back(std::pair<int, int> (-1,0));
+    directions.push_back(std::pair<int, int> (0,-1));
 
     while (heap.size()>0){
         std::pair<int, Terrain*> next = heap.front();
@@ -99,10 +106,21 @@ std::vector<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates*
         Terrain *u = next.second;
         Coordinates *upos = u->getLocation();
         int uposindex = upos->getX()*this->width + upos->getY();
+
+        if (distances[uposindex] == INT_MAX) {break;} //Unable to find path
+        if (upos == endpos ){break;} //Search is completed
+
+        for(auto iter = directions.begin(); iter!=directions.end(); ++iter) {
+            int tempX = upos->getX()+(*iter).first;
+            int tempY = upos->getY()+(*iter).second;
+            if (this->contains(tempX, tempY)) {
+                std::cout<<*this->getTerrain(tempX,tempY)<<std::endl;
+            }
+        }
     }
 
 
-    //*TEST STUFF PLEASE REMOVE
+    /*TEST STUFF PLEASE REMOVE
     std::cout<<"asd"<<std::endl;
     std::cout<<(heap.front()).first<<std::endl;
     std::cout<<heap.size()<<std::endl;
