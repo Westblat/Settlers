@@ -2,6 +2,7 @@
 #define BUILDING_H
 #include <string>
 #include <vector>
+#include <algorithm>
 
 class Building
 {
@@ -14,9 +15,6 @@ public:
 	bool removeItem(int item);
 	void setReady();
 	int getType();
-
-	Building (Building& b);
-
 
 protected:
 	int type;

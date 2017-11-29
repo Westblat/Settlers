@@ -1,8 +1,4 @@
-
-
 #include "settler.h"
-#include <algorithm>
-#include <iostream>
 
 // Constructor take the name of the settler and sets the values for max inventory size, max hp, (current) hp and playerControlled to true
 Settler::Settler(std::string name) : name(name) {

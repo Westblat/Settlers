@@ -1,11 +1,11 @@
 #include "building.h"
 
-Building::Building(int type, int hp): type(type), hp(hp) { }
+Building::Building(int type, int hp): type(type), hp(hp), isReady(false) { }
 
 // Adds a given item to the inventory vector, assuming the the inventory isn't full (vector.size != maxsize)
 bool Building::addItem(int item)
 {
-	if (inventory.first.size() != inventory.second)
+	if ((int)inventory.first.size() != inventory.second)
 	{
 		inventory.first.push_back(item);
 		return true;
@@ -33,13 +33,8 @@ bool Building::removeItem(int item)
 
 Building::~Building() { }
 
-Building::getType() { return type;}
+int Building::getType() { return type;}
 
 void Building::setReady() {
 	Building::isReady = true;
-}
-
-Building::Building (Building& building) {
-	this.type = building.type;
-	this.hp = building.hp;
 }

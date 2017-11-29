@@ -4,6 +4,9 @@
 #include <string>
 #include <vector>
 #include <queue>
+#include <algorithm>
+#include <iostream>
+
 
 class Settler
 {

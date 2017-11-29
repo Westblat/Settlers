@@ -31,6 +31,7 @@ SOURCES += \
         map.cpp \
         game.cpp \
 	settler.cpp \
+        building.cpp \
         house.cpp
 
 HEADERS += \
@@ -40,6 +41,7 @@ HEADERS += \
         map.h \
         game.h \
 	settler.h \
+        building.h \
         house.h
 
 FORMS +=

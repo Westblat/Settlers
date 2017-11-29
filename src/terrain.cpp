@@ -24,7 +24,7 @@ void Terrain::setType(int newType) {type = newType;}
 Coordinates& Terrain::getLocation() {return *location;}
 
 void Terrain::placeBuilding(Building *building) {
-    //Terrain::buildingType = building->getType();
+    Terrain::buildingType = building->getType();
 }
 
 std::ostream& operator<<(std::ostream& os, Terrain& terrain){
