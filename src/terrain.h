@@ -14,7 +14,7 @@ public:
     int getType();
     void setType(int newType);
     
-    Coordinates getLocation();
+    Coordinates& getLocation();
 
 private:
     Coordinates *location;
