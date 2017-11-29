@@ -21,5 +21,13 @@ void Game::addBuilding(int type, Coordinates *location){
     if(type == 1) {
         House *talo = new House(map->get_map()[location->getX()][location->getY()]);
         buildings.push_back(talo);
+        addSettler(talo);
+        addSettler(talo);
     }
+}
+
+void Game::addSettler(House *house) {
+    Settler *settler = new Settler("John Cena");
+    house->addSettler(settler);
+    settlers.push_back(settler);
 }

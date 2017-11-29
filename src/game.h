@@ -13,9 +13,11 @@ public:
     Map& getMap();
     void setBuildings();
     void addBuilding(int type, Coordinates *location);
+    void addSettler(House *house);
 private:
     Map *map;
     std::vector<Building*> buildings;
+    std::vector<Settler*> settlers;
 };
 
 #endif // GAME_H

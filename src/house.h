@@ -8,6 +8,7 @@ class House: public Building {
 public:
     House(Terrain *terrain);
     void build();
+    void addSettler(Settler *settler);
 private:
     Terrain *terrain;
     std::vector<Settler*> habitants;
