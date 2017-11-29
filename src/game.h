@@ -13,6 +13,7 @@ public:
     ~Game();
     Map& getMap();
     void setBuildings();
+    void addBuilding(int type, Coordinates *location);
 private:
     Map *map;
     std::vector<Building*> buildings;

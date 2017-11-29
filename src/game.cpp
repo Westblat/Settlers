@@ -16,3 +16,10 @@ void Game::setBuildings(){
     talo->setReady();
     buildings.push_back(talo);
 }
+
+void Game::addBuilding(int type, Coordinates *location){
+    if(type == 1) {
+        House *talo = new House(1,1,map->get_map()[location->getX()][location->getY()]);
+        buildings.push_back(talo);
+    }
+}
