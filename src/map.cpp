@@ -53,13 +53,32 @@ bool Map::contains(Coordinates &coord) {
 }
 
 
-const Terrain& Map::getTerrain(Coordinates &coord){
-    return *(map.at(coord.getX())).at(coord.getY());
+Terrain* Map::getTerrain(Coordinates *coord){
+    return (map.at(coord->getX())).at(coord->getY());
 }
 
 
-std::vector<std::pair<int, int> > Map::solvePath(Coordinates& unit, Coordinates& target){
+std::vector<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates* target){
     std::vector<std::pair<int, int> > temp;
+
+    Terrain *start = this->getTerrain(unit);
+    Terrain *end = this->getTerrain(target);
+
+    int size = this->get_height()*this->get_width();
+
+    std::vector<bool> checked (size, false);
+    std::vector<Terrain*> previous (size);
+    std::vector<int> distances (size, INT_MAX);
+
+    distances[start->getLocation().getX()*this->width + start->getLocation().getY()] = 0;
+
+    std::vector<std::pair<int, Terrain*> > heap;
+    heap.push_back(std::pair<int, Terrain*> (0,start));
+    std::make_heap(heap.begin(), heap.end());
+
+
+    std::cout<<previous.size()<<std::endl;
+    std::cout<<"asd"<<std::endl;
 
     return temp;
 }

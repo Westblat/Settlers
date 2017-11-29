@@ -6,8 +6,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include<cstdlib>
+#include <cstdlib>
 #include <sstream>
+#include <algorithm>
 
 
 class Map {
@@ -19,8 +20,8 @@ public:
     const std::vector<std::vector<Terrain*> >& get_map() const;
     void setMap();
     bool contains(Coordinates &coord);
-    const Terrain& getTerrain(Coordinates &coord);
-    std::vector<std::pair<int, int> > solvePath(Coordinates& unit, Coordinates& target);
+    Terrain* getTerrain(Coordinates *coord);
+    std::vector<std::pair<int, int> > solvePath(Coordinates* unit, Coordinates* target);
 private:
     int width;
     int height;
