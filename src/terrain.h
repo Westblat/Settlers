@@ -14,7 +14,7 @@ public:
     int getType();
     void setType(int newType);
     
-    Coordinates getLocation();
+    Coordinates& getLocation();
 
 private:
     Coordinates *location;
@@ -22,7 +22,7 @@ private:
     bool blocked;
 
 };
-std::ostream& operator<<(std::ostream& os, Terrain terrain);
+std::ostream& operator<<(std::ostream& os, Terrain& terrain);
 
 
 #endif

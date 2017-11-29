@@ -52,12 +52,14 @@ SOURCES       = main.cpp \
 		mainwindow.cpp \
 		coordinates.cpp \
 		terrain.cpp \
-		map.cpp 
+		map.cpp \
+		game.cpp 
 OBJECTS       = main.o \
 		mainwindow.o \
 		coordinates.o \
 		terrain.o \
-		map.o
+		map.o \
+		game.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -118,11 +120,13 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		main.pro mainwindow.h \
 		coordinates.h \
 		terrain.h \
-		map.h main.cpp \
+		map.h \
+		game.h main.cpp \
 		mainwindow.cpp \
 		coordinates.cpp \
 		terrain.cpp \
-		map.cpp
+		map.cpp \
+		game.cpp
 QMAKE_TARGET  = launch
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = launch
@@ -290,8 +294,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h coordinates.h terrain.h map.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp coordinates.cpp terrain.cpp map.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.h coordinates.h terrain.h map.h game.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainwindow.cpp coordinates.cpp terrain.cpp map.cpp game.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -331,6 +335,7 @@ compiler_clean:
 ####### Compile
 
 main.o: main.cpp mainwindow.h \
+		game.h \
 		map.h \
 		terrain.h \
 		coordinates.h
@@ -350,6 +355,12 @@ map.o: map.cpp map.h \
 		terrain.h \
 		coordinates.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o map.o map.cpp
+
+game.o: game.cpp game.h \
+		map.h \
+		terrain.h \
+		coordinates.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o game.o game.cpp
 
 ####### Install
 

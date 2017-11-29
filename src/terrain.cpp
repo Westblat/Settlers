@@ -21,9 +21,9 @@ int Terrain::getType() {return type;}
 
 void Terrain::setType(int newType) {type = newType;}
 
-Coordinates Terrain::getLocation() {return *location;}
+Coordinates& Terrain::getLocation() {return *location;}
 
-std::ostream& operator<<(std::ostream& os, Terrain terrain){
+std::ostream& operator<<(std::ostream& os, Terrain& terrain){
     os << terrain.getType();
     return os;
 }
