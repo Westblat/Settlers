@@ -120,9 +120,10 @@ bool comparison(std::pair<int, Terrain*> &a, std::pair<int, Terrain*> &b){
 std::ostream& operator<<(std::ostream& os, Map& map){
     
     std::vector<std::vector<Terrain*> > temp = map.get_map();
-    
-    for(std::vector<std::vector<Terrain*> >::iterator it = temp.begin(); it != temp.end(); ++it){
-        for(std::vector<Terrain*>::iterator iter = it->begin(); iter != it->end(); ++iter){
+
+    for(int i = 0; i<map.get_height(); ++i){
+        for(std::vector<std::vector<Terrain*> >::iterator it = temp.begin(); it != temp.end(); ++it){
+            std::vector<Terrain*>::iterator iter = it->begin()+i;
             os << **iter << " ";
         }
         os << std::endl;
