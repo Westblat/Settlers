@@ -56,7 +56,8 @@ SOURCES       = main.cpp \
 		game.cpp \
 		settler.cpp \
 		building.cpp \
-		house.cpp 
+		house.cpp \
+		tree.cpp 
 OBJECTS       = main.o \
 		mainwindow.o \
 		coordinates.o \
@@ -65,7 +66,8 @@ OBJECTS       = main.o \
 		game.o \
 		settler.o \
 		building.o \
-		house.o
+		house.o \
+		tree.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -130,7 +132,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		game.h \
 		settler.h \
 		building.h \
-		house.h main.cpp \
+		house.h \
+		tree.h main.cpp \
 		mainwindow.cpp \
 		coordinates.cpp \
 		terrain.cpp \
@@ -138,7 +141,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		game.cpp \
 		settler.cpp \
 		building.cpp \
-		house.cpp
+		house.cpp \
+		tree.cpp
 QMAKE_TARGET  = launch
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = launch
@@ -306,8 +310,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h coordinates.h terrain.h map.h game.h settler.h building.h house.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp coordinates.cpp terrain.cpp map.cpp game.cpp settler.cpp building.cpp house.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.h coordinates.h terrain.h map.h game.h settler.h building.h house.h tree.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainwindow.cpp coordinates.cpp terrain.cpp map.cpp game.cpp settler.cpp building.cpp house.cpp tree.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -352,7 +356,8 @@ main.o: main.cpp mainwindow.h \
 		terrain.h \
 		coordinates.h \
 		building.h \
-		settler.h
+		settler.h \
+		house.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
@@ -361,7 +366,8 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		terrain.h \
 		coordinates.h \
 		building.h \
-		settler.h
+		settler.h \
+		house.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 coordinates.o: coordinates.cpp coordinates.h
@@ -383,7 +389,8 @@ game.o: game.cpp game.h \
 		terrain.h \
 		coordinates.h \
 		building.h \
-		settler.h
+		settler.h \
+		house.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o game.o game.cpp
 
 settler.o: settler.cpp settler.h
@@ -397,6 +404,12 @@ house.o: house.cpp house.h \
 		terrain.h \
 		coordinates.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o house.o house.cpp
+
+tree.o: tree.cpp tree.h \
+		building.h \
+		terrain.h \
+		coordinates.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tree.o tree.cpp
 
 ####### Install
 

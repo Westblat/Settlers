@@ -32,7 +32,8 @@ SOURCES += \
         game.cpp \
 	settler.cpp \
         building.cpp \
-        house.cpp
+        house.cpp \
+        tree.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,6 +43,7 @@ HEADERS += \
         game.h \
 	settler.h \
         building.h \
-        house.h
+        house.h \
+        tree.h
 
 FORMS +=
