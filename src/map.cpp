@@ -52,6 +52,19 @@ bool Map::contains(Coordinates &coord) {
     return coord.getX()>0 && coord.getY()>0 && coord.getX()<width && coord.getY()<height;
 }
 
+
+const Terrain& Map::getTerrain(Coordinates &coord){
+    return *(map.at(coord.getX())).at(coord.getY());
+}
+
+
+std::vector<std::pair<int, int> > Map::solvePath(Coordinates& unit, Coordinates& target){
+    std::vector<std::pair<int, int> > temp;
+
+    return temp;
+}
+
+
 std::ostream& operator<<(std::ostream& os, Map& map){
     
     std::vector<std::vector<Terrain*> > temp = map.get_map();
