@@ -22,8 +22,10 @@ protected:
 	bool isReady;
 	std::pair<std::vector<int>, int> inventory;
 };
-
-
+/*Building types are
+	0: tree
+	1: House
+*/
 
 
 #endif // !BUILDING_H
