@@ -68,21 +68,44 @@ std::vector<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates*
 
     std::vector<bool> checked (size, false);
     std::vector<Terrain*> previous (size);
+    std::vector<Terrain*> nodeIndex (size);
     std::vector<int> distances (size, INT_MAX);
 
     distances[start->getLocation().getX()*this->width + start->getLocation().getY()] = 0;
+    nodeIndex[start->getLocation().getX()*this->width + start->getLocation().getY()] = start;
 
     std::vector<std::pair<int, Terrain*> > heap;
     heap.push_back(std::pair<int, Terrain*> (0,start));
-    std::make_heap(heap.begin(), heap.end());
+
+    //TEST STUFF PLEASE REMOVE
+    heap.push_back(std::pair<int, Terrain*> (4, end));
+    heap.push_back(std::pair<int, Terrain*> (3, end));
+    heap.push_back(std::pair<int, Terrain*> (5, end));
+    //END OF TEST STUFF
+
+    std::make_heap(heap.begin(), heap.end(), comparison);
+
+    while (heap.size()>0){
+        std::pair<int, Terrain*> next = heap.front();
+        std::pop_heap(heap.begin(),heap.end(), comparison); heap.pop_back();
+        std::cout<<next.first<<std::endl;
+    }
 
 
-    std::cout<<previous.size()<<std::endl;
+    //TEST STUFF PLEASE REMOVE
     std::cout<<"asd"<<std::endl;
+    std::cout<<(heap.front()).first<<std::endl;
+    std::cout<<heap.size()<<std::endl;
+    std::cout<<"asd"<<std::endl;
+    //END OF TEST STUFF
 
     return temp;
 }
 
+
+bool comparison(std::pair<int, Terrain*> &a, std::pair<int, Terrain*> &b){
+    return a.first>b.first;
+}
 
 std::ostream& operator<<(std::ostream& os, Map& map){
     

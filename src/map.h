@@ -28,6 +28,8 @@ private:
     std::vector<std::vector<Terrain*> > map;
 };
 
+
+bool comparison(std::pair<int, Terrain*> &a, std::pair<int, Terrain*> &b);
 std::ostream& operator<<(std::ostream& os, Map& map);
 
 #endif
