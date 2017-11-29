@@ -3,7 +3,7 @@
 Game::Game() {
     map = new Map(21,21);
     map->setMap();
-    std::cout << *map<<std::endl;
+    //std::cout << *map<<std::endl;
 }
 
 Game::~Game() {
@@ -31,3 +31,7 @@ void Game::addSettler(House *house) {
     house->addSettler(settler);
     settlers.push_back(settler);
 }
+
+std::vector<Settler*> Game::getSettlers() {return settlers;}
+
+std::vector<Building*> Game::getBuildings() {return buildings;}
