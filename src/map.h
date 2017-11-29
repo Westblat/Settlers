@@ -19,7 +19,9 @@ public:
     const std::vector<std::vector<Terrain*> >& get_map() const;
     void setMap();
     bool contains(Coordinates &coord);
+    bool contains(int x, int y);
     Terrain* getTerrain(Coordinates *coord);
+    Terrain* getTerrain(int x, int y);
     std::vector<std::pair<int, int> > solvePath(Coordinates* unit, Coordinates* target);
 private:
     int width;

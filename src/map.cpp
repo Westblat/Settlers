@@ -51,10 +51,16 @@ void Map::setMap() {
 bool Map::contains(Coordinates &coord) {
     return coord.getX()>0 && coord.getY()>0 && coord.getX()<width && coord.getY()<height;
 }
+bool Map::contains(int x, int y) {
+    return x>=0 && y>=0 && x<width && y<height;
+}
 
 
 Terrain* Map::getTerrain(Coordinates *coord){
     return (map.at(coord->getX())).at(coord->getY());
+}
+Terrain* Map::getTerrain(int x, int y) {
+    return (map[x][y]);
 }
 
 
