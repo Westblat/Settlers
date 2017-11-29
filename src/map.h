@@ -2,7 +2,6 @@
 #define MAP_H
 #include <vector>
 #include "terrain.h"
-#include "coordinates.h"
 #include <iostream>
 #include <fstream>
 #include <string>

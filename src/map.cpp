@@ -71,33 +71,37 @@ std::vector<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates*
     std::vector<Terrain*> nodeIndex (size);
     std::vector<int> distances (size, INT_MAX);
 
-    distances[start->getLocation().getX()*this->width + start->getLocation().getY()] = 0;
-    nodeIndex[start->getLocation().getX()*this->width + start->getLocation().getY()] = start;
+    distances[start->getLocation()->getX()*this->width + start->getLocation()->getY()] = 0;
+    nodeIndex[start->getLocation()->getX()*this->width + start->getLocation()->getY()] = start;
 
     std::vector<std::pair<int, Terrain*> > heap;
     heap.push_back(std::pair<int, Terrain*> (0,start));
 
-    //TEST STUFF PLEASE REMOVE
+    //*TEST STUFF PLEASE REMOVE
     heap.push_back(std::pair<int, Terrain*> (4, end));
     heap.push_back(std::pair<int, Terrain*> (3, end));
     heap.push_back(std::pair<int, Terrain*> (5, end));
-    //END OF TEST STUFF
+    //END OF TEST STUFF*/
 
     std::make_heap(heap.begin(), heap.end(), comparison);
 
     while (heap.size()>0){
         std::pair<int, Terrain*> next = heap.front();
         std::pop_heap(heap.begin(),heap.end(), comparison); heap.pop_back();
-        std::cout<<next.first<<std::endl;
+        //std::cout<<next.first<<std::endl;
+
+        Terrain *u = next.second;
+        Coordinates *upos = u->getLocation();
+        int uposindex = upos->getX()*this->width + upos->getY();
     }
 
 
-    //TEST STUFF PLEASE REMOVE
+    //*TEST STUFF PLEASE REMOVE
     std::cout<<"asd"<<std::endl;
     std::cout<<(heap.front()).first<<std::endl;
     std::cout<<heap.size()<<std::endl;
     std::cout<<"asd"<<std::endl;
-    //END OF TEST STUFF
+    //END OF TEST STUFF*/
 
     return temp;
 }
