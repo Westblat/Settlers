@@ -29,15 +29,17 @@ SOURCES += \
         coordinates.cpp \
         terrain.cpp \
         map.cpp \
-    game.cpp
-	settler.cpp
+        game.cpp \
+	settler.cpp \
+        house.cpp
 
 HEADERS += \
         mainwindow.h \
         coordinates.h \
         terrain.h \
         map.h \
-    game.h
-	settler.h
+        game.h \
+	settler.h \
+        house.h
 
 FORMS +=
