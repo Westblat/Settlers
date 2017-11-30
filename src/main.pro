@@ -29,13 +29,15 @@ SOURCES += \
         coordinates.cpp \
         terrain.cpp \
         map.cpp \
-    game.cpp
+    game.cpp \
+    priorityqueue.cpp
 
 HEADERS += \
         mainwindow.h \
         coordinates.h \
         terrain.h \
         map.h \
-    game.h
+    game.h \
+    priorityqueue.h
 
 FORMS +=
