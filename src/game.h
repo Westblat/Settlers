@@ -3,6 +3,7 @@
 #include "map.h"
 #include "building.h"
 #include "house.h"
+#include "warehouse.h"
 
 
 class Game
