@@ -33,7 +33,8 @@ SOURCES += \
 	settler.cpp \
         building.cpp \
         house.cpp \
-        tree.cpp
+        tree.cpp \
+        warehouse.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,6 +45,7 @@ HEADERS += \
 	settler.h \
         building.h \
         house.h \
-        tree.h
+        tree.h \
+        warehouse.h
 
 FORMS +=

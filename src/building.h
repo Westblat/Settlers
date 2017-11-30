@@ -20,11 +20,17 @@ protected:
 	int type;
 	int hp;
 	bool isReady;
+	int inventorySize;
 	std::pair<std::vector<int>, int> inventory;
 };
 /*Building types are
 	0: tree
 	1: House
+	2: Warehouse
+	3: Stonecutter
+	4: Mine
+	5: Blacksmith
+	6: Keep
 */
 
 
