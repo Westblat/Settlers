@@ -114,3 +114,8 @@ bool Settler::reduceDelay()
 int Settler::getDelay() { return actionDelay; }
 
 Settler::~Settler() { }
+
+std::ostream& operator <<(std::ostream& os, Settler& settler){
+	os << "He's name is "<< settler.getName();
+	return os;
+}

@@ -34,5 +34,6 @@ protected:
 	6: Keep
 */
 
+std::ostream& operator <<(std::ostream& os, Building& building);
 
 #endif // !BUILDING_H

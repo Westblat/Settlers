@@ -45,4 +45,6 @@ private:
 	bool playerControlled; // Determines whether settlers is able to accept commands from player or not
 };
 
+std::ostream& operator <<(std::ostream& os, Settler& settler);
+
 #endif

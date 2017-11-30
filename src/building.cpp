@@ -38,3 +38,8 @@ int Building::getType() { return type;}
 void Building::setReady() {
 	Building::isReady = true;
 }
+
+std::ostream& operator <<(std::ostream& os, Building& building){
+	os << building.getType();
+	return os;
+}
