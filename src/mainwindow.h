@@ -22,7 +22,7 @@ private:
  	GameWindow *gamewindow;
 
 
-private slots:
+public slots:
 	void OpenGameWindow();
 
 };

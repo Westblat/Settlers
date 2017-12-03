@@ -4,6 +4,11 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QtWidgets>
+#include <QGraphicsScene>
+#include <QGraphicsRectItem>
+#include <QGraphicsView>
+
+#include "game.h"
 
 //window showing the actual game
 //opens when new game is started from main menu
@@ -12,12 +17,15 @@ class GameWindow : public QWidget {
 
 public:
 	explicit GameWindow(QWidget *parent = 0);
+	void draw_terrain();
 
 private:
+	Game game; // creates the game
 
+	QPushButton *menu_button;
 
-private slots:
-	
+public slots:
+	void ShowMainMenu();
 };
 
 #endif
