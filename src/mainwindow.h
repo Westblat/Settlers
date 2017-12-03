@@ -1,29 +1,30 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-
-#include <QMainWindow>
-
-#include <QToolBar>
-#include <QAction>
-
-#include <QStackedLayout>
 #include <QWidget>
-#include <QGroupBox>
-#include <QGridLayout>
-#include <QHBoxLayout>
 #include <QPushButton>
+#include <QtWidgets>
 
+//window showing the actual game
+//opens when new game is started from main menu
+class GameWindow;
 
-class MainWindow : public QMainWindow {
+//this is the main window, so called "Main Menu", for the program itself.
+class Window : public QWidget {
+	Q_OBJECT
+
 public:
-
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+ 	explicit Window(QWidget *parent = 0);
 
 private:
-    void initToolBar();
-    void initCentralWidget();
+ 	QPushButton *quit_button;
+ 	QPushButton *start_button;
+ 	GameWindow *gamewindow;
+
+
+private slots:
+	void OpenGameWindow();
+
 };
 
 #endif // MAINWINDOW_H

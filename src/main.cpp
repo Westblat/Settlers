@@ -5,10 +5,10 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    w.setWindowTitle("Asd");
+    
+    //Main Menu when opening program
+    Window w;
     w.show();
-
 
     return a.exec();
 }
