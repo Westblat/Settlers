@@ -30,7 +30,8 @@ SOURCES += \
         terrain.cpp \
         map.cpp \
         game.cpp \
-        gamewindow.cpp
+        gamewindow.cpp \
+        terrainitem.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,6 +39,7 @@ HEADERS += \
         terrain.h \
         map.h \
         game.h \
-        gamewindow.h
+        gamewindow.h \
+        terrainitem.h
 
 FORMS +=

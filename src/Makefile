@@ -54,7 +54,8 @@ SOURCES       = main.cpp \
 		terrain.cpp \
 		map.cpp \
 		game.cpp \
-		gamewindow.cpp moc_mainwindow.cpp \
+		gamewindow.cpp \
+		terrainitem.cpp moc_mainwindow.cpp \
 		moc_gamewindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
@@ -63,6 +64,7 @@ OBJECTS       = main.o \
 		map.o \
 		game.o \
 		gamewindow.o \
+		terrainitem.o \
 		moc_mainwindow.o \
 		moc_gamewindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -127,13 +129,15 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		terrain.h \
 		map.h \
 		game.h \
-		gamewindow.h main.cpp \
+		gamewindow.h \
+		terrainitem.h main.cpp \
 		mainwindow.cpp \
 		coordinates.cpp \
 		terrain.cpp \
 		map.cpp \
 		game.cpp \
-		gamewindow.cpp
+		gamewindow.cpp \
+		terrainitem.cpp
 QMAKE_TARGET  = launch
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = launch
@@ -301,8 +305,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h coordinates.h terrain.h map.h game.h gamewindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp coordinates.cpp terrain.cpp map.cpp game.cpp gamewindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.h coordinates.h terrain.h map.h game.h gamewindow.h terrainitem.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainwindow.cpp coordinates.cpp terrain.cpp map.cpp game.cpp gamewindow.cpp terrainitem.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -331,7 +335,11 @@ compiler_moc_header_clean:
 moc_mainwindow.cpp: mainwindow.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/mini_bunney/Desktop/prog/c++/settlers-2/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
-moc_gamewindow.cpp: gamewindow.h
+moc_gamewindow.cpp: game.h \
+		map.h \
+		terrain.h \
+		coordinates.h \
+		gamewindow.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/mini_bunney/Desktop/prog/c++/settlers-2/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include gamewindow.h -o moc_gamewindow.cpp
 
 compiler_moc_source_make_all:
@@ -348,15 +356,15 @@ compiler_clean: compiler_moc_header_clean
 
 ####### Compile
 
-main.o: main.cpp mainwindow.h \
+main.o: main.cpp mainwindow.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
+
+mainwindow.o: mainwindow.cpp mainwindow.h \
+		gamewindow.h \
 		game.h \
 		map.h \
 		terrain.h \
 		coordinates.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
-
-mainwindow.o: mainwindow.cpp mainwindow.h \
-		gamewindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 coordinates.o: coordinates.cpp coordinates.h
@@ -377,8 +385,15 @@ game.o: game.cpp game.h \
 		coordinates.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o game.o game.cpp
 
-gamewindow.o: gamewindow.cpp gamewindow.h
+gamewindow.o: gamewindow.cpp gamewindow.h \
+		game.h \
+		map.h \
+		terrain.h \
+		coordinates.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gamewindow.o gamewindow.cpp
+
+terrainitem.o: terrainitem.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o terrainitem.o terrainitem.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

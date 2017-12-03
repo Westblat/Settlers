@@ -17,7 +17,7 @@ class GameWindow : public QWidget {
 
 public:
 	explicit GameWindow(QWidget *parent = 0);
-	void draw_terrain();
+	void draw_terrain(QGraphicsScene* scene);
 
 private:
 	Game game; // creates the game
