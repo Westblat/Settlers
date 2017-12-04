@@ -13,7 +13,13 @@ int main(int argc, char *argv[])
 
     Terrain location = *(gameMap.get_map())[19][19];
     
-    std::cout << location << std::endl;
+    game->setBuildings();
+
+    std::vector<Building*> buildings = game->getBuildings();
+    for (std::vector<Building*>:: iterator it = buildings.begin();it != buildings.end(); it++){
+        std::cout << **it << std::endl;
+
+    }
 
 
     return a.exec();

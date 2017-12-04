@@ -361,7 +361,8 @@ main.o: main.cpp mainwindow.h \
 		coordinates.h \
 		building.h \
 		house.h \
-		settler.h
+		settler.h \
+		warehouse.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
@@ -371,7 +372,8 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		coordinates.h \
 		building.h \
 		house.h \
-		settler.h
+		settler.h \
+		warehouse.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 coordinates.o: coordinates.cpp coordinates.h
@@ -394,7 +396,8 @@ game.o: game.cpp game.h \
 		coordinates.h \
 		building.h \
 		house.h \
-		settler.h
+		settler.h \
+		warehouse.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o game.o game.cpp
 
 settler.o: settler.cpp settler.h
