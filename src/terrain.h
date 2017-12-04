@@ -1,7 +1,7 @@
 #ifndef TERRAIN_H
 #define TERRAIN_H
 #include "coordinates.h"
-#include <ostream>
+#include <iostream>
 
 class Terrain {
 public:

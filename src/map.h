@@ -1,14 +1,11 @@
 #ifndef MAP_H
 #define MAP_H
-#include <vector>
-#include "terrain.h"
-#include <iostream>
-#include <fstream>
+#include <climits>
+#include <stack>
 #include <string>
-#include <cstdlib>
+#include <fstream>
 #include <sstream>
 #include "priorityqueue.h"
-#include <stack>
 
 
 class Map {
