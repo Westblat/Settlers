@@ -12,7 +12,7 @@ public:
 	~Building();
 	virtual void build() = 0;
 
-	bool addItem(int item);
+    bool addItem(int item);
 	bool removeItem(int item);
 	void setReady();
 	int getType();
@@ -20,9 +20,9 @@ public:
 protected:
 	int type;
 	int hp;
-	bool isReady;
-	int inventorySize;
-	std::pair<std::vector<int>, int> inventory;
+    bool isReady;
+    std::pair<std::vector<int>, int> inventory; //First == vector of items, Second == inventory max size
+    //-1 for unlimited size, 0 for 0 items, positive number for limited size
 };
 /*Building types are
 	0: tree
