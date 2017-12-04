@@ -8,7 +8,6 @@ class Node
 {
 public:
     Node(int, Terrain*);
-    ~Node();
     int first();
     Terrain* second();
     bool isSingle();

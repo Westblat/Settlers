@@ -5,9 +5,6 @@ Node::Node(int dif, Terrain *terrain) : difficulty(dif), terrain(terrain){
     degree = 0;
     child = parent = this;
 }
-Node::~Node(){
-
-}
 
 int Node::first(){return this->difficulty;}
 Terrain* Node::second(){return this->terrain;}
