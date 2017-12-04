@@ -63,6 +63,7 @@ Heap::Heap(){
 }
 
 Heap::~Heap(){
+    delete nonode->terrain;
     delete nonode;
 }
 
