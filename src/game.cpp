@@ -32,7 +32,7 @@ void Game::setBuildings(){
         type = (*it)[0];
         int xcoord = (*it)[1];
         int ycoord = (*it)[2];        
-        Game::addBuilding(type, &(map->get_map()[xcoord][ycoord])->getLocation());
+        Game::addBuilding(type, (map->get_map()[xcoord][ycoord])->getLocation());
     }
 }
 
