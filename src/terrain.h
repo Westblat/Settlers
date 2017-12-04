@@ -1,8 +1,8 @@
 #ifndef TERRAIN_H
 #define TERRAIN_H
 #include "coordinates.h"
+#include <iostream>
 #include "building.h"
-#include <ostream>
 
 class Terrain {
 public:
@@ -15,7 +15,7 @@ public:
     int getType();
     void setType(int newType);
     
-    Coordinates& getLocation();
+    Coordinates* getLocation();
 
     void placeBuilding(Building *building);
 
@@ -27,6 +27,6 @@ private:
 
 };
 std::ostream& operator<<(std::ostream& os, Terrain& terrain);
-
+bool operator==(Terrain &a, Terrain &b);
 
 #endif

@@ -35,17 +35,13 @@ SOURCES += \
         house.cpp \
         tree.cpp \
         warehouse.cpp
+    priorityqueue.cpp
 
 HEADERS += \
         mainwindow.h \
         coordinates.h \
         terrain.h \
         map.h \
-        game.h \
-	settler.h \
-        building.h \
-        house.h \
-        tree.h \
-        warehouse.h
+    priorityqueue.h
 
 FORMS +=

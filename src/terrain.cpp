@@ -21,7 +21,7 @@ int Terrain::getType() {return type;}
 
 void Terrain::setType(int newType) {type = newType;}
 
-Coordinates& Terrain::getLocation() {return *location;}
+Coordinates* Terrain::getLocation() {return location;}
 
 void Terrain::placeBuilding(Building *building) {
     Terrain::buildingType = building->getType();
@@ -30,4 +30,8 @@ void Terrain::placeBuilding(Building *building) {
 std::ostream& operator<<(std::ostream& os, Terrain& terrain){
     os << terrain.getType();
     return os;
+}
+
+bool operator==(Terrain &a, Terrain &b){
+    return a.getLocation() == b.getLocation();
 }
