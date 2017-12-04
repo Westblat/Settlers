@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <sstream>
 #include "priorityqueue.h"
+#include <stack>
 
 
 class Map {
@@ -22,7 +23,7 @@ public:
     bool contains(int x, int y);
     Terrain* getTerrain(Coordinates *coord);
     Terrain* getTerrain(int x, int y);
-    std::vector<std::pair<int, int> > solvePath(Coordinates* unit, Coordinates* target);
+    std::stack<std::pair<int, int> > solvePath(Coordinates* unit, Coordinates* target);
 private:
     int width;
     int height;

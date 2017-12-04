@@ -1,5 +1,4 @@
 #include "priorityqueue.h"
-#include <iostream>
 
 Node::Node(int dif, Terrain *terrain) : difficulty(dif), terrain(terrain){
     previous = next = this;
@@ -90,7 +89,7 @@ void Heap::insertNode(Node *node){
 Node* Heap::min() {return this->minnode;}
 
 Node* Heap::removeMin(){
-    if (this->minnode->difficulty == -1) {std::cout<<"Empty Heap"<<std::endl;}
+    if (this->minnode->difficulty == -1) {}
 
     Node *r_node = this->minnode;
     count -= 1;

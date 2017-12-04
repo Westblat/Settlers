@@ -64,8 +64,8 @@ Terrain* Map::getTerrain(int x, int y) {
 }
 
 
-std::vector<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates* target){
-    std::vector<std::pair<int, int> > temp;
+std::stack<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates* target){
+    std::stack<std::pair<int, int> > temp;
 
     Terrain *start = this->getTerrain(unit);
     Terrain *end = this->getTerrain(target);
@@ -81,7 +81,6 @@ std::vector<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates*
 
     Heap *heap = new Heap();
     Node *startNode = new Node(0,start);
-    //Node *endNode = new Node(INT_MAX, end);
     std::vector<Node*> nodeIndex (size, heap->nonode);
     nodeIndex[start->getLocation()->getX()*this->width + start->getLocation()->getY()] = startNode;
 
@@ -136,6 +135,14 @@ std::vector<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates*
         }
         checked[uposindex] = true;
         std::cout<<"Checked: "<<upos->getX()<<" "<<upos->getY()<<" Best path: "<<next->difficulty<<std::endl;
+    }
+
+    Terrain *cur = end;
+    Terrain *prev;
+    while (cur != start) {
+        prev = previous[cur->getLocation()->getX()*this->width + cur->getLocation()->getY()];
+        temp.push(std::pair<int, int> (cur->getLocation()->getX() - prev->getLocation()->getX(), cur->getLocation()->getY() - prev->getLocation()->getY()));
+        cur = prev;
     }
 
     return temp;
