@@ -13,6 +13,7 @@
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QPushButton>
+#include "game.h"
 
 
 class MainWindow : public QMainWindow {

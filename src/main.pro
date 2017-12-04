@@ -29,13 +29,23 @@ SOURCES += \
         coordinates.cpp \
         terrain.cpp \
         map.cpp \
-    game.cpp
+        game.cpp \
+	settler.cpp \
+        building.cpp \
+        house.cpp \
+        tree.cpp \
+        warehouse.cpp
 
 HEADERS += \
         mainwindow.h \
         coordinates.h \
         terrain.h \
         map.h \
-    game.h
+        game.h \
+	settler.h \
+        building.h \
+        house.h \
+        tree.h \
+        warehouse.h
 
 FORMS +=
