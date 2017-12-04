@@ -6,7 +6,7 @@
 
 class TerrainItem : public QGraphicsRectItem {
 public:
-	TerrainItem(int tilesize);
+	TerrainItem(int tilesize, int type);
 };
 
 #endif

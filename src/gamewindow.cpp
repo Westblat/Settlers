@@ -34,21 +34,23 @@ void GameWindow::ShowMainMenu() {
 }
 
 void GameWindow::draw_terrain(QGraphicsScene *scene) {
-	//draws the terrain of the map
+	//draws the terrain on the map
 	int tilesize = 50;
 	
-	int width = game.getMap().get_width();
-	int height = game.getMap().get_height();
+	Map map = game.getMap(); //apparently not the same as the vector<vector<Terrain*>> map
+	std::vector<std::vector<Terrain*>> terrain_map = map.get_map();
+	int width = map.get_width();
+	int height = map.get_height();
+	
 	int x = 0;
 	int y = 0;
+	int type = 0; //initialized as normal terrain
 	for (int j = 0; j < width; j++) {
 		x = 0;
-		for (int i = 0; i < height; i++) {
-			//draw a TerrainItem (which is a rectangle)
-			TerrainItem *titem = new TerrainItem(tilesize);
+		for (int i = 0; i < height; i++) { //draw a TerrainItem (which is a rectangle)
+			type = terrain_map[j][i]->getType();
+			TerrainItem *titem = new TerrainItem(tilesize, type);
 			titem->setPos(x,y);
-			//QBrush red = QBrush(QColor(255, 0, 0));
-            //titem->setBrush(red);
 			scene->addItem(titem);
 			x += tilesize;
 
@@ -56,10 +58,4 @@ void GameWindow::draw_terrain(QGraphicsScene *scene) {
 		//next row
 		y += tilesize;
 	}
-	/*
-	int i = game.getMap().get_width();
-	std::cout << std::endl;
-	std::cout << std::endl;
-	std::cout << "Map width is: " << i << std::endl;
-	*/
 }
