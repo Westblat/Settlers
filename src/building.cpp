@@ -1,6 +1,6 @@
 #include "building.h"
 
-Building::Building(int type, int hp): type(type), hp(hp), isReady(false) { }
+Building::Building(int type, int hp,bool initialize): type(type), hp(hp), isReady(initialize) { }
 
 // Adds a given item to the inventory vector, assuming the the inventory isn't full (vector.size != maxsize)
 bool Building::addItem(int item)

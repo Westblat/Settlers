@@ -6,7 +6,7 @@
 
 class Tree: public Building{
 public:
-    Tree(Terrain *terrain);
+    Tree(Terrain *terrain, bool initialize);
     void build();
     ~Tree();
 private:

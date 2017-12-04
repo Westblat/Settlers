@@ -8,7 +8,7 @@
 class Building
 {
 public:
-	Building(int type, int hp);
+	Building(int type, int hp, bool initialize);
 	~Building();
 	virtual void build() = 0;
 

@@ -14,7 +14,7 @@ public:
     ~Game();
     Map& getMap();
     void setBuildings();
-    void addBuilding(int type, Coordinates *location);
+    void addBuilding(int type, Coordinates *location, bool initialize);
     void addSettler(House *house);
     std::vector<Settler*> getSettlers();
     std::vector<Building*> getBuildings();

@@ -5,7 +5,7 @@
 
 class Warehouse: public Building {
 public:
-    Warehouse(Terrain *terrain);
+    Warehouse(Terrain *terrain, bool initialize);
     void build();
 private:
     Terrain *terrain;

@@ -1,6 +1,6 @@
 #include "house.h"
 
-House::House(Terrain *terrain) : Building(1,10), terrain(terrain) {}
+House::House(Terrain *terrain,bool initialize) : Building(1,10, initialize), terrain(terrain) {}
 
 void House::build() {
     return;

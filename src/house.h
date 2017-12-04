@@ -6,7 +6,7 @@
 
 class House: public Building {
 public:
-    House(Terrain *terrain);
+    House(Terrain *terrain, bool initialize);
     void build();
     void addSettler(Settler *settler);
 private:

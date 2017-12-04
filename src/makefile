@@ -133,7 +133,13 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		coordinates.h \
 		terrain.h \
 		map.h \
-		priorityqueue.h main.cpp \
+		priorityqueue.h \
+		game.h \
+		settler.h \
+		building.h \
+		house.h \
+		tree.h \
+		warehouse.h main.cpp \
 		mainwindow.cpp \
 		coordinates.cpp \
 		terrain.cpp \
@@ -312,7 +318,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h coordinates.h terrain.h map.h priorityqueue.h $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.h coordinates.h terrain.h map.h priorityqueue.h game.h settler.h building.h house.h tree.h warehouse.h $(DISTDIR)/
 	$(COPY_FILE) --parents main.cpp mainwindow.cpp coordinates.cpp terrain.cpp map.cpp game.cpp settler.cpp building.cpp house.cpp tree.cpp warehouse.cpp priorityqueue.cpp $(DISTDIR)/
 
 

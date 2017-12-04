@@ -32,21 +32,21 @@ void Game::setBuildings(){
         type = (*it)[0];
         int xcoord = (*it)[1];
         int ycoord = (*it)[2];        
-        Game::addBuilding(type, (map->get_map()[xcoord][ycoord])->getLocation());
+        Game::addBuilding(type, (map->get_map()[xcoord][ycoord])->getLocation(), true);
     }
 }
 
-void Game::addBuilding(int type, Coordinates *location){
+void Game::addBuilding(int type, Coordinates *location, bool initialize){
     if(type == 1) {
-        House *talo = new House(map->get_map()[location->getX()][location->getY()]);
+        House *talo = new House(map->get_map()[location->getX()][location->getY()], initialize);
         buildings.push_back(talo);
         addSettler(talo);
         addSettler(talo);
     } else if (type == 2){
-        Warehouse *varasto = new Warehouse(map->get_map()[location->getX()][location->getY()]);
+        Warehouse *varasto = new Warehouse(map->get_map()[location->getX()][location->getY()], initialize);
         buildings.push_back(varasto);
     } else if(type == 0){
-        Tree *tree = new Tree(map->get_map()[location->getX()][location->getY()]);
+        Tree *tree = new Tree(map->get_map()[location->getX()][location->getY()], initialize);
         buildings.push_back(tree);
     }
 }
