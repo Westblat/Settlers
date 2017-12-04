@@ -24,6 +24,7 @@ public:
     Node *previous;
     Node *next;
 };
+bool operator==(Node & a, Node & b);
 
 
 class Heap
@@ -36,11 +37,13 @@ public:
     void insertNode(Node*);
     Node* min();
     void merge(Heap*);
-    Node* remove_min();
+    Node* removeMin();
     void decreaseKey(Node*, int);
-private:
+    int size();
+    Node *nonode;
     Node *minnode;
-    int size;
+private:
+    int count;
 };
 
 #endif // PRIORITYQUEUE_H

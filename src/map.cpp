@@ -75,22 +75,19 @@ std::vector<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates*
 
     std::vector<bool> checked (size, false);
     std::vector<Terrain*> previous (size);
-    std::vector<std::pair<int,Terrain*> > nodeIndex (size);
     std::vector<int> distances (size, INT_MAX);
 
     distances[start->getLocation()->getX()*this->width + start->getLocation()->getY()] = 0;
-    nodeIndex[start->getLocation()->getX()*this->width + start->getLocation()->getY()] = std::pair<int, Terrain*>(0, start);
 
-    std::vector<std::pair<int, Terrain*> > heap;
-    heap.push_back(std::pair<int, Terrain*> (0,start));
+    Heap *heap = new Heap();
+    Node *startNode = new Node(0,start);
+    //Node *endNode = new Node(INT_MAX, end);
+    std::vector<Node*> nodeIndex (size, heap->nonode);
+    nodeIndex[start->getLocation()->getX()*this->width + start->getLocation()->getY()] = startNode;
 
-    /*TEST STUFF PLEASE REMOVE
-    heap.push_back(std::pair<int, Terrain*> (4, end));
-    heap.push_back(std::pair<int, Terrain*> (3, end));
-    heap.push_back(std::pair<int, Terrain*> (5, end));
-    //END OF TEST STUFF*/
 
-    std::make_heap(heap.begin(), heap.end(), comparison);
+    heap->insert(startNode);
+    std::cout<<" <- First node"<<std::endl;
 
     std::vector<std::pair<int,int> > directions;
     directions.push_back(std::pair<int, int> (1,0));
@@ -98,17 +95,17 @@ std::vector<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates*
     directions.push_back(std::pair<int, int> (-1,0));
     directions.push_back(std::pair<int, int> (0,-1));
 
-    while (heap.size()>0){
-        std::pair<int, Terrain*> next = heap.front();
-        std::pop_heap(heap.begin(),heap.end(), comparison); heap.pop_back();
-        //std::cout<<next.first<<std::endl;
+    //*
 
-        Terrain *u = next.second;
+    while (heap->size()>0){
+        Node *next = heap->removeMin();
+
+        Terrain *u = next->second();
         Coordinates *upos = u->getLocation();
         int uposindex = upos->getX()*this->width + upos->getY();
 
         if (distances[uposindex] == INT_MAX) {break;} //Unable to find path
-        if (upos == endpos ){std::cout<<"Target found"<<std::endl;break;} //Search is completed
+        if (upos == endpos ){std::cout<<"Target found, smallest distance "<< next->difficulty<<std::endl;break;} //Search is completed
 
         for(auto iter = directions.begin(); iter!=directions.end(); ++iter) {
             int tempX = upos->getX()+(*iter).first;
@@ -118,14 +115,17 @@ std::vector<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates*
                 if (!checked[vposindex]){
                     int new_distance = distances[uposindex] + 1; //TODO IMPLEMENT TERRAIN DIFFICULTY
                     if (new_distance < distances[vposindex]) {
-                        if (nodeIndex[vposindex].second) {
-                            //std::cout<<"old node "<<tempX<<" "<<tempY<<std::endl;
-                            //TODO IMPLEMENT VALUE DECREMENT
+                        if (nodeIndex[vposindex]->difficulty != -1) {
+                            std::cout<<"old node "<<tempX<<" "<<tempY<<std::endl;
+                            heap->decreaseKey(nodeIndex[vposindex],new_distance);
+                            distances[vposindex] = new_distance;
+                            previous[vposindex] = u;
                         }
                         else {
-                            std::pair<int, Terrain*> vnode (new_distance, this->getTerrain(tempX, tempY));
-                            //std::cout<<"new node "<<tempX<<" "<<tempY<<std::endl;
-                            heap.push_back(vnode); std::push_heap(heap.begin(),heap.end());
+                            Node* vnode = new Node(new_distance, this->getTerrain(tempX, tempY));
+                            //std::cout<<"new node "<<tempX<<" "<<tempY;
+                            heap->insert(vnode);
+                            //std::cout<<std::endl;
                             nodeIndex[vposindex] = vnode;
                             distances[vposindex] = new_distance;
                             previous[vposindex] = u;
@@ -135,23 +135,12 @@ std::vector<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates*
             }
         }
         checked[uposindex] = true;
+        std::cout<<"Checked: "<<upos->getX()<<" "<<upos->getY()<<" Best path: "<<next->difficulty<<std::endl;
     }
-
-
-    /*TEST STUFF PLEASE REMOVE
-    std::cout<<"asd"<<std::endl;
-    std::cout<<(heap.front()).first<<std::endl;
-    std::cout<<heap.size()<<std::endl;
-    std::cout<<"asd"<<std::endl;
-    //END OF TEST STUFF*/
 
     return temp;
 }
 
-
-bool comparison(std::pair<int, Terrain*> &a, std::pair<int, Terrain*> &b){
-    return a.first>b.first;
-}
 
 std::ostream& operator<<(std::ostream& os, Map& map){
     

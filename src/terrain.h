@@ -23,6 +23,6 @@ private:
 
 };
 std::ostream& operator<<(std::ostream& os, Terrain& terrain);
-
+bool operator==(Terrain &a, Terrain &b);
 
 #endif

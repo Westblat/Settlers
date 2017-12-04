@@ -27,3 +27,7 @@ std::ostream& operator<<(std::ostream& os, Terrain& terrain){
     os << terrain.getType();
     return os;
 }
+
+bool operator==(Terrain &a, Terrain &b){
+    return a.getLocation() == b.getLocation();
+}

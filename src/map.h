@@ -7,7 +7,7 @@
 #include <string>
 #include <cstdlib>
 #include <sstream>
-#include <algorithm>
+#include "priorityqueue.h"
 
 
 class Map {
@@ -30,7 +30,6 @@ private:
 };
 
 
-bool comparison(std::pair<int, Terrain*> &a, std::pair<int, Terrain*> &b);
 std::ostream& operator<<(std::ostream& os, Map& map);
 
 #endif
