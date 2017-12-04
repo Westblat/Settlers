@@ -34,14 +34,14 @@ SOURCES += \
         building.cpp \
         house.cpp \
         tree.cpp \
-        warehouse.cpp
-    priorityqueue.cpp
+        warehouse.cpp \
+        priorityqueue.cpp
 
 HEADERS += \
         mainwindow.h \
         coordinates.h \
         terrain.h \
         map.h \
-    priorityqueue.h
+        priorityqueue.h
 
 FORMS +=
