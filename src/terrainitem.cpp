@@ -1,6 +1,7 @@
 #include "terrainitem.h"
 
 TerrainItem::TerrainItem(int tilesize, int type) {
+	//rectangles are placeholders inb4 .png files
 	setRect(0,0,tilesize,tilesize);
 
 	if (type == 0) {		// 0: GRASS/PLAINS

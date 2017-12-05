@@ -31,7 +31,9 @@ SOURCES += \
         map.cpp \
         game.cpp \
         gamewindow.cpp \
-        terrainitem.cpp
+        terrainitem.cpp \
+        buildingitem.cpp \
+        settleritem.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,6 +42,8 @@ HEADERS += \
         map.h \
         game.h \
         gamewindow.h \
-        terrainitem.h
+        terrainitem.h \
+        buildingitem.h \
+        settleritem.h
 
 FORMS +=

@@ -55,7 +55,9 @@ SOURCES       = main.cpp \
 		map.cpp \
 		game.cpp \
 		gamewindow.cpp \
-		terrainitem.cpp moc_mainwindow.cpp \
+		terrainitem.cpp \
+		buildingitem.cpp \
+		settleritem.cpp moc_mainwindow.cpp \
 		moc_gamewindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
@@ -65,6 +67,8 @@ OBJECTS       = main.o \
 		game.o \
 		gamewindow.o \
 		terrainitem.o \
+		buildingitem.o \
+		settleritem.o \
 		moc_mainwindow.o \
 		moc_gamewindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -130,14 +134,18 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		map.h \
 		game.h \
 		gamewindow.h \
-		terrainitem.h main.cpp \
+		terrainitem.h \
+		buildingitem.h \
+		settleritem.h main.cpp \
 		mainwindow.cpp \
 		coordinates.cpp \
 		terrain.cpp \
 		map.cpp \
 		game.cpp \
 		gamewindow.cpp \
-		terrainitem.cpp
+		terrainitem.cpp \
+		buildingitem.cpp \
+		settleritem.cpp
 QMAKE_TARGET  = launch
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = launch
@@ -305,8 +313,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h coordinates.h terrain.h map.h game.h gamewindow.h terrainitem.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp coordinates.cpp terrain.cpp map.cpp game.cpp gamewindow.cpp terrainitem.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.h coordinates.h terrain.h map.h game.h gamewindow.h terrainitem.h buildingitem.h settleritem.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainwindow.cpp coordinates.cpp terrain.cpp map.cpp game.cpp gamewindow.cpp terrainitem.cpp buildingitem.cpp settleritem.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -356,7 +364,12 @@ compiler_clean: compiler_moc_header_clean
 
 ####### Compile
 
-main.o: main.cpp mainwindow.h
+main.o: main.cpp mainwindow.h \
+		gamewindow.h \
+		game.h \
+		map.h \
+		terrain.h \
+		coordinates.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
@@ -389,11 +402,18 @@ gamewindow.o: gamewindow.cpp gamewindow.h \
 		game.h \
 		map.h \
 		terrain.h \
-		coordinates.h
+		coordinates.h \
+		terrainitem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gamewindow.o gamewindow.cpp
 
-terrainitem.o: terrainitem.cpp 
+terrainitem.o: terrainitem.cpp terrainitem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o terrainitem.o terrainitem.cpp
+
+buildingitem.o: buildingitem.cpp buildingitem.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildingitem.o buildingitem.cpp
+
+settleritem.o: settleritem.cpp settleritem.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o settleritem.o settleritem.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

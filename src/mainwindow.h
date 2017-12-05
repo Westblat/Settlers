@@ -18,12 +18,15 @@ public:
  	GameWindow *gamewindow;
 
 private:
+	QGridLayout *grid;
  	QPushButton *quit_button;
  	QPushButton *start_button;
+ 	QPushButton *resume_button;
 
 
 public slots:
 	void OpenGameWindow();
+	void ResumeGame();
 
 };
 
