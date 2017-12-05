@@ -18,10 +18,10 @@ Window::Window(QWidget *parent) : QWidget(parent) {
 
     connect(quit_button, SIGNAL (clicked()), QApplication::instance(), SLOT (quit()));
 
-    connect(start_button, SIGNAL (clicked()), this , SLOT (OpenGameWindow()));
+    connect(start_button, SIGNAL (clicked()), this , SLOT (NewGame()));
 }
 
-void Window::OpenGameWindow() {
+void Window::NewGame() {
     gamewindow = new GameWindow(this);
     gamewindow->show();
 

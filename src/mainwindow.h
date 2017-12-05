@@ -26,7 +26,7 @@ private:
 
 
 public slots:
-	void OpenGameWindow();
+	void NewGame();
 	void ResumeGame();
 
 };

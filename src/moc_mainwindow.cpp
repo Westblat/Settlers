@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Window_t {
     QByteArrayData data[4];
-    char stringdata0[34];
+    char stringdata0[27];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -30,12 +30,12 @@ struct qt_meta_stringdata_Window_t {
 static const qt_meta_stringdata_Window_t qt_meta_stringdata_Window = {
     {
 QT_MOC_LITERAL(0, 0, 6), // "Window"
-QT_MOC_LITERAL(1, 7, 14), // "OpenGameWindow"
-QT_MOC_LITERAL(2, 22, 0), // ""
-QT_MOC_LITERAL(3, 23, 10) // "ResumeGame"
+QT_MOC_LITERAL(1, 7, 7), // "NewGame"
+QT_MOC_LITERAL(2, 15, 0), // ""
+QT_MOC_LITERAL(3, 16, 10) // "ResumeGame"
 
     },
-    "Window\0OpenGameWindow\0\0ResumeGame"
+    "Window\0NewGame\0\0ResumeGame"
 };
 #undef QT_MOC_LITERAL
 
@@ -69,7 +69,7 @@ void Window::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         Window *_t = static_cast<Window *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->OpenGameWindow(); break;
+        case 0: _t->NewGame(); break;
         case 1: _t->ResumeGame(); break;
         default: ;
         }

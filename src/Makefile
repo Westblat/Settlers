@@ -57,7 +57,13 @@ SOURCES       = main.cpp \
 		gamewindow.cpp \
 		terrainitem.cpp \
 		buildingitem.cpp \
-		settleritem.cpp moc_mainwindow.cpp \
+		settleritem.cpp \
+		settler.cpp \
+		building.cpp \
+		house.cpp \
+		tree.cpp \
+		warehouse.cpp \
+		priorityqueue.cpp moc_mainwindow.cpp \
 		moc_gamewindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
@@ -69,6 +75,12 @@ OBJECTS       = main.o \
 		terrainitem.o \
 		buildingitem.o \
 		settleritem.o \
+		settler.o \
+		building.o \
+		house.o \
+		tree.o \
+		warehouse.o \
+		priorityqueue.o \
 		moc_mainwindow.o \
 		moc_gamewindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -136,7 +148,13 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		gamewindow.h \
 		terrainitem.h \
 		buildingitem.h \
-		settleritem.h main.cpp \
+		settleritem.h \
+		priorityqueue.h \
+		settler.h \
+		building.h \
+		house.h \
+		tree.h \
+		warehouse.h main.cpp \
 		mainwindow.cpp \
 		coordinates.cpp \
 		terrain.cpp \
@@ -145,7 +163,13 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		gamewindow.cpp \
 		terrainitem.cpp \
 		buildingitem.cpp \
-		settleritem.cpp
+		settleritem.cpp \
+		settler.cpp \
+		building.cpp \
+		house.cpp \
+		tree.cpp \
+		warehouse.cpp \
+		priorityqueue.cpp
 QMAKE_TARGET  = launch
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = launch
@@ -313,8 +337,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h coordinates.h terrain.h map.h game.h gamewindow.h terrainitem.h buildingitem.h settleritem.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp coordinates.cpp terrain.cpp map.cpp game.cpp gamewindow.cpp terrainitem.cpp buildingitem.cpp settleritem.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.h coordinates.h terrain.h map.h game.h gamewindow.h terrainitem.h buildingitem.h settleritem.h priorityqueue.h settler.h building.h house.h tree.h warehouse.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainwindow.cpp coordinates.cpp terrain.cpp map.cpp game.cpp gamewindow.cpp terrainitem.cpp buildingitem.cpp settleritem.cpp settler.cpp building.cpp house.cpp tree.cpp warehouse.cpp priorityqueue.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -340,13 +364,29 @@ compiler_rcc_clean:
 compiler_moc_header_make_all: moc_mainwindow.cpp moc_gamewindow.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp moc_gamewindow.cpp
-moc_mainwindow.cpp: mainwindow.h
+moc_mainwindow.cpp: game.h \
+		map.h \
+		priorityqueue.h \
+		terrain.h \
+		coordinates.h \
+		building.h \
+		house.h \
+		settler.h \
+		warehouse.h \
+		tree.h \
+		mainwindow.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/mini_bunney/Desktop/prog/c++/settlers-2/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
 moc_gamewindow.cpp: game.h \
 		map.h \
+		priorityqueue.h \
 		terrain.h \
 		coordinates.h \
+		building.h \
+		house.h \
+		settler.h \
+		warehouse.h \
+		tree.h \
 		gamewindow.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/mini_bunney/Desktop/prog/c++/settlers-2/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include gamewindow.h -o moc_gamewindow.cpp
 
@@ -365,44 +405,71 @@ compiler_clean: compiler_moc_header_clean
 ####### Compile
 
 main.o: main.cpp mainwindow.h \
-		gamewindow.h \
 		game.h \
 		map.h \
+		priorityqueue.h \
 		terrain.h \
-		coordinates.h
+		coordinates.h \
+		building.h \
+		house.h \
+		settler.h \
+		warehouse.h \
+		tree.h \
+		gamewindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
-		gamewindow.h \
 		game.h \
 		map.h \
+		priorityqueue.h \
 		terrain.h \
-		coordinates.h
+		coordinates.h \
+		building.h \
+		house.h \
+		settler.h \
+		warehouse.h \
+		tree.h \
+		gamewindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 coordinates.o: coordinates.cpp coordinates.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o coordinates.o coordinates.cpp
 
 terrain.o: terrain.cpp terrain.h \
-		coordinates.h
+		coordinates.h \
+		building.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o terrain.o terrain.cpp
 
 map.o: map.cpp map.h \
+		priorityqueue.h \
 		terrain.h \
-		coordinates.h
+		coordinates.h \
+		building.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o map.o map.cpp
 
 game.o: game.cpp game.h \
 		map.h \
+		priorityqueue.h \
 		terrain.h \
-		coordinates.h
+		coordinates.h \
+		building.h \
+		house.h \
+		settler.h \
+		warehouse.h \
+		tree.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o game.o game.cpp
 
 gamewindow.o: gamewindow.cpp gamewindow.h \
 		game.h \
 		map.h \
+		priorityqueue.h \
 		terrain.h \
 		coordinates.h \
+		building.h \
+		house.h \
+		settler.h \
+		warehouse.h \
+		tree.h \
 		terrainitem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gamewindow.o gamewindow.cpp
 
@@ -414,6 +481,38 @@ buildingitem.o: buildingitem.cpp buildingitem.h
 
 settleritem.o: settleritem.cpp settleritem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o settleritem.o settleritem.cpp
+
+settler.o: settler.cpp settler.h \
+		coordinates.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o settler.o settler.cpp
+
+building.o: building.cpp building.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o building.o building.cpp
+
+house.o: house.cpp house.h \
+		building.h \
+		terrain.h \
+		coordinates.h \
+		settler.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o house.o house.cpp
+
+tree.o: tree.cpp tree.h \
+		building.h \
+		terrain.h \
+		coordinates.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tree.o tree.cpp
+
+warehouse.o: warehouse.cpp warehouse.h \
+		building.h \
+		terrain.h \
+		coordinates.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o warehouse.o warehouse.cpp
+
+priorityqueue.o: priorityqueue.cpp priorityqueue.h \
+		terrain.h \
+		coordinates.h \
+		building.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o priorityqueue.o priorityqueue.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
