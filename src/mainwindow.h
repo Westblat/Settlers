@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QtWidgets>
+#include "game.h"
 
 //window showing the actual game
 //opens when new game is started from main menu

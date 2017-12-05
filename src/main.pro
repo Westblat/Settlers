@@ -34,6 +34,12 @@ SOURCES += \
         terrainitem.cpp \
         buildingitem.cpp \
         settleritem.cpp
+	settler.cpp \
+        building.cpp \
+        house.cpp \
+        tree.cpp \
+        warehouse.cpp \
+        priorityqueue.cpp \
 
 HEADERS += \
         mainwindow.h \
@@ -45,5 +51,13 @@ HEADERS += \
         terrainitem.h \
         buildingitem.h \
         settleritem.h
+        priorityqueue.h \
+        settler.h \
+        building.h \
+        house.h \
+        tree.h \
+        warehouse.h \
+ 
+
 
 FORMS +=
