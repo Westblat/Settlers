@@ -15,11 +15,11 @@ class Window : public QWidget {
 
 public:
  	explicit Window(QWidget *parent = 0);
+ 	GameWindow *gamewindow;
 
 private:
  	QPushButton *quit_button;
  	QPushButton *start_button;
- 	GameWindow *gamewindow;
 
 
 public slots:

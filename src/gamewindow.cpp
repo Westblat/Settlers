@@ -6,11 +6,10 @@
 
 //#include <iostream>
 
-
 GameWindow::GameWindow(QWidget *parent) : QWidget(parent) {
 
 	setWindowTitle("The Settlers");
-    setMinimumSize(650, 650);
+    setMinimumSize(800, 600);
 
     QGridLayout *grid = new QGridLayout;
 
@@ -18,7 +17,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent) {
     grid->addWidget(menu_button, 0, 0);
     connect(menu_button, SIGNAL (clicked()), this , SLOT (ShowMainMenu()));
 
-    QGraphicsScene *scene = new QGraphicsScene(); //scene for viewing game map
+    QGraphicsScene *scene = new QGraphicsScene(this); //scene for viewing game map
     QGraphicsView *view = new QGraphicsView(scene);
     view->show();
     grid->addWidget(view, 1, 0, 10, 10);

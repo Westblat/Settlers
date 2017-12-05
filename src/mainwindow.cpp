@@ -3,7 +3,7 @@
 
 Window::Window(QWidget *parent) : QWidget(parent) {
     setWindowTitle("The Settlers");
-    setMinimumSize(650, 650);
+    setMinimumSize(800, 600);
 
 
     QGridLayout *grid = new QGridLayout;
@@ -23,7 +23,7 @@ Window::Window(QWidget *parent) : QWidget(parent) {
 }
 
 void Window::OpenGameWindow() {
+    //gamewindow = new GameWindow(this);
     gamewindow = new GameWindow();
     gamewindow->show();
-    //this->hide();
 }
