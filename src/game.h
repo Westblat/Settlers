@@ -18,6 +18,7 @@ public:
     void addSettler(House *house);
     std::vector<Settler*> getSettlers();
     std::vector<Building*> getBuildings();
+    bool simulate();
 private:
     Map *map;
     std::vector<Building*> buildings;

@@ -60,3 +60,12 @@ void Game::addSettler(House *house) {
 std::vector<Settler*> Game::getSettlers() {return settlers;}
 
 std::vector<Building*> Game::getBuildings() {return buildings;}
+
+bool Game::simulate(){
+    for(std::vector<Settler*>::iterator it = settlers.begin(); it !=settlers.end(); it++){
+        std::cout << *it << std::endl;
+    }
+
+
+    return true;
+}
