@@ -23,28 +23,35 @@ int Map::get_height() const {return height;}
 const std::vector<std::vector<Terrain*> >& Map::get_map() const {return map;}
 
 void Map::setMap() {
-    std::ifstream myfile;
-    std::string line;
-    myfile.open("map.txt");
-    std::vector<int> temp;
-    
-    while(std::getline(myfile, line)){
-        std::string buf;
-        std::stringstream ss(line);
-        
-        while (ss >> buf){
-            temp.push_back(std::stoi(buf));
-            }
-    }
-    
-    myfile.close();
-    int counter = 0;
-
-    for(std::vector<std::vector<Terrain*> >::iterator it = map.begin(); it != map.end(); it++){
-        for(std::vector<Terrain*>::iterator iter = it->begin(); iter != it->end(); iter++){
-            (**iter).setType(temp[counter]);
-            counter++;
+    try{
+        std::ifstream myfile;
+        std::string line;
+        myfile.open("map.txt");
+        if(!myfile.is_open()){
+            throw 0;
         }
+        std::vector<int> temp;
+        
+        while(std::getline(myfile, line)){
+            std::string buf;
+            std::stringstream ss(line);
+            
+            while (ss >> buf){
+                temp.push_back(std::stoi(buf));
+                }
+        }
+        
+        myfile.close();
+        int counter = 0;
+
+        for(std::vector<std::vector<Terrain*> >::iterator it = map.begin(); it != map.end(); it++){
+            for(std::vector<Terrain*>::iterator iter = it->begin(); iter != it->end(); iter++){
+                (**iter).setType(temp[counter]);
+                counter++;
+            }
+        }
+    }catch (...) {
+        std::cout << "Error reading map.txt file" << std::endl;
     }
 }
 
