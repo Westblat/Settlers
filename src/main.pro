@@ -33,8 +33,8 @@ SOURCES += \
         gamewindow.cpp \
         terrainitem.cpp \
         buildingitem.cpp \
-        settleritem.cpp
-	settler.cpp \
+        settleritem.cpp \
+        settler.cpp \
         building.cpp \
         house.cpp \
         tree.cpp \
@@ -50,7 +50,7 @@ HEADERS += \
         gamewindow.h \
         terrainitem.h \
         buildingitem.h \
-        settleritem.h
+        settleritem.h \
         priorityqueue.h \
         settler.h \
         building.h \
