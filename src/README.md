@@ -13,8 +13,8 @@ Settler(std::string name, Building *home)
 //Settler should be created with parameter name and building
 Public:
 	std::string getName //Returns name
-	std::string getTask //Returns current task
-	bool setTask(std::string task) //Returns true if succesful else false
+	int getTask //Returns current task
+	bool setTask(int task) //Returns true if succesful else false
 	vector<int> getItems() //Returns vector of items
 	bool addItem(int item) //Returns true if item added succesfully else false
 	bool removeItem(int item) //Returns true if item found and removed else false
@@ -23,6 +23,7 @@ Public:
 	int getHp() //Returns HP value
 	int removeHp(int remove) //Returns new HP value
 	int addHp(int add) //Returns new HP value, cant be higher than maxHp
+	Coordinates* getLocation() //Returns pointer to location
 	void setPath(std::stack<std::pair<int,int> >) //Sets path
 	bool move() //Updates settlers location based on next direction in path
 	void setDelay(int time) //Set wait time (actionDelay) for next simulation
@@ -30,7 +31,7 @@ Public:
 	int getDelay() //Returns actionDelay
 Private:
 	std::string name //SettlersName
-	std::string task //Current task
+	int task //Current task
 	int hp //Current HitPoints
 	int maxHp //Max value for HP
 	Building *home //Building Settler is tied to, !!might be unneeded!!
