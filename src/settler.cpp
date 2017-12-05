@@ -93,17 +93,13 @@ void Settler::setPath(std::stack<std::pair<int, int> > newPath){
 }
 
 // Returns next step
-std::pair<int, int> Settler::popNextPath() {
-
-    if (this->path.size() > 0){
-        std::pair<int, int> next (this->path.top());
+bool Settler::move() {
+    if (this->path.size() > 0) {
+        std::pair<int,int> next (this->path.top());
         this->path.pop();
-        return next;
+        return this->location->updateCoords(next.first,next.second);
     }
-    else {
-        std::pair<int, int> next (0,0);
-        return next;
-    }
+    else {return false;}
 }
 
 // Sets action delay to the given value

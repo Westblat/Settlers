@@ -29,7 +29,7 @@ public:
 	int addHP(int hpChange);
 
     void setPath(std::stack<std::pair<int, int> > newPath);
-    std::pair<int, int> popNextPath();
+    bool move();
 	
 	void setDelay(int time);
 	bool reduceDelay();
