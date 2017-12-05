@@ -24,7 +24,7 @@ Public:
 	int removeHp(int remove) //Returns new HP value
 	int addHp(int add) //Returns new HP value, cant be higher than maxHp
 	void setPath(std::stack<std::pair<int,int> >) //Sets path
-	std::pair<int,int> popNextPath() //Removes and returns next direction from path stack
+	bool move() //Updates settlers location based on next direction in path
 	void setDelay(int time) //Set wait time (actionDelay) for next simulation
 	bool reduceDelay() //Reduces wait time by one, returns true if actionDelay==0
 	int getDelay() //Returns actionDelay
