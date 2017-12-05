@@ -19,11 +19,22 @@ public:
 
     void placeBuilding(Building *building);
 
+   	std::vector<int> availableBuildings(); 
+    //returns vector of building types, if it returns -1, there is no available buildings
+
+
 private:
     Coordinates *location;
     int type;
     bool blocked;
     int buildingType;
+    /*Terrain types
+        0 = plains
+        1 = stone
+        2 = mountain
+        3 = beach
+        4 = water
+    */
 
 };
 std::ostream& operator<<(std::ostream& os, Terrain& terrain);
