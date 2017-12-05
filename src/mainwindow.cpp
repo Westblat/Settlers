@@ -25,6 +25,9 @@ void Window::OpenGameWindow() {
     gamewindow = new GameWindow(this);
     gamewindow->show();
 
+    // hide "New game"-button
+    start_button->hide();
+
     // add a button for resuming the game
     resume_button =  new QPushButton("Resume game");
     grid->addWidget(resume_button, 2, 0);
