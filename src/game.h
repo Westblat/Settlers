@@ -15,9 +15,10 @@ public:
     Map& getMap();
     void setBuildings();
     void addBuilding(int type, Coordinates *location, bool initialize);
-    void addSettler(House *house);
+    void addSettler(House *house, Coordinates *location);
     std::vector<Settler*> getSettlers();
     std::vector<Building*> getBuildings();
+    bool simulate();
 private:
     Map *map;
     std::vector<Building*> buildings;

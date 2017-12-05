@@ -48,6 +48,10 @@ std::vector<int> Terrain::availableBuildings(){
     return available;    
 }
 
+void Terrain::setBuildingType(int newtype) {
+    buildingType = newtype;
+}
+
 
 std::ostream& operator<<(std::ostream& os, Terrain& terrain){
     os << terrain.getType();
