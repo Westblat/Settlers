@@ -1,7 +1,7 @@
 #include "settler.h"
 
 // Constructor take the name of the settler and sets the values for max inventory size, max hp, (current) hp and playerControlled to true
-Settler::Settler(std::string name, Coordinates location) : name(name), location(location) {
+Settler::Settler(std::string name, Coordinates *location) : name(name), location(location) {
 	inventory.second = 5;
 	hp = 10;
 	maxHp = 10;
@@ -88,22 +88,18 @@ int Settler::addHP(int newHp)
 }
 
 // Sets new path
-void Settler::setPath(std::vector<std::pair<int, int> > newPath){
+void Settler::setPath(std::stack<std::pair<int, int> > newPath){
     this->path = newPath;
 }
 
 // Returns next step
-std::pair<int, int> Settler::popNextPath() {
-
-    if (this->path.size() > 0){
-        std::pair<int, int> next (this->path.top());
+bool Settler::move() {
+    if (this->path.size() > 0) {
+        std::pair<int,int> next (this->path.top());
         this->path.pop();
-        return next;
+        return this->location->updateCoords(next.first,next.second);
     }
-    else {
-        std::pair<int, int> next (0,0);
-        return next;
-    }
+    else {return false;}
 }
 
 // Sets action delay to the given value
