@@ -23,7 +23,8 @@ Public:
 	int getHp() //Returns HP value
 	int removeHp(int remove) //Returns new HP value
 	int addHp(int add) //Returns new HP value, cant be higher than maxHp
-	void pushPath(int x, int y) //Push direction to path
+	void setPath(std::stack<std::pair<int,int> >) //Sets path
+	std::pair<int,int> popNextPath() //Removes and returns next direction from path stack
 	void setDelay(int time) //Set wait time (actionDelay) for next simulation
 	bool reduceDelay() //Reduces wait time by one, returns true if actionDelay==0
 	int getDelay() //Returns actionDelay
@@ -36,7 +37,7 @@ Private:
 	pair<vector<int> items, int maxsize> //Inventory, first part is content, second max size "-1 for unlimtited, 0 for 0, pos item for defined size"
 	bool playerControlled //Determines if player can control this settler
 	Coordinates location //Settlers keep track of their location
-	std::queue<pair<int,int> > path //Movement path, contains directions 
+	std::stack<pair<int,int> > path //Movement path, contains directions 
 	int actionDelay //How much time action takes
 	
 
