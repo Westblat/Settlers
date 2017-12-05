@@ -36,6 +36,7 @@ SOURCES += \
         tree.cpp \
         warehouse.cpp \
         priorityqueue.cpp \
+	blacksmith.cpp \
 
 HEADERS += \
         mainwindow.h \
@@ -49,7 +50,7 @@ HEADERS += \
         house.h \
         tree.h \
         warehouse.h \
- 
+ 	blacksmith.h \
 
 
 FORMS +=
