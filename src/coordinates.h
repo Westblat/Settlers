@@ -6,6 +6,7 @@ class Coordinates
 {
 public:
     Coordinates(int x, int y);
+    Coordinates(Coordinates &other);
     int getX() const;
     int getY() const;
     bool updateCoords(int x, int y);

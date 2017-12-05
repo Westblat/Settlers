@@ -1,6 +1,10 @@
 #include "coordinates.h"
 
 Coordinates::Coordinates(int x, int y) : x(x), y(y){}
+Coordinates::Coordinates(Coordinates &other){
+    x = other.getX();
+    y = other.getY();
+}
 
 int Coordinates::getX() const {return x;}
 int Coordinates::getY() const {return y;}
