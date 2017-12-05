@@ -9,6 +9,9 @@
 #include <QGraphicsView>
 
 #include "game.h"
+#include "map.h"
+
+class Map;
 
 //window showing the actual game
 //opens when new game is started from main menu
@@ -19,8 +22,10 @@ public:
 	explicit GameWindow(QWidget *parent = 0);
 	void draw_terrain(QGraphicsScene* scene);
 
+
 private:
 	Game game; // creates the game
+	Map map = game.getMap();
 
 	QPushButton *menu_button;
 

@@ -1,7 +1,5 @@
 #include "gamewindow.h"
-//#include "terrain.h"
 #include "map.h"
-#include "game.h"
 #include "terrainitem.h"
 
 //#include <iostream>
@@ -25,6 +23,18 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     draw_terrain(scene); //draws the terrain on the map
 
     setLayout(grid);
+
+    // stuff taken from main.cpp when merging GUIdevelop branch with settlerdevelop.
+
+    Terrain location = *(map.get_map())[19][19];
+    
+    game.setBuildings();
+
+    std::vector<Building*> buildings = game.getBuildings();
+    for (std::vector<Building*>:: iterator it = buildings.begin();it != buildings.end(); it++){
+        std::cout << **it << std::endl;
+
+    }
 }
 
 void GameWindow::ShowMainMenu() {
@@ -36,7 +46,7 @@ void GameWindow::draw_terrain(QGraphicsScene *scene) {
 	//draws the terrain on the map
 	int tilesize = 50;
 	
-	Map map = game.getMap(); //apparently not the same as the vector<vector<Terrain*>> map
+	//Map map = game.getMap(); //apparently not the same as the vector<vector<Terrain*>> map
 	std::vector<std::vector<Terrain*>> terrain_map = map.get_map();
 	int width = map.get_width();
 	int height = map.get_height();
