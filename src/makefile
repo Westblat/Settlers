@@ -59,7 +59,8 @@ SOURCES       = main.cpp \
 		house.cpp \
 		tree.cpp \
 		warehouse.cpp \
-		priorityqueue.cpp 
+		priorityqueue.cpp \
+		blacksmith.cpp 
 OBJECTS       = main.o \
 		mainwindow.o \
 		coordinates.o \
@@ -71,7 +72,8 @@ OBJECTS       = main.o \
 		house.o \
 		tree.o \
 		warehouse.o \
-		priorityqueue.o
+		priorityqueue.o \
+		blacksmith.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -139,7 +141,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		building.h \
 		house.h \
 		tree.h \
-		warehouse.h main.cpp \
+		warehouse.h \
+		blacksmith.h main.cpp \
 		mainwindow.cpp \
 		coordinates.cpp \
 		terrain.cpp \
@@ -150,7 +153,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		house.cpp \
 		tree.cpp \
 		warehouse.cpp \
-		priorityqueue.cpp
+		priorityqueue.cpp \
+		blacksmith.cpp
 QMAKE_TARGET  = launch
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = launch
@@ -318,8 +322,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h coordinates.h terrain.h map.h priorityqueue.h game.h settler.h building.h house.h tree.h warehouse.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp coordinates.cpp terrain.cpp map.cpp game.cpp settler.cpp building.cpp house.cpp tree.cpp warehouse.cpp priorityqueue.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.h coordinates.h terrain.h map.h priorityqueue.h game.h settler.h building.h house.h tree.h warehouse.h blacksmith.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainwindow.cpp coordinates.cpp terrain.cpp map.cpp game.cpp settler.cpp building.cpp house.cpp tree.cpp warehouse.cpp priorityqueue.cpp blacksmith.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -411,7 +415,8 @@ game.o: game.cpp game.h \
 		tree.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o game.o game.cpp
 
-settler.o: settler.cpp settler.h
+settler.o: settler.cpp settler.h \
+		coordinates.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o settler.o settler.cpp
 
 building.o: building.cpp building.h
@@ -441,6 +446,13 @@ priorityqueue.o: priorityqueue.cpp priorityqueue.h \
 		coordinates.h \
 		building.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o priorityqueue.o priorityqueue.cpp
+
+blacksmith.o: blacksmith.cpp blacksmith.h \
+		building.h \
+		terrain.h \
+		coordinates.h \
+		settler.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o blacksmith.o blacksmith.cpp
 
 ####### Install
 

@@ -23,6 +23,16 @@ private:
     Map *map;
     std::vector<Building*> buildings;
     std::vector<Settler*> settlers;
+    /* Types for task:
+    0 = idle
+    1 = build
+    2 = cut tree
+    3 = cut stone
+    4 = cut iron
+    5 = empty inventory
+    6 = get item
+    7 = combat
+    */
 };
 
 #endif // GAME_H

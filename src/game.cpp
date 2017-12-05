@@ -73,10 +73,21 @@ std::vector<Building*> Game::getBuildings() {return buildings;}
 
 bool Game::simulate(){
     for(std::vector<Settler*>::iterator it = settlers.begin(); it !=settlers.end(); it++){
-       (**it).move();
+       if((**it).getDelay() > 0){
+        (**it).reduceDelay();
+       }else{
+           (**it).move();
+       }
+       
         //std::cout << **it << std::endl;
+        /*TODO on simulata:
+        if((**it).move()){
+            settler.setDelay(???)
+        }else {
+            if( (**it).getTask() ) // def apufunktio(int taskID); <- Tarkistaa mikä taski ja toteuttaa sen mukaan
+                                    // ja callaa oikeaa apufunktiota 
+        }
+        */
     }
-
-
     return true;
 }
