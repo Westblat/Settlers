@@ -39,7 +39,7 @@ public:
 
 private:
 	std::string name; // Settlers name
-	std::string task; // Current task
+    int task; // Current task
     int hp; // Current hp of the settler
     int maxHp; // Maximum hp of the settler
     //Building *home;

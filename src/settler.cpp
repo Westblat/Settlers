@@ -6,6 +6,7 @@ Settler::Settler(std::string name, Coordinates *location) : name(name), location
 	hp = 10;
 	maxHp = 10;
 	playerControlled = true;
+    task = 0; //0 stands for idle task
 }
 
 
