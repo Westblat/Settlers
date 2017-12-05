@@ -73,7 +73,8 @@ std::vector<Building*> Game::getBuildings() {return buildings;}
 
 bool Game::simulate(){
     for(std::vector<Settler*>::iterator it = settlers.begin(); it !=settlers.end(); it++){
-        std::cout << *it << std::endl;
+       (**it).move();
+        //std::cout << **it << std::endl;
     }
 
 
