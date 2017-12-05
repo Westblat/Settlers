@@ -23,7 +23,7 @@ Window::Window(QWidget *parent) : QWidget(parent) {
 }
 
 void Window::OpenGameWindow() {
-    //gamewindow = new GameWindow(this);
-    gamewindow = new GameWindow();
+    gamewindow = new GameWindow(this);
+    //gamewindow = new GameWindow();
     gamewindow->show();
 }

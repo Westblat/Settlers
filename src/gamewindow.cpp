@@ -6,7 +6,7 @@
 
 //#include <iostream>
 
-GameWindow::GameWindow(QWidget *parent) : QWidget(parent) {
+GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
 
 	setWindowTitle("The Settlers");
     setMinimumSize(800, 600);
