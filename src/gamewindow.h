@@ -21,11 +21,14 @@ class GameWindow : public QWidget {
 public:
 	explicit GameWindow(QWidget *parent = 0);
 	void draw_terrain(QGraphicsScene* scene);
+	void draw_buildings(QGraphicsScene* scene);
+	void draw_settlers(QGraphicsScene* scene);
 
 
 private:
 	Game game; // creates the game
 	Map map = game.getMap();
+	int tilesize = 50;
 
 	QPushButton *menu_button;
 

@@ -10,6 +10,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     setMinimumSize(800, 600);
 
     QGridLayout *grid = new QGridLayout;
+    setLayout(grid);
 
     menu_button = new QPushButton("Main Menu");  //button that shows the main menu
     grid->addWidget(menu_button, 0, 0);
@@ -21,39 +22,24 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     grid->addWidget(view, 1, 0, 10, 10);
 
     draw_terrain(scene); //draws the terrain on the map
+    draw_buildings(scene);
 
-    setLayout(grid);
-
-    // stuff taken from main.cpp when merging GUIdevelop branch with settlerdevelop.
-
-    Terrain location = *(map.get_map())[19][19];
-    
-    game.setBuildings();
-
-    std::vector<Building*> buildings = game.getBuildings();
-    for (std::vector<Building*>:: iterator it = buildings.begin();it != buildings.end(); it++){
-        std::cout << **it << std::endl;
-
-    }
 }
 
 void GameWindow::ShowMainMenu() {
-    //somehow show main menu
-    this->hide(); //bad solution, works though
+    this->hide();
 }
 
 void GameWindow::draw_terrain(QGraphicsScene *scene) {
 	//draws the terrain on the map
-	int tilesize = 50;
 	
-	//Map map = game.getMap(); //apparently not the same as the vector<vector<Terrain*>> map
 	std::vector<std::vector<Terrain*>> terrain_map = map.get_map();
 	int width = map.get_width();
 	int height = map.get_height();
 	
 	int x = 0;
 	int y = 0;
-	int type = 0; //initialized as normal terrain
+	int type = 0; //initialized as normal grass-terrain
 	for (int j = 0; j < width; j++) {
 		x = 0;
 		for (int i = 0; i < height; i++) { //draw a TerrainItem (which is a rectangle)
@@ -67,4 +53,24 @@ void GameWindow::draw_terrain(QGraphicsScene *scene) {
 		//next row
 		y += tilesize;
 	}
+}
+
+void GameWindow::draw_buildings(QGraphicsScene *scene) {
+	//draws buildings on the map
+
+	// stuff taken from main.cpp when merging GUIdevelop branch with settlerdevelop.
+    Terrain location = *(map.get_map())[19][19];
+    
+    game.setBuildings();
+
+    std::vector<Building*> buildings = game.getBuildings();
+    for (std::vector<Building*>:: iterator it = buildings.begin();it != buildings.end(); it++){
+        std::cout << **it << std::endl;
+
+    }
+}
+
+void GameWindow::draw_settlers(QGraphicsScene *scene) {
+	//draws settlers on the map
+
 }
