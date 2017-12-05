@@ -17,8 +17,8 @@ public:
 
     std::string getName();
 
-    std::string getTask();
-    bool setTask(std::string newTask);
+    int getTask();
+    bool setTask(int newTask);
 
 	std::vector<int> getItems();
 	bool addItem(int item);
@@ -27,6 +27,8 @@ public:
 	int getHP();
 	int removeHP(int hpChange);
 	int addHP(int hpChange);
+
+    Coordinates* getLocation();
 
     void setPath(std::stack<std::pair<int, int> > newPath);
     bool move();

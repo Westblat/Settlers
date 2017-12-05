@@ -17,10 +17,10 @@ Settler::~Settler() {
 // These functions take no parameters and return the wanted variable
 std::string Settler::getName() { return name; }
 
-std::string Settler::getTask() { return task; }
+int Settler::getTask() { return task; }
 
 // TODO
-bool Settler::setTask(std::string newTask)
+bool Settler::setTask(int = task)
 {
 	task = newTask;
 	return true;
@@ -87,6 +87,8 @@ int Settler::addHP(int newHp)
     }
 }
 
+Coordinates* Settler::getLocation(){return this->location;}
+
 // Sets new path
 void Settler::setPath(std::stack<std::pair<int, int> > newPath){
     this->path = newPath;
@@ -106,18 +108,13 @@ bool Settler::move() {
 void Settler::setDelay(int delay) { actionDelay = delay; }
 
 // Reduces the delay by 1, until the delay is 0 and returns true once it is
-bool Settler::reduceDelay()
-{
-	if (actionDelay - 1 <= 0)
-	{
+bool Settler::reduceDelay() {
+    actionDelay -= 1;
+    if (actionDelay <= 0) {
 		actionDelay = 0;
 		return true;
 	}
-	else
-	{
-		actionDelay--;
-		return false;
-	}
+    else {return false;}
 }
 
 // Returns the delay
