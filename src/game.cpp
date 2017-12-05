@@ -40,8 +40,8 @@ void Game::addBuilding(int type, Coordinates *location, bool initialize){
     if(type == 1) {
         House *talo = new House(map->get_map()[location->getX()][location->getY()], initialize);
         buildings.push_back(talo);
-        addSettler(talo);
-        addSettler(talo);
+        addSettler(talo,map->get_map()[location->getX()][location->getY()]->getLocation());
+        addSettler(talo,map->get_map()[location->getX()][location->getY()]->getLocation());
     } else if (type == 2){
         Warehouse *varasto = new Warehouse(map->get_map()[location->getX()][location->getY()], initialize);
         buildings.push_back(varasto);
@@ -51,8 +51,8 @@ void Game::addBuilding(int type, Coordinates *location, bool initialize){
     }
 }
 
-void Game::addSettler(House *house) {
-    Settler *settler = new Settler("John Cena");
+void Game::addSettler(House *house, Coordinates *location) {
+    Settler *settler = new Settler("John Cena", location);
     house->addSettler(settler);
     settlers.push_back(settler);
 }
