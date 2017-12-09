@@ -24,6 +24,10 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     draw_terrain(scene); //draws the terrain on the map
     draw_buildings(scene);
 
+    //TODO
+    //add a timer
+    //refresh the scene in regards to settlers and buildings
+
 }
 
 void GameWindow::ShowMainMenu() {
@@ -32,14 +36,14 @@ void GameWindow::ShowMainMenu() {
 
 void GameWindow::draw_terrain(QGraphicsScene *scene) {
 	//draws the terrain on the map
-	
-	std::vector<std::vector<Terrain*>> terrain_map = map.get_map();
-	int width = map.get_width();
-	int height = map.get_height();
+
+	// debug
+	//std::cout << "width: " << width << " ";
+	//std::cout << "height: " << height << std::endl;
 	
 	int x = 0;
 	int y = 0;
-	int type = 0; //initialized as normal grass-terrain
+	int type;
 	for (int j = 0; j < width; j++) {
 		x = 0;
 		for (int i = 0; i < height; i++) { //draw a TerrainItem (which is a rectangle)
@@ -56,18 +60,35 @@ void GameWindow::draw_terrain(QGraphicsScene *scene) {
 }
 
 void GameWindow::draw_buildings(QGraphicsScene *scene) {
-	//draws buildings on the map
-
-	// stuff taken from main.cpp when merging GUIdevelop branch with settlerdevelop.
-    Terrain location = *(map.get_map())[19][19];
+	//draws the buildings (and trees) on the map
     
-    game.setBuildings();
+    game.setBuildings(); // the buildings the player starts with
 
+    // debug, prints the types of the buildings currently on the map. 2 = warehouse, 1 = house, 0 = trees
     std::vector<Building*> buildings = game.getBuildings();
-    for (std::vector<Building*>:: iterator it = buildings.begin();it != buildings.end(); it++){
-        std::cout << **it << std::endl;
-
+    for (auto i : buildings) {
+		std::cout << "Type: " << i->getType() << std::endl;
+		//std::cout << " Location: " << i->getLocation()->getX() << " " << i->getLocation()->getY() << std::endl;
+		
+		//Apparently buildings don't have locations, how do I know where to place buildings?
     }
+/*
+    int x = 0;
+	int y = 0;
+	int type;
+	for (int j = 0; j < width; j++) {
+		x = 0;
+		for (int i = 0; i < height; i++) {
+			type = terrain_map[j][i]->getType();
+			BuildingItem *bitem = new BuildingItem(type);
+			bitem->setPos(x,y);
+			scene->addItem(bitem);
+			x += tilesize;
+
+		}
+		y += tilesize;
+	}*/
+
 }
 
 void GameWindow::draw_settlers(QGraphicsScene *scene) {

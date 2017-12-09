@@ -28,6 +28,11 @@ public:
 private:
 	Game game; // creates the game
 	Map map = game.getMap();
+	int width = map.get_width();
+	int height = map.get_height();
+
+	std::vector<std::vector<Terrain*>> terrain_map = map.get_map();
+
 	int tilesize = 64; // images used are 64x64 pixels
 
 	QPushButton *menu_button;
