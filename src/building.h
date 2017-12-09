@@ -15,6 +15,7 @@ public:
     bool addItem(int item);
 	bool removeItem(int item);
 	void setReady();
+	bool getReadiness() {return isReady;};
 	int getType();
 	virtual Coordinates* getLocation() = 0;
 

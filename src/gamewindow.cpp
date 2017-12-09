@@ -9,7 +9,8 @@
 GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
 
 	setWindowTitle("The Settlers");
-    setMinimumSize(800, 600);
+    //setMinimumSize(800, 600);
+    setFixedSize(1000, 800);
 
     QGridLayout *grid = new QGridLayout;
     setLayout(grid);
@@ -22,6 +23,11 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     QGraphicsView *view = new QGraphicsView(scene);
     view->show();
     grid->addWidget(view, 1, 0, 10, 10);
+
+    game.setBuildings(); // the buildings the player starts with
+
+    buildings = game.getBuildings();
+    settlers = game.getSettlers();
 
     draw_terrain(scene); //draws the terrain on the map
     draw_buildings(scene);
@@ -63,22 +69,20 @@ void GameWindow::draw_terrain(QGraphicsScene *scene) {
 
 void GameWindow::draw_buildings(QGraphicsScene *scene) {
 	//draws the buildings (and trees) on the map
-    
-    game.setBuildings(); // the buildings the player starts with
 
-    // debug, prints the types of the buildings currently on the map. 2 = warehouse, 1 = house, 0 = trees
+    // debug
+    /*
     std::vector<Building*> buildings = game.getBuildings();
     for (auto i : buildings) {
 		std::cout << "Type: " << i->getType();
 		std::cout << " Location: " << i->getLocation()->getX() << " " << i->getLocation()->getY() << std::endl;
-    }
+    }*/
 
     int x = 0;
     for (auto building : buildings) {
-    	int type = building->getType();
-    	BuildingItem *buildingitem = new BuildingItem(type);
+    	//int type = building->getType();
+    	BuildingItem *buildingitem = new BuildingItem(building->getType(), building->getReadiness());
     	buildingitem->setPos(tilesize*building->getLocation()->getX(), tilesize*building->getLocation()->getY());
-    	//buildingitem->setPos(x,0);
     	scene->addItem(buildingitem);
     	x += tilesize;
     }
@@ -88,17 +92,15 @@ void GameWindow::draw_buildings(QGraphicsScene *scene) {
 void GameWindow::draw_settlers(QGraphicsScene *scene) {
 	//draws settlers on the map
 
-	std::vector<Building*> buildings = game.getBuildings();
-	std::vector<Settler*> settlers = game.getSettlers();
-
 	// debug
+	/*
 	int i = 0;
 	for (auto settler : settlers) {
 		i++;
 		std::cout << i << ": ";
 		std::cout << "Name: " << settler->getName();
 		std::cout << " Location: " << settler->getLocation()->getX() << " " << settler->getLocation()->getY() << std::endl;
-	}
+	}*/
 
 	for (auto settler : settlers) {
 		SettlerItem *settleritem = new SettlerItem();

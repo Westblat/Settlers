@@ -375,6 +375,7 @@ qrc_media.cpp: media.qrc \
 		house.png \
 		mine.png \
 		keeptop.png \
+		constructionsite.png \
 		beach.png \
 		stonecutter.png \
 		blacksmith.png \
@@ -511,26 +512,27 @@ settler.o: settler.cpp settler.h \
 		coordinates.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o settler.o settler.cpp
 
-building.o: building.cpp building.h
+building.o: building.cpp building.h \
+		coordinates.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o building.o building.cpp
 
 house.o: house.cpp house.h \
 		building.h \
-		terrain.h \
 		coordinates.h \
+		terrain.h \
 		settler.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o house.o house.cpp
 
 tree.o: tree.cpp tree.h \
 		building.h \
-		terrain.h \
-		coordinates.h
+		coordinates.h \
+		terrain.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tree.o tree.cpp
 
 warehouse.o: warehouse.cpp warehouse.h \
 		building.h \
-		terrain.h \
-		coordinates.h
+		coordinates.h \
+		terrain.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o warehouse.o warehouse.cpp
 
 priorityqueue.o: priorityqueue.cpp priorityqueue.h \

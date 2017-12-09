@@ -14,5 +14,6 @@
         <file>blacksmith.png</file>
         <file>keepbottom.png</file>
         <file>keeptop.png</file>
+        <file>constructionsite.png</file>
     </qresource>
 </RCC>

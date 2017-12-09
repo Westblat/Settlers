@@ -33,6 +33,9 @@ private:
 
 	std::vector<std::vector<Terrain*>> terrain_map = map.get_map();
 
+	std::vector<Building*> buildings;
+    std::vector<Settler*> settlers;
+
 	int tilesize = 64; // images used are 64x64 pixels
 	int refresh_time = 40; // milliseconds, after how much time locations update on screen, roughly 25 fps
 
@@ -43,3 +46,7 @@ public slots:
 };
 
 #endif
+
+/*
+Imagefiles taken from kenney.nl!
+*/
