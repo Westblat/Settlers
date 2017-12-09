@@ -1,12 +1,14 @@
 #ifndef TERRAINITEM_H
 #define TERRAINITEM_H
 
-#include <QGraphicsRectItem>
 #include <QGraphicsView>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsItem>
 
-class TerrainItem : public QGraphicsRectItem {
+
+class TerrainItem : public QGraphicsPixmapItem {
 public:
-	TerrainItem(int tilesize, int type);
+	TerrainItem(int type, QGraphicsItem *parent = 0);
 };
 
 #endif

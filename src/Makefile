@@ -63,7 +63,8 @@ SOURCES       = main.cpp \
 		house.cpp \
 		tree.cpp \
 		warehouse.cpp \
-		priorityqueue.cpp moc_mainwindow.cpp \
+		priorityqueue.cpp qrc_media.cpp \
+		moc_mainwindow.cpp \
 		moc_gamewindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
@@ -81,6 +82,7 @@ OBJECTS       = main.o \
 		tree.o \
 		warehouse.o \
 		priorityqueue.o \
+		qrc_media.o \
 		moc_mainwindow.o \
 		moc_gamewindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -258,6 +260,7 @@ Makefile: main.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.conf
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		main.pro \
+		media.qrc \
 		/usr/lib/x86_64-linux-gnu/libQt5Widgets.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Gui.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Core.prl
@@ -320,6 +323,7 @@ Makefile: main.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.conf
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf:
 main.pro:
+media.qrc:
 /usr/lib/x86_64-linux-gnu/libQt5Widgets.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Gui.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Core.prl:
@@ -337,6 +341,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents media.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow.h coordinates.h terrain.h map.h game.h gamewindow.h terrainitem.h buildingitem.h settleritem.h priorityqueue.h settler.h building.h house.h tree.h warehouse.h $(DISTDIR)/
 	$(COPY_FILE) --parents main.cpp mainwindow.cpp coordinates.cpp terrain.cpp map.cpp game.cpp gamewindow.cpp terrainitem.cpp buildingitem.cpp settleritem.cpp settler.cpp building.cpp house.cpp tree.cpp warehouse.cpp priorityqueue.cpp $(DISTDIR)/
 
@@ -359,8 +364,17 @@ mocables: compiler_moc_header_make_all compiler_moc_source_make_all
 
 check: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_media.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_media.cpp
+qrc_media.cpp: media.qrc \
+		grass.png \
+		stone.png \
+		beach.png \
+		mountain.png \
+		water.png
+	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name media media.qrc -o qrc_media.cpp
+
 compiler_moc_header_make_all: moc_mainwindow.cpp moc_gamewindow.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp moc_gamewindow.cpp
@@ -400,7 +414,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_header_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_header_clean 
 
 ####### Compile
 
@@ -513,6 +527,9 @@ priorityqueue.o: priorityqueue.cpp priorityqueue.h \
 		coordinates.h \
 		building.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o priorityqueue.o priorityqueue.cpp
+
+qrc_media.o: qrc_media.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_media.o qrc_media.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

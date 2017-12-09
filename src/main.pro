@@ -39,7 +39,7 @@ SOURCES += \
         house.cpp \
         tree.cpp \
         warehouse.cpp \
-        priorityqueue.cpp \
+        priorityqueue.cpp 
 
 HEADERS += \
         mainwindow.h \
@@ -56,7 +56,10 @@ HEADERS += \
         building.h \
         house.h \
         tree.h \
-        warehouse.h \
+        warehouse.h 
+
+RESOURCES += \
+    media.qrc
  
 
 

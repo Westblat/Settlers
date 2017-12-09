@@ -44,7 +44,7 @@ void GameWindow::draw_terrain(QGraphicsScene *scene) {
 		x = 0;
 		for (int i = 0; i < height; i++) { //draw a TerrainItem (which is a rectangle)
 			type = terrain_map[j][i]->getType();
-			TerrainItem *titem = new TerrainItem(tilesize, type);
+			TerrainItem *titem = new TerrainItem(type);
 			titem->setPos(x,y);
 			scene->addItem(titem);
 			x += tilesize;

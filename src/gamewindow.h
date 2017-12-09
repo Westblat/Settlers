@@ -28,7 +28,7 @@ public:
 private:
 	Game game; // creates the game
 	Map map = game.getMap();
-	int tilesize = 50;
+	int tilesize = 64; // images used are 64x64 pixels
 
 	QPushButton *menu_button;
 
