@@ -1,6 +1,8 @@
 #include "gamewindow.h"
 #include "map.h"
 #include "terrainitem.h"
+#include "buildingitem.h"
+#include "settleritem.h"
 
 //#include <iostream>
 
@@ -23,6 +25,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
 
     draw_terrain(scene); //draws the terrain on the map
     draw_buildings(scene);
+    draw_settlers(scene);
 
     //TODO
     //add a timer
@@ -43,11 +46,10 @@ void GameWindow::draw_terrain(QGraphicsScene *scene) {
 	
 	int x = 0;
 	int y = 0;
-	int type;
 	for (int j = 0; j < width; j++) {
 		x = 0;
 		for (int i = 0; i < height; i++) { //draw a TerrainItem (which is a rectangle)
-			type = terrain_map[j][i]->getType();
+			int type = terrain_map[j][i]->getType();
 			TerrainItem *titem = new TerrainItem(type);
 			titem->setPos(x,y);
 			scene->addItem(titem);
@@ -72,26 +74,37 @@ void GameWindow::draw_buildings(QGraphicsScene *scene) {
 		
 		//Apparently buildings don't have locations, how do I know where to place buildings?
     }
-/*
-    int x = 0;
-	int y = 0;
-	int type;
-	for (int j = 0; j < width; j++) {
-		x = 0;
-		for (int i = 0; i < height; i++) {
-			type = terrain_map[j][i]->getType();
-			BuildingItem *bitem = new BuildingItem(type);
-			bitem->setPos(x,y);
-			scene->addItem(bitem);
-			x += tilesize;
 
-		}
-		y += tilesize;
-	}*/
+    int x = 0;
+    for (auto building : buildings) {
+    	int type = building->getType();
+    	BuildingItem *buildingitem = new BuildingItem(type);
+    	//buildingitem->setPos(tilesize*building->getLocation()->getX(), tilesize*building->getLocation()->getY());
+    	buildingitem->setPos(x,0);
+    	scene->addItem(buildingitem);
+    	x += tilesize;
+    }
 
 }
 
 void GameWindow::draw_settlers(QGraphicsScene *scene) {
 	//draws settlers on the map
 
+	std::vector<Building*> buildings = game.getBuildings();
+	std::vector<Settler*> settlers = game.getSettlers();
+
+	// debug
+	int i = 0;
+	for (auto settler : settlers) {
+		i++;
+		std::cout << i << ": ";
+		std::cout << "Name: " << settler->getName();
+		std::cout << " Location: " << settler->getLocation()->getX() << " " << settler->getLocation()->getY() << std::endl;
+	}
+
+	for (auto settler : settlers) {
+		SettlerItem *settleritem = new SettlerItem();
+		settleritem->setPos(tilesize*settler->getLocation()->getX(), tilesize*settler->getLocation()->getY());
+		scene->addItem(settleritem);
+	}
 }

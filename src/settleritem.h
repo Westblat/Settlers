@@ -1,12 +1,13 @@
 #ifndef SETTLERITEM_H
 #define SETTLERITEM_H
 
-#include <QGraphicsRectItem>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsItem>
 #include <QGraphicsView>
 
-class SettlerItem : public QGraphicsRectItem {
+class SettlerItem : public QGraphicsPixmapItem {
 public:
-	SettlerItem(int tilesize);
+	SettlerItem(QGraphicsItem *parent = 0);
 };
 
 #endif

@@ -1,20 +1,36 @@
 #include "buildingitem.h"
 
-BuildingItem::BuildingItem(int tilesize, int type) {
-	//rectangles are placeholders inb4 .png files
-
-	setRect(0,0,tilesize,tilesize);
-
-	if (type == 0) {												// 0: TREE
-		QBrush brush = QBrush(QColor(0, 255, 0)); // Bright green
-		setBrush(brush);
+BuildingItem::BuildingItem(int type, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
+/*	Building types are
+	0: tree
+	1: House
+	2: Warehouse
+	3: Stonecutter
+	4: Mine
+	5: Blacksmith
+	6: Keep
+*/
+	if (type == 0) {
+		setPixmap(QPixmap(":/graphics/tree.png"));
 	}
-	else if (type == 1) {											// 1: HOUSE
-		QBrush brush = QBrush(QColor(51, 25, 0)); // Brownish
-		setBrush(brush);
+	else if (type == 1) {
+		setPixmap(QPixmap(":/graphics/house.png"));
 	}
-	else if (type == 2) {											// 2: WAREHOUSE
-		QBrush brush = QBrush(QColor(255, 128, 0)); // Orange
-		setBrush(brush);
+	else if (type == 2) {
+		setPixmap(QPixmap(":/graphics/warehouse.png"));
 	}
+	else if (type == 3) {
+		setPixmap(QPixmap(":/graphics/stonecutter.png"));
+	}
+	else if (type == 4) {
+		setPixmap(QPixmap(":/graphics/mine.png"));
+	}
+	else if (type == 5) {
+		setPixmap(QPixmap(":/graphics/blacksmith.png"));
+	}
+	/*
+	// SPECIAL CASE
+	else if (type == 6) {
+		setPixmap(QPixmap(":/graphics/keep.png"));
+	}*/
 }

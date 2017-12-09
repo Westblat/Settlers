@@ -368,10 +368,19 @@ compiler_rcc_make_all: qrc_media.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_media.cpp
 qrc_media.cpp: media.qrc \
+		settler.png \
+		keepbottom.png \
 		grass.png \
 		stone.png \
+		house.png \
+		mine.png \
+		keeptop.png \
 		beach.png \
+		stonecutter.png \
+		blacksmith.png \
 		mountain.png \
+		tree.png \
+		warehouse.png \
 		water.png
 	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name media media.qrc -o qrc_media.cpp
 
@@ -484,7 +493,9 @@ gamewindow.o: gamewindow.cpp gamewindow.h \
 		settler.h \
 		warehouse.h \
 		tree.h \
-		terrainitem.h
+		terrainitem.h \
+		buildingitem.h \
+		settleritem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gamewindow.o gamewindow.cpp
 
 terrainitem.o: terrainitem.cpp terrainitem.h

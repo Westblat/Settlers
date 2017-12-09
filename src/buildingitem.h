@@ -1,12 +1,13 @@
 #ifndef BUILDINGITEM_H
 #define BUILDINGITEM_H
 
-#include <QGraphicsRectItem>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsItem>
 #include <QGraphicsView>
 
-class BuildingItem : public QGraphicsRectItem {
+class BuildingItem : public QGraphicsPixmapItem {
 public:
-	BuildingItem(int tilesize, int type);
+	BuildingItem(int type, QGraphicsItem *parent = 0);
 };
 
 #endif
