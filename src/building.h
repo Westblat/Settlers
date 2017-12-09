@@ -4,6 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <ostream>
+#include "coordinates.h"
 
 class Building
 {
@@ -15,6 +16,7 @@ public:
 	bool removeItem(int item);
 	void setReady();
 	int getType();
+	virtual Coordinates* getLocation() = 0;
 
 protected:
 	int type;

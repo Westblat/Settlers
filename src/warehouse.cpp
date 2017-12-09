@@ -12,3 +12,7 @@ Warehouse::Warehouse(Terrain *terrain, bool initialize): Building(2, 10, initial
         inventory.first.push_back(0);
     }
  }
+
+Coordinates* Warehouse::getLocation() {
+    return terrain->getLocation();
+}

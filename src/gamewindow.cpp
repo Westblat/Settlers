@@ -69,18 +69,16 @@ void GameWindow::draw_buildings(QGraphicsScene *scene) {
     // debug, prints the types of the buildings currently on the map. 2 = warehouse, 1 = house, 0 = trees
     std::vector<Building*> buildings = game.getBuildings();
     for (auto i : buildings) {
-		std::cout << "Type: " << i->getType() << std::endl;
-		//std::cout << " Location: " << i->getLocation()->getX() << " " << i->getLocation()->getY() << std::endl;
-		
-		//Apparently buildings don't have locations, how do I know where to place buildings?
+		std::cout << "Type: " << i->getType();
+		std::cout << " Location: " << i->getLocation()->getX() << " " << i->getLocation()->getY() << std::endl;
     }
 
     int x = 0;
     for (auto building : buildings) {
     	int type = building->getType();
     	BuildingItem *buildingitem = new BuildingItem(type);
-    	//buildingitem->setPos(tilesize*building->getLocation()->getX(), tilesize*building->getLocation()->getY());
-    	buildingitem->setPos(x,0);
+    	buildingitem->setPos(tilesize*building->getLocation()->getX(), tilesize*building->getLocation()->getY());
+    	//buildingitem->setPos(x,0);
     	scene->addItem(buildingitem);
     	x += tilesize;
     }
