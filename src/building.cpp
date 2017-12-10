@@ -52,7 +52,7 @@ void Building::setReady() {
 }
 
 void Building::takeDamage(){
-	hp --1;
+	hp --;
 };
 
 std::ostream& operator <<(std::ostream& os, Building& building){

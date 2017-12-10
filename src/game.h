@@ -20,7 +20,7 @@ public:
     std::vector<Building*> getBuildings();
     bool simulate();
     int checkTask(int task, Settler *settler, Building *building);
-    int cutTree(Settler *settler, Building *building);
+    int cutTree(Settler *settler, Building *tree);
 private:
     Map *map;
     std::vector<Building*> buildings;

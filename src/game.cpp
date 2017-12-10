@@ -94,9 +94,11 @@ bool Game::simulate(){
         (**it).reduceDelay();
        }else{
            if((**it).move()){
-               settler.setDelay(2);
+               (**it).setDelay(2);
            }else {
-               this.checkTask((**it).getTask(), *it, map->get_map()[(**it).getLocation()->getLocation()->getX(), (**it).getLocation()->getLocation()->getY()].getBuilding())
+               /*  */
+               Building *tree = map->get_map()[(**it).getLocation()->getX()][(**it).getLocation()->getY()]->getBuilding();
+               checkTask((**it).getTask(), *it, tree);
            }
        }
        
@@ -136,8 +138,8 @@ int Game::checkTask(int task, Settler *settler, Building *building) {
     return 0;
 }
 
-int Game::cutTree(Settler *settler, Tree *tree){
-    tree.takeDamage();
-    settler.addItem(1);
+int Game::cutTree(Settler *settler, Building *tree){
+    tree->takeDamage();
+    settler->addItem(1);
     return 0;
 }
