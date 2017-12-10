@@ -169,7 +169,7 @@ std::stack<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates* 
 }
 
 Coordinates* Map::findNearby(Coordinates *s, int building){
-    Coordinates* temp;
+    Coordinates* temp = s;
 
     Terrain *start = this->getTerrain(s);
 
