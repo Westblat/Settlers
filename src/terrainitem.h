@@ -1,7 +1,6 @@
 #ifndef TERRAINITEM_H
 #define TERRAINITEM_H
 
-#include <QGraphicsView>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
 

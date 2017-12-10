@@ -3,7 +3,6 @@
 
 #include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
-#include <QGraphicsView>
 
 class BuildingItem : public QGraphicsPixmapItem {
 public:

@@ -7,9 +7,13 @@
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
 #include <QGraphicsView>
+#include <QTimer>
 
 #include "game.h"
 #include "map.h"
+#include "terrainitem.h"
+#include "buildingitem.h"
+#include "settleritem.h"
 
 class Map;
 
@@ -34,15 +38,23 @@ private:
 	std::vector<std::vector<Terrain*>> terrain_map = map.get_map();
 
 	std::vector<Building*> buildings;
+	std::vector<BuildingItem*> buildingitems;
     std::vector<Settler*> settlers;
+    std::vector<SettlerItem*> settleritems;
 
 	int tilesize = 64; // images used are 64x64 pixels
-	int refresh_time = 40; // milliseconds, after how much time locations update on screen, roughly 25 fps
+	int refresh_time = 1000; // milliseconds, after how much time locations update on screen, 40 ms = roughly 25 fps
+
+	//int x; //used for debugging timer
 
 	QPushButton *menu_button;
 
 public slots:
 	void ShowMainMenu();
+	void moveSettlers();
+	void refreshBuildings();
+
+	void randomLocation(); //debug function, gives settlers and buildings random new locations
 };
 
 #endif
