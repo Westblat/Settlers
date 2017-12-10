@@ -368,14 +368,13 @@ compiler_rcc_make_all: qrc_media.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_media.cpp
 qrc_media.cpp: media.qrc \
+		keep.png \
 		settler.png \
-		keepbottom.png \
 		cut_tree.png \
 		grass.png \
 		stone.png \
 		house.png \
 		mine.png \
-		keeptop.png \
 		constructionsite.png \
 		beach.png \
 		stonecutter.png \

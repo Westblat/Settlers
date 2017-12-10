@@ -12,8 +12,7 @@
         <file>stonecutter.png</file>
         <file>mine.png</file>
         <file>blacksmith.png</file>
-        <file>keepbottom.png</file>
-        <file>keeptop.png</file>
+        <file>keep.png</file>
         <file>constructionsite.png</file>
         <file>cut_tree.png</file>
     </qresource>

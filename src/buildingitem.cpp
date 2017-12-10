@@ -37,10 +37,8 @@ BuildingItem::BuildingItem(int type, bool ready, int hp, QGraphicsItem *parent) 
 		else if (type == 5) {
 			setPixmap(QPixmap(":/graphics/blacksmith.png"));
 		}
+		else if (type == 6) {
+			setPixmap(QPixmap(":/graphics/keep.png"));
+		}
 	}
-	/*
-	// SPECIAL CASES
-	else if (type == 6) {
-		setPixmap(QPixmap(":/graphics/keep.png"));
-	}*/
 }
