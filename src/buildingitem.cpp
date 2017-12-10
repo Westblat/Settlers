@@ -1,6 +1,6 @@
 #include "buildingitem.h"
 
-BuildingItem::BuildingItem(int type, bool ready, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
+BuildingItem::BuildingItem(int type, bool ready, int hp, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
 /*	Building types are
 	0: tree
 	1: House
@@ -15,7 +15,12 @@ BuildingItem::BuildingItem(int type, bool ready, QGraphicsItem *parent) : QGraph
 	}
 	else {
 		if (type == 0) {
-			setPixmap(QPixmap(":/graphics/tree.png"));
+			if (hp != 0) {
+				setPixmap(QPixmap(":/graphics/tree.png"));
+			}
+			else {
+				setPixmap(QPixmap(":/graphics/cut_tree.png"));
+			}
 		}
 		else if (type == 1) {
 			setPixmap(QPixmap(":/graphics/house.png"));

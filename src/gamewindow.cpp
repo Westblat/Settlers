@@ -91,8 +91,7 @@ void GameWindow::draw_buildings(QGraphicsScene *scene) {
 
     int x = 0;
     for (auto building : buildings) {
-    	//int type = building->getType();
-    	BuildingItem *buildingitem = new BuildingItem(building->getType(), building->getReadiness());
+    	BuildingItem *buildingitem = new BuildingItem(building->getType(), building->getReadiness(), building->getHp());
     	buildingitem->setPos(tilesize*building->getLocation()->getX(), tilesize*building->getLocation()->getY());
     	buildingitems.push_back(buildingitem);
     	scene->addItem(buildingitem);

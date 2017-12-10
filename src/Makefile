@@ -370,6 +370,7 @@ compiler_rcc_clean:
 qrc_media.cpp: media.qrc \
 		settler.png \
 		keepbottom.png \
+		cut_tree.png \
 		grass.png \
 		stone.png \
 		house.png \
@@ -411,6 +412,9 @@ moc_gamewindow.cpp: game.h \
 		settler.h \
 		warehouse.h \
 		tree.h \
+		terrainitem.h \
+		buildingitem.h \
+		settleritem.h \
 		gamewindow.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/mini_bunney/Desktop/prog/c++/settlers-2/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include gamewindow.h -o moc_gamewindow.cpp
 
@@ -439,7 +443,10 @@ main.o: main.cpp mainwindow.h \
 		settler.h \
 		warehouse.h \
 		tree.h \
-		gamewindow.h
+		gamewindow.h \
+		terrainitem.h \
+		buildingitem.h \
+		settleritem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
@@ -453,7 +460,10 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		settler.h \
 		warehouse.h \
 		tree.h \
-		gamewindow.h
+		gamewindow.h \
+		terrainitem.h \
+		buildingitem.h \
+		settleritem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 coordinates.o: coordinates.cpp coordinates.h
