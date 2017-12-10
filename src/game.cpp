@@ -100,17 +100,7 @@ bool Game::simulate(){
                checkTask((**it).getTask(), *it, building);
            }
        }
-       
-        //std::cout << **it << std::endl;
-        /*TODO on simulata:
-        if((**it).move()){
-            settler.setDelay(???)
-        }else {
-            if( (**it).getTask() ) // def apufunktio(int taskID); <- Tarkistaa mikä taski ja toteuttaa sen mukaan
-                                    // ja callaa oikeaa apufunktiota 
-        }
-        */
-        
+        //std::cout << **it << std::endl;        
     }
     return true;
 }
@@ -140,6 +130,7 @@ bool Game::atWarehouse(Settler *settler){
 
 int Game::checkTask(int task, Settler *settler, Building *building) {
     if(task == 1){
+        buildBuilding(settler, building);
     }else if(task == 2){
         cutTree(settler,building);
     }
@@ -173,8 +164,7 @@ void Game::cutTree(Settler *settler, Building *building){
                 for (int i = 0; i != (int)items.size(); i++){
                     (*it)->addItem(items[i]);
                 }
-
-                
+                settler->emptyInventory();
             }
         }
     } else if (settler->inventoryFull()) 
@@ -184,6 +174,18 @@ void Game::cutTree(Settler *settler, Building *building){
         pathToNearbyBuilding(settler, 0);
     }
 }
+
+void Game::buildBuilding(Settler *settler, Building *building){
+    if(settler->inventoryEmpty()){
+        pathToNearbyBuilding(settler, 2);
+    }
     
-    return 0;
+    if(map->findNearby(settler->getLocation(),2) == settler->getLocation()){
+        settler->addItem(0);
+    }
+    
+    if(settler->getLocation() == building->getLocation()){
+        
+        building->build(0);
+    }
 }
