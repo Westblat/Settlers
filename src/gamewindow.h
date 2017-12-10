@@ -8,6 +8,8 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsView>
 #include <QTimer>
+#include <QLabel>
+#include <QString>
 
 #include "game.h"
 #include "map.h"

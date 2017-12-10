@@ -14,16 +14,28 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     grid->addWidget(menu_button, 0, 10);
     connect(menu_button, SIGNAL (clicked()), this , SLOT (ShowMainMenu()));
 
+    /*
     // button for adding new buildings
     build_button = new QPushButton("Build");
     grid->addWidget(build_button, 1, 0);
     connect(build_button, SIGNAL (clicked()), this, SLOT (addBuilding()));
+    */
 
     // creates the scene for viewing game map
     QGraphicsScene *scene = new QGraphicsScene(this);
     QGraphicsView *view = new QGraphicsView(scene);
     view->show();
     grid->addWidget(view, 1, 1, 10, 10);
+
+    // scene for viewing build menu/buildingselection
+    QGraphicsScene *buildscene = new QGraphicsScene(this);
+    QGraphicsView *buildview = new QGraphicsView(buildscene);
+    buildview->show();
+    grid->addWidget(buildview, 1, 0, 10, 1);
+    QLabel *buildlabel = new QLabel(this); // text above the buildingselection
+    buildlabel->setText(QString("Buildings"));
+    buildlabel->show();
+    grid->addWidget(buildlabel, 0,0);
 
     // the buildings the player starts with
     game.setBuildings();
