@@ -16,6 +16,7 @@
 #include "terrainitem.h"
 #include "buildingitem.h"
 #include "settleritem.h"
+#include "buildmenuicon.h"
 
 /*
 Imagefiles taken from kenney.nl!

@@ -65,7 +65,8 @@ SOURCES       = main.cpp \
 		warehouse.cpp \
 		priorityqueue.cpp \
 		blacksmith.cpp \
-		road.cpp qrc_media.cpp \
+		road.cpp \
+		buildmenuicon.cpp qrc_media.cpp \
 		moc_mainwindow.cpp \
 		moc_gamewindow.cpp
 OBJECTS       = main.o \
@@ -86,6 +87,7 @@ OBJECTS       = main.o \
 		priorityqueue.o \
 		blacksmith.o \
 		road.o \
+		buildmenuicon.o \
 		qrc_media.o \
 		moc_mainwindow.o \
 		moc_gamewindow.o
@@ -162,7 +164,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		tree.h \
 		warehouse.h \
 		blacksmith.h \
-		road.h main.cpp \
+		road.h \
+		buildmenuicon.h main.cpp \
 		mainwindow.cpp \
 		coordinates.cpp \
 		terrain.cpp \
@@ -179,7 +182,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		warehouse.cpp \
 		priorityqueue.cpp \
 		blacksmith.cpp \
-		road.cpp
+		road.cpp \
+		buildmenuicon.cpp
 QMAKE_TARGET  = launch
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = launch
@@ -350,8 +354,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents media.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h coordinates.h terrain.h map.h game.h gamewindow.h terrainitem.h buildingitem.h settleritem.h priorityqueue.h settler.h building.h house.h tree.h warehouse.h blacksmith.h road.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp coordinates.cpp terrain.cpp map.cpp game.cpp gamewindow.cpp terrainitem.cpp buildingitem.cpp settleritem.cpp settler.cpp building.cpp house.cpp tree.cpp warehouse.cpp priorityqueue.cpp blacksmith.cpp road.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.h coordinates.h terrain.h map.h game.h gamewindow.h terrainitem.h buildingitem.h settleritem.h priorityqueue.h settler.h building.h house.h tree.h warehouse.h blacksmith.h road.h buildmenuicon.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainwindow.cpp coordinates.cpp terrain.cpp map.cpp game.cpp gamewindow.cpp terrainitem.cpp buildingitem.cpp settleritem.cpp settler.cpp building.cpp house.cpp tree.cpp warehouse.cpp priorityqueue.cpp blacksmith.cpp road.cpp buildmenuicon.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -376,21 +380,27 @@ compiler_rcc_make_all: qrc_media.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_media.cpp
 qrc_media.cpp: media.qrc \
-		keep.png \
-		settler.png \
-		cut_tree.png \
-		grass.png \
-		stone.png \
-		house.png \
-		mine.png \
-		constructionsite.png \
-		beach.png \
-		stonecutter.png \
-		blacksmith.png \
-		mountain.png \
-		tree.png \
+		keepicon.png \
 		warehouse.png \
-		water.png
+		keep.png \
+		blacksmith.png \
+		water.png \
+		cut_tree.png \
+		warehouseicon.png \
+		tree.png \
+		mountain.png \
+		constructionsite.png \
+		blacksmithicon.png \
+		stonecuttericon.png \
+		beach.png \
+		settler.png \
+		stonecutter.png \
+		mineicon.png \
+		house.png \
+		stone.png \
+		houseicon.png \
+		mine.png \
+		grass.png
 	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name media media.qrc -o qrc_media.cpp
 
 compiler_moc_header_make_all: moc_mainwindow.cpp moc_gamewindow.cpp
@@ -422,6 +432,7 @@ moc_gamewindow.cpp: game.h \
 		terrainitem.h \
 		buildingitem.h \
 		settleritem.h \
+		buildmenuicon.h \
 		gamewindow.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/mini_bunney/Desktop/prog/c++/settlers-2/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include gamewindow.h -o moc_gamewindow.cpp
 
@@ -453,7 +464,8 @@ main.o: main.cpp mainwindow.h \
 		gamewindow.h \
 		terrainitem.h \
 		buildingitem.h \
-		settleritem.h
+		settleritem.h \
+		buildmenuicon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
@@ -470,7 +482,8 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		gamewindow.h \
 		terrainitem.h \
 		buildingitem.h \
-		settleritem.h
+		settleritem.h \
+		buildmenuicon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 coordinates.o: coordinates.cpp coordinates.h
@@ -513,7 +526,8 @@ gamewindow.o: gamewindow.cpp gamewindow.h \
 		tree.h \
 		terrainitem.h \
 		buildingitem.h \
-		settleritem.h
+		settleritem.h \
+		buildmenuicon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gamewindow.o gamewindow.cpp
 
 terrainitem.o: terrainitem.cpp terrainitem.h
@@ -570,6 +584,9 @@ road.o: road.cpp road.h \
 		coordinates.h \
 		terrain.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o road.o road.cpp
+
+buildmenuicon.o: buildmenuicon.cpp buildmenuicon.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildmenuicon.o buildmenuicon.cpp
 
 qrc_media.o: qrc_media.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_media.o qrc_media.cpp

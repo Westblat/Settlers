@@ -3,7 +3,6 @@
 GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
 
 	setWindowTitle("The Settlers");
-    //setMinimumSize(800, 600);
     setFixedSize(1000, 800);
 
     QGridLayout *grid = new QGridLayout;
@@ -31,11 +30,16 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     QGraphicsScene *buildscene = new QGraphicsScene(this);
     QGraphicsView *buildview = new QGraphicsView(buildscene);
     buildview->show();
-    grid->addWidget(buildview, 1, 0, 10, 1);
+    grid->addWidget(buildview, 1, 0, 6, 1);
     QLabel *buildlabel = new QLabel(this); // text above the buildingselection
     buildlabel->setText(QString("Buildings"));
     buildlabel->show();
-    grid->addWidget(buildlabel, 0,0);
+    grid->addWidget(buildlabel, 0, 0);
+    for (int i = 1; i < 7; i++) {
+    	BuildmenuIcon *icon = new BuildmenuIcon(i);
+    	icon->setPos(0, tilesize*(i-1));
+    	buildscene->addItem(icon);
+    }
 
     // the buildings the player starts with
     game.setBuildings();
@@ -43,15 +47,16 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     buildings = game.getBuildings();
     settlers = game.getSettlers();
 
+    /*
     // DEBUG, say hello to Bob, he's a free settler not tied to a building
     Coordinates *loc = new Coordinates(0,0);
     settlers.push_back(new Settler("Bob", loc));
+    */
 
     draw_terrain(scene); //draws the terrain on the map
     draw_buildings(scene);
     draw_settlers(scene);
 
-    //TODO
     //add a timer
     //refresh the scene in regards to settlers and buildings
     QTimer *timer = new QTimer();
