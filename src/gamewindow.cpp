@@ -47,7 +47,9 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
 
 void GameWindow::randomLocation() {
 	// used for DEBUG, moves Bob to a random location
-	settlers[2]->move();
+	//settlers[2]->move();
+
+	//game.simulate();
 }
 
 void GameWindow::ShowMainMenu() {
