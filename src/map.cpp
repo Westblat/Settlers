@@ -206,7 +206,7 @@ Coordinates* Map::findNearby(Coordinates *s, int building){
         int uposindex = upos->getX()*this->width + upos->getY();
 
         if (distances[uposindex] == INT_MAX) {break;} //Unable to find path
-        if (u->getBuildingType() == building ){temp = u->getLocation();break;} //Search is completed
+        if (u->getBuildingType() == building && u->getBuilding()->getReadiness()){temp = u->getLocation();break;} //Search is completed
 
         for(auto iter = directions.begin(); iter!=directions.end(); ++iter) {
             int tempX = upos->getX()+(*iter).first;
