@@ -20,6 +20,7 @@ public:
 	int getHp() {return hp;};
 	virtual Coordinates* getLocation() = 0;
 	bool takeDamage();
+	std::pair<std::vector<int>, int> getInventory();
 
 protected:
 	int type;

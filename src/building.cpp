@@ -59,6 +59,10 @@ bool Building::takeDamage(){
 	return false;
 };
 
+std::pair<std::vector<int>, int> Building::getInventory(){
+	return inventory;
+}
+
 std::ostream& operator <<(std::ostream& os, Building& building){
 	os << building.getType();
 	return os;
