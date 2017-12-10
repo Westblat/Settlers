@@ -58,6 +58,14 @@ bool Settler::removeItem(int item) {
 	}
 }
 
+bool Settler::inventoryFull(){
+	if((int)inventory.first.size() != inventory.second){
+		return false;
+	}else{
+		return true;
+	}
+}
+
 int Settler::getHP() { return hp; }
 
 // Function that removes a given value from the settlers hp and returns the health the settler has after the addition, if the health were to go below 0 it is set to 0
