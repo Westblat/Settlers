@@ -21,10 +21,10 @@ public:
     bool simulate();
     void pathToNearbyBuilding(Settler *settler, int building);
     bool atWarehouse(Settler *settler);
-    int checkTask(int task, Settler *settler, Building *building);
+    int checkTask(int task, Settler *settler);
     void removeBuilding(Building *building);
-    void cutTree(Settler *settler, Building *building);
-    void buildBuilding(Settler *settler, Building *building);
+    void cutTree(Settler *settler);
+    //void buildBuilding(Settler *settler, Building *building);
 private:
     Map *map;
     std::vector<Building*> buildings;

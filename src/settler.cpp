@@ -22,12 +22,12 @@ std::string Settler::getName() { return name; }
 int Settler::getTask() { return task; }
 
 // TODO
-/*
-bool Settler::setTask(int = task)
+
+bool Settler::setTask(int newTask)
 {
 	task = newTask;
 	return true;
-}*/
+}
 
 std::vector<int> Settler::getItems() { return inventory.first; }
 
@@ -59,9 +59,7 @@ bool Settler::removeItem(int item) {
 }
 
 void Settler::emptyInventory(){
-	for(std::vector<int>::iterator it = inventory.first.begin(); it != inventory.first.end(); it++){
-		inventory.first.erase(it);
-	}
+		inventory.first.clear();
 }
 
 bool Settler::inventoryFull(){

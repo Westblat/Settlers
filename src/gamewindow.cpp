@@ -3,8 +3,8 @@
 GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
 
 	setWindowTitle("The Settlers");
-    //setMinimumSize(800, 600);
-    setFixedSize(1000, 800);
+    setMinimumSize(800, 600);
+    //setFixedSize(1000, 800);
 
     QGridLayout *grid = new QGridLayout;
     setLayout(grid);
@@ -34,6 +34,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     // DEBUG, say hello to Bob, he's a free settler not tied to a building
     Coordinates *loc = new Coordinates(0,0);
     settlers.push_back(new Settler("Bob", loc));
+	settlers[0]->setTask(2);
 
     draw_terrain(scene); //draws the terrain on the map
     draw_buildings(scene);
@@ -143,6 +144,7 @@ void GameWindow::moveSettlers() {
 		settleritems[i]->setPos(tilesize*x, 0);
 	}
 	x++;*/
+	game.simulate();
 	std::cout << "Refresh" << std::endl;
 	for (unsigned int i = 0; i < settlers.size(); i++) {
 		int x = tilesize*settlers[i]->getLocation()->getX();
