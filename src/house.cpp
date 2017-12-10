@@ -16,3 +16,7 @@ House::House(Terrain *terrain, bool initialize) : Building(1,10,initialize), ter
 void House::addSettler(Settler *settler) {
     habitants.push_back(settler);
 }
+
+Coordinates* House::getLocation() {
+    return terrain->getLocation();
+}

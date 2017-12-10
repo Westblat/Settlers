@@ -1,5 +1,5 @@
 #ifndef SETTLER_H
-#define SETLLER_H
+#define SETTLER_H
 
 #include <string>
 #include <vector>

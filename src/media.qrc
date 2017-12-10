@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/graphics">
+        <file>grass.png</file>
+        <file>beach.png</file>
+        <file>mountain.png</file>
+        <file>stone.png</file>
+        <file>water.png</file>
+        <file>settler.png</file>
+        <file>tree.png</file>
+        <file>house.png</file>
+        <file>warehouse.png</file>
+        <file>stonecutter.png</file>
+        <file>mine.png</file>
+        <file>blacksmith.png</file>
+        <file>keep.png</file>
+        <file>constructionsite.png</file>
+        <file>cut_tree.png</file>
+    </qresource>
+</RCC>
