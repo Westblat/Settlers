@@ -120,7 +120,15 @@ std::stack<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates* 
                 int vposindex = tempX*width + tempY;
                 if (!checked[vposindex]){
                     //TODO_______________________TODO
-                    int new_distance = distances[uposindex] + 1; //TODO IMPLEMENT TERRAIN DIFFICULTY
+                    int new_distance;
+                    if(u->getBuildingType() == -1){
+                        if(u->getType() == 0){new_distance = distances[uposindex] + 1;}
+                        else if(u->getType() == 1){new_distance = distances[uposindex] + 2;}
+                        else if(u->getType() == 2){new_distance = distances[uposindex] + 3;}
+                        else if(u->getType() == 3){new_distance = distances[uposindex] + 2;}
+                        else{new_distance = distances[uposindex] + 10;}
+                    }
+                    else{new_distance = distances[uposindex] + 2;}
                     //TODO_______________________TODO
                     if (new_distance < distances[vposindex]) {
                         if (nodeIndex[vposindex]->difficulty != -1) {
