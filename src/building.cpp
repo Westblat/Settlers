@@ -45,13 +45,15 @@ bool Building::removeItem(int item)
 	}
 }
 
-Building::~Building() { }
-
 int Building::getType() { return type;}
 
 void Building::setReady() {
 	Building::isReady = true;
 }
+
+void Building::takeDamage(){
+	hp --1;
+};
 
 std::ostream& operator <<(std::ostream& os, Building& building){
 	os << building.getType();

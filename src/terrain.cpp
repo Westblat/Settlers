@@ -24,7 +24,15 @@ void Terrain::setType(int newType) {type = newType;}
 Coordinates* Terrain::getLocation() {return location;}
 
 void Terrain::placeBuilding(Building *building) {
-    Terrain::buildingType = building->getType();
+    this->building = building; 
+    this->buildingType = building->getType(); 
+} 
+ 
+void Terrain::removeBuilding(){ 
+    if(this->buildingType == -1){ 
+        delete this->building; 
+        this->buildingType = -1; 
+    } 
 }
 
 std::vector<int> Terrain::availableBuildings(){
@@ -48,10 +56,12 @@ std::vector<int> Terrain::availableBuildings(){
     return available;    
 }
 
+int Terrain::getBuildingType(){return this->buildingType;}
 void Terrain::setBuildingType(int newtype) {
     buildingType = newtype;
 }
 
+Building* Terrain::getBuilding(){return building;} 
 
 std::ostream& operator<<(std::ostream& os, Terrain& terrain){
     os << terrain.getType();
