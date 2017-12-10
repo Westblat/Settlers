@@ -28,12 +28,40 @@ SOURCES += \
         mainwindow.cpp \
         coordinates.cpp \
         terrain.cpp \
-        map.cpp
+        map.cpp \
+        game.cpp \
+        gamewindow.cpp \
+        terrainitem.cpp \
+        buildingitem.cpp \
+        settleritem.cpp \
+        settler.cpp \
+        building.cpp \
+        house.cpp \
+        tree.cpp \
+        warehouse.cpp \
+        priorityqueue.cpp \
+	blacksmith.cpp \
 
 HEADERS += \
         mainwindow.h \
         coordinates.h \
         terrain.h \
-        map.h
+        map.h \
+        game.h \
+        gamewindow.h \
+        terrainitem.h \
+        buildingitem.h \
+        settleritem.h \
+        priorityqueue.h \
+        settler.h \
+        building.h \
+        house.h \
+        tree.h \
+        warehouse.h \
+ 	blacksmith.h \
+
+RESOURCES += \
+    media.qrc
+
 
 FORMS +=
