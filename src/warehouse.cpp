@@ -2,7 +2,7 @@
 
 Warehouse::Warehouse(Terrain *terrain, bool initialize): Building(2, 10, initialize), terrain(terrain){
     inventory.second = -1;
-    terrain->setBuildingType(2);
+    terrain->placeBuilding(this);
     if(!initialize){
         inventory.first.push_back(0);//TEMP? House is built with 4 "0" resources (wood)
         inventory.first.push_back(0);//UUUUUUUUUUUUUUUUUUUUUHHHHHH
@@ -11,7 +11,11 @@ Warehouse::Warehouse(Terrain *terrain, bool initialize): Building(2, 10, initial
         inventory.first.push_back(0);
         inventory.first.push_back(0);
     }
- }
+}
+
+Warehouse::~Warehouse(){
+    this->terrain->setBuildingType(-1);
+}
 
 Coordinates* Warehouse::getLocation() {
     return terrain->getLocation();

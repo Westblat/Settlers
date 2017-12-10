@@ -10,6 +10,7 @@ class Building
 {
 public:
     Building(int type, int hp, bool initialize);
+    virtual ~Building();
     bool build(int item); //Returns if building isReady
     bool addItem(int item);
 	bool removeItem(int item);
