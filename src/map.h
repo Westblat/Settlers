@@ -21,6 +21,7 @@ public:
     Terrain* getTerrain(Coordinates *coord);
     Terrain* getTerrain(int x, int y);
     std::stack<std::pair<int, int> > solvePath(Coordinates* unit, Coordinates* target);
+    Coordinates* findNearby(Coordinates* start, int building);
 private:
     int width;
     int height;

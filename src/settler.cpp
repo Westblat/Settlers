@@ -111,7 +111,7 @@ bool Settler::move() {
     if (this->path.size() > 0) {
         std::pair<int,int> next (this->path.top());
         this->path.pop();
-        return this->location->updateCoords(next.first,next.second);
+        return this->location->updateCoords(this->getLocation()->getX() + next.first,this->getLocation()->getY() + next.second);
     }
     else {return false;}
     
