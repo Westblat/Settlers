@@ -8,12 +8,15 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsView>
 #include <QTimer>
+#include <QLabel>
+#include <QString>
 
 #include "game.h"
 #include "map.h"
 #include "terrainitem.h"
 #include "buildingitem.h"
 #include "settleritem.h"
+#include "buildmenuicon.h"
 
 /*
 Imagefiles taken from kenney.nl!

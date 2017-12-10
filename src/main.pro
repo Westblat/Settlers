@@ -41,6 +41,8 @@ SOURCES += \
         warehouse.cpp \
         priorityqueue.cpp \
 	blacksmith.cpp \
+        road.cpp \
+        buildmenuicon.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -59,6 +61,8 @@ HEADERS += \
         tree.h \
         warehouse.h \
  	blacksmith.h \
+        road.h \
+        buildmenuicon.h
 
 RESOURCES += \
     media.qrc
