@@ -7,6 +7,7 @@
 class Warehouse: public Building {
 public:
     Warehouse(Terrain *terrain, bool initialize);
+    ~Warehouse();
     Coordinates* getLocation();
 private:
     Terrain *terrain;

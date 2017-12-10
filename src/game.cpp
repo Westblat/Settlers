@@ -90,9 +90,78 @@ std::vector<Building*> Game::getBuildings() {return buildings;}
 
 bool Game::simulate(){
     for(std::vector<Settler*>::iterator it = settlers.begin(); it !=settlers.end(); it++){
-        std::cout << **it << std::endl;
+       if((**it).getDelay() > 0){
+        (**it).reduceDelay();
+       }else{
+           if((**it).move()){
+               (**it).setDelay(2);
+           }else {
+               Building *building = map->get_map()[(**it).getLocation()->getX()][(**it).getLocation()->getY()]->getBuilding();
+               checkTask((**it).getTask(), *it, building);
+           }
+       }
+       
+        //std::cout << **it << std::endl;
+        /*TODO on simulata:
+        if((**it).move()){
+            settler.setDelay(???)
+        }else {
+            if( (**it).getTask() ) // def apufunktio(int taskID); <- Tarkistaa mikä taski ja toteuttaa sen mukaan
+                                    // ja callaa oikeaa apufunktiota 
+        }
+        */
+        
     }
-
-
     return true;
+}
+    /* Types for task:
+    0 = idle
+    1 = build
+    2 = cut tree
+    3 = cut stone
+    4 = cut iron
+    5 = cut swords
+    6 = empty inventory
+    7 = get item
+    8 = combat
+    */
+
+
+
+int Game::checkTask(int task, Settler *settler, Building *building) {
+    if(task == 1){
+
+    }else if(task == 2){
+        cutTree(settler,building);
+    }
+    return 0;
+}
+
+void Game::removeBuilding(Building *building){
+    int counter = 0;
+        for(std::vector<Building*>::iterator it = buildings.begin(); it !=buildings.end(); it++){
+            if(*it == building){
+                buildings.erase(buildings.begin() + counter);
+                map->get_map()[(**it).getLocation()->getX()][(**it).getLocation()->getY()]->removeBuilding();
+                return;
+            }
+            counter ++;
+        }
+}
+
+int Game::cutTree(Settler *settler, Building *building){
+    if(settler->getLocation() == building->getLocation() && !(settler->inventoryFull())){
+        if(building->takeDamage()){
+            removeBuilding(building);
+        }
+        settler->addItem(1);
+    } else if (settler->inventoryFull()){
+        //ADD LOCATION OF WAREHOUSE
+        settler->setPath(map->solvePath(settler->getLocation(),map->get_map()[0][0]->getLocation()));
+    } else {
+        //ADD LOCATION OF TREES
+        settler->setPath(map->solvePath(settler->getLocation(),map->get_map()[14][14]->getLocation()));
+    }
+    
+    return 0;
 }

@@ -2,7 +2,7 @@
 
 Building::Building(int type, int hp, bool initialize): type(type), hp(hp), isReady(initialize) { }
 
-
+Building::~Building(){}
 
 bool Building::build(int item) {
     if (!isReady) {
@@ -45,15 +45,29 @@ bool Building::removeItem(int item)
 	}
 }
 
-Building::~Building() { }
-
 int Building::getType() { return type;}
 
 void Building::setReady() {
 	Building::isReady = true;
 }
 
+bool Building::takeDamage(){
+	hp --;
+	if(hp == 0){
+		return true;
+	}
+	return false;
+};
+
+std::pair<std::vector<int>, int> Building::getInventory(){
+	return inventory;
+}
+
 std::ostream& operator <<(std::ostream& os, Building& building){
 	os << building.getType();
 	return os;
+}
+
+bool operator==(Building &a, Building &b){
+    return a.getLocation() == b.getLocation();
 }

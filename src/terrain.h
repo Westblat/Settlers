@@ -18,17 +18,21 @@ public:
     Coordinates* getLocation();
 
     void placeBuilding(Building *building);
+    void removeBuilding();
 
    	std::vector<int> availableBuildings(); 
     //returns vector of building types, if it returns -1, there is no available buildings
 
+    int getBuildingType();
     void setBuildingType(int newtype);
+    Building* getBuilding();
 
 
 private:
     Coordinates *location;
     int type;
     bool blocked;
+    Building* building;
     int buildingType;
     /*Terrain types
         0 = plains

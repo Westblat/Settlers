@@ -58,6 +58,22 @@ bool Settler::removeItem(int item) {
 	}
 }
 
+bool Settler::inventoryFull(){
+	if((int)inventory.first.size() != inventory.second){
+		return false;
+	}else{
+		return true;
+	}
+}
+
+bool Settler::inventoryEmpty(){
+	if((int)inventory.first.size() == 0){
+		return true;
+	} else {
+		return false;
+	}
+}
+
 int Settler::getHP() { return hp; }
 
 // Function that removes a given value from the settlers hp and returns the health the settler has after the addition, if the health were to go below 0 it is set to 0
@@ -103,7 +119,7 @@ bool Settler::move() {
     if (this->path.size() > 0) {
         std::pair<int,int> next (this->path.top());
         this->path.pop();
-        return this->location->updateCoords(next.first,next.second);
+        return this->location->updateCoords(this->getLocation()->getX() + next.first,this->getLocation()->getY() + next.second);
     }
     else {return false;}
     
