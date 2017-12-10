@@ -19,10 +19,23 @@ public:
     std::vector<Settler*> getSettlers();
     std::vector<Building*> getBuildings();
     bool simulate();
+    int checkTask(int task, Settler *settler, Building *building);
+    int cutTree(Settler *settler, Building *building);
 private:
     Map *map;
     std::vector<Building*> buildings;
     std::vector<Settler*> settlers;
+    /* Types for task:
+    0 = idle
+    1 = build
+    2 = cut tree
+    3 = cut stone
+    4 = cut iron
+    5 = cut swords
+    6 = empty inventory
+    7 = get item
+    8 = combat
+    */
 };
 
 #endif // GAME_H

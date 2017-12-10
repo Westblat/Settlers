@@ -19,6 +19,7 @@ public:
 	int getType();
 	int getHp() {return hp;};
 	virtual Coordinates* getLocation() = 0;
+	void takeDamage();
 
 protected:
 	int type;

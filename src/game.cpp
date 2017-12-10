@@ -90,9 +90,54 @@ std::vector<Building*> Game::getBuildings() {return buildings;}
 
 bool Game::simulate(){
     for(std::vector<Settler*>::iterator it = settlers.begin(); it !=settlers.end(); it++){
-        std::cout << **it << std::endl;
+       if((**it).getDelay() > 0){
+        (**it).reduceDelay();
+       }else{
+           if((**it).move()){
+               settler.setDelay(2);
+           }else {
+               this.checkTask((**it).getTask(), *it, map->get_map()[(**it).getLocation()->getLocation()->getX(), (**it).getLocation()->getLocation()->getY()].getBuilding())
+           }
+       }
+       
+        //std::cout << **it << std::endl;
+        /*TODO on simulata:
+        if((**it).move()){
+            settler.setDelay(???)
+        }else {
+            if( (**it).getTask() ) // def apufunktio(int taskID); <- Tarkistaa mikä taski ja toteuttaa sen mukaan
+                                    // ja callaa oikeaa apufunktiota 
+        }
+        */
+        
     }
-
-
     return true;
+}
+    /* Types for task:
+    0 = idle
+    1 = build
+    2 = cut tree
+    3 = cut stone
+    4 = cut iron
+    5 = cut swords
+    6 = empty inventory
+    7 = get item
+    8 = combat
+    */
+
+
+
+int Game::checkTask(int task, Settler *settler, Building *building) {
+    if(task == 1){
+
+    }else if(task == 2){
+        cutTree(settler,building);
+    }
+    return 0;
+}
+
+int Game::cutTree(Settler *settler, Tree *tree){
+    tree.takeDamage();
+    settler.addItem(1);
+    return 0;
 }
