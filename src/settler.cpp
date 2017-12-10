@@ -58,6 +58,12 @@ bool Settler::removeItem(int item) {
 	}
 }
 
+void Settler::emptyInventory(){
+	for(std::vector<int>::iterator it = inventory.first.begin(); it != inventory.first.end(); it++){
+		inventory.first.erase(it);
+	}
+}
+
 bool Settler::inventoryFull(){
 	if((int)inventory.first.size() != inventory.second){
 		return false;
