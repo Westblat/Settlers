@@ -9,7 +9,7 @@ class Blacksmith : public Building {
 public:
 	Blacksmith(Terrain *terrain, bool initialize);
 	void addSettler(Settler *settler);
-	void makeWeapon();
+    bool makeWeapon();
 private:
     Terrain *terrain;
 };
