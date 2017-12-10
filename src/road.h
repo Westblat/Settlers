@@ -9,6 +9,7 @@ class Road : public Building
 public:
     Road(Terrain* terrain, bool initialze);
     ~Road();
+    Coordinates* getLocation();
 private:
     Terrain* terrain;
 };
