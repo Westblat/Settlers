@@ -126,11 +126,20 @@ bool Game::simulate(){
     8 = combat
     */
 
+void Game::pathToNearbyBuilding(Settler *settler, int building){
+    settler->setPath(map->solvePath(settler->getLocation(),map->findNearby(settler->getLocation(),building)));
+}
 
+bool Game::atWarehouse(Settler *settler){
+    if( map->findNearby(settler->getLocation(),2) == settler->getLocation() ){
+        return true;
+    } else {
+        return false;
+    }
+}
 
 int Game::checkTask(int task, Settler *settler, Building *building) {
     if(task == 1){
-
     }else if(task == 2){
         cutTree(settler,building);
     }
@@ -149,19 +158,32 @@ void Game::removeBuilding(Building *building){
         }
 }
 
-int Game::cutTree(Settler *settler, Building *building){
+void Game::cutTree(Settler *settler, Building *building){
     if(settler->getLocation() == building->getLocation() && !(settler->inventoryFull())){
         if(building->takeDamage()){
             removeBuilding(building);
         }
         settler->addItem(1);
-    } else if (settler->inventoryFull()){
-        //ADD LOCATION OF WAREHOUSE
-        settler->setPath(map->solvePath(settler->getLocation(),map->get_map()[0][0]->getLocation()));
-    } else {
-        //ADD LOCATION OF TREES
-        settler->setPath(map->solvePath(settler->getLocation(),map->get_map()[14][14]->getLocation()));
+        settler->setDelay(4);
+    } else if (settler->inventoryFull() && atWarehouse(settler)){
+        
+        for(std::vector<Building*>::iterator it = buildings.begin(); it !=buildings.end(); it++){
+            if((*it)->getLocation() == building->getLocation()){
+                std::vector<int> items = settler->getItems();
+                for (int i = 0; i != (int)items.size(); i++){
+                    (*it)->addItem(items[i]);
+                }
+
+                
+            }
+        }
+    } else if (settler->inventoryFull()) 
+        pathToNearbyBuilding(settler, 2);
+    
+    else {
+        pathToNearbyBuilding(settler, 0);
     }
+}
     
     return 0;
 }

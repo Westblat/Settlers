@@ -19,9 +19,11 @@ public:
     std::vector<Settler*> getSettlers();
     std::vector<Building*> getBuildings();
     bool simulate();
+    void pathToNearbyBuilding(Settler *settler, int building);
+    bool atWarehouse(Settler *settler);
     int checkTask(int task, Settler *settler, Building *building);
     void removeBuilding(Building *building);
-    int cutTree(Settler *settler, Building *building);
+    void cutTree(Settler *settler, Building *building);
 private:
     Map *map;
     std::vector<Building*> buildings;
