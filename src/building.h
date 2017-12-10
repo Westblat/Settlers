@@ -9,8 +9,7 @@
 class Building
 {
 public:
-	Building(int type, int hp, bool initialize);
-	~Building();
+    Building(int type, int hp, bool initialize);
     bool build(int item); //Returns if building isReady
     bool addItem(int item);
 	bool removeItem(int item);
@@ -28,6 +27,7 @@ protected:
     //-1 for unlimited size, 0 for 0 items, positive number for limited size
 };
 /*Building types are
+   -1: No building
 	0: tree
 	1: House
 	2: Warehouse

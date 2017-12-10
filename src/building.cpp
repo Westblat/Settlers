@@ -45,7 +45,6 @@ bool Building::removeItem(int item)
 	}
 }
 
-Building::~Building() { }
 
 int Building::getType() { return type;}
 
