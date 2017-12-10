@@ -11,8 +11,7 @@ public:
 	void addSettler(Settler *settler);
 	void makeWeapon();
 private:
-	Terrain *terrain;
-	std::vector<Settler*> habitants;
+    Terrain *terrain;
 };
 
 #endif
