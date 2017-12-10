@@ -8,17 +8,10 @@ Blacksmith::Blacksmith(Terrain *terrain, bool initialize) : Building(5, 10, init
     terrain->placeBuilding(this);
 }
 
-
-
-// Possible improvements: add a sepate inventory for weapons
-// Create a timer of sorts to wait a few turns before adding the sword to the inventory
-void Blacksmith::makeWeapon() {
-	// TODO change the item values to correct ones
-
-	//remove iron ore from inventory
-	removeItem(0);
-
-	//add a weapon to inventory
-	inventory.first.push_back(3);
-
+bool Blacksmith::makeWeapon() {
+    //Removes one iron from inventory and adds one sword
+    if(this->removeItem(2)){
+        return addItem(3);
+    }
+    else{return false;}
 }
