@@ -19,7 +19,7 @@ public:
 	int getType();
 	int getHp() {return hp;};
 	virtual Coordinates* getLocation() = 0;
-	void takeDamage();
+	bool takeDamage();
 
 protected:
 	int type;
@@ -40,5 +40,5 @@ protected:
 */
 
 std::ostream& operator <<(std::ostream& os, Building& building);
-
+bool operator==(Building &a, Building &b);
 #endif // !BUILDING_H

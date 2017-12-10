@@ -94,9 +94,10 @@ bool Game::simulate(){
         (**it).reduceDelay();
        }else{
            if((**it).move()){
-               settler.setDelay(2);
+               (**it).setDelay(2);
            }else {
-               this.checkTask((**it).getTask(), *it, map->get_map()[(**it).getLocation()->getLocation()->getX(), (**it).getLocation()->getLocation()->getY()].getBuilding())
+               Building *building = map->get_map()[(**it).getLocation()->getX()][(**it).getLocation()->getY()]->getBuilding();
+               checkTask((**it).getTask(), *it, building);
            }
        }
        
@@ -136,8 +137,31 @@ int Game::checkTask(int task, Settler *settler, Building *building) {
     return 0;
 }
 
-int Game::cutTree(Settler *settler, Tree *tree){
-    tree.takeDamage();
-    settler.addItem(1);
+void Game::removeBuilding(Building *building){
+    int counter = 0;
+        for(std::vector<Building*>::iterator it = buildings.begin(); it !=buildings.end(); it++){
+            if(*it == building){
+                buildings.erase(buildings.begin() + counter);
+                map->get_map()[(**it).getLocation()->getX()][(**it).getLocation()->getY()]->removeBuilding();
+                return;
+            }
+            counter ++;
+        }
+}
+
+int Game::cutTree(Settler *settler, Building *building){
+    if(settler->getLocation() == building->getLocation() && !(settler->inventoryFull())){
+        if(building->takeDamage()){
+            removeBuilding(building);
+        }
+        settler->addItem(1);
+    } else if (settler->inventoryFull()){
+        //ADD LOCATION OF WAREHOUSE
+        settler->setPath(map->solvePath(settler->getLocation(),map->get_map()[0][0]->getLocation()));
+    } else {
+        //ADD LOCATION OF TREES
+        settler->setPath(map->solvePath(settler->getLocation(),map->get_map()[14][14]->getLocation()));
+    }
+    
     return 0;
 }

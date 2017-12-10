@@ -51,11 +51,19 @@ void Building::setReady() {
 	Building::isReady = true;
 }
 
-void Building::takeDamage(){
-	hp --1;
+bool Building::takeDamage(){
+	hp --;
+	if(hp == 0){
+		return true;
+	}
+	return false;
 };
 
 std::ostream& operator <<(std::ostream& os, Building& building){
 	os << building.getType();
 	return os;
+}
+
+bool operator==(Building &a, Building &b){
+    return a.getLocation() == b.getLocation();
 }

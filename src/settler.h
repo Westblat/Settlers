@@ -23,6 +23,8 @@ public:
 	std::vector<int> getItems();
 	bool addItem(int item);
 	bool removeItem(int item);
+    bool inventoryFull();
+    bool inventoryEmpty();
 
 	int getHP();
 	int removeHP(int hpChange);
