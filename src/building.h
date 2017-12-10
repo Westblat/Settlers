@@ -17,6 +17,7 @@ public:
 	void setReady();
 	bool getReadiness() {return isReady;};
 	int getType();
+	int getHp() {return hp;};
 	virtual Coordinates* getLocation() = 0;
 
 protected:

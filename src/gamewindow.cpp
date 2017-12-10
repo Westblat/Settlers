@@ -39,7 +39,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     connect(timer, SIGNAL (timeout()), this, SLOT (moveSettlers()));
     //connect(timer, SIGNAL (timeout()), this, SLOT (refreshBuildings()));
 
-    connect(timer, SIGNAL (timeout()), this, SLOT (randomLocation()));
+    //connect(timer, SIGNAL (timeout()), this, SLOT (randomLocation()));
 
     timer->start(refresh_time);
 

@@ -15,6 +15,10 @@
 #include "buildingitem.h"
 #include "settleritem.h"
 
+/*
+Imagefiles taken from kenney.nl!
+*/
+
 class Map;
 
 //window showing the actual game
@@ -58,7 +62,3 @@ public slots:
 };
 
 #endif
-
-/*
-Imagefiles taken from kenney.nl!
-*/
