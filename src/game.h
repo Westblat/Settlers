@@ -24,7 +24,7 @@ public:
     int checkTask(int task, Settler *settler);
     void removeBuilding(Building *building);
     void cutTree(Settler *settler);
-    //void buildBuilding(Settler *settler, Building *building);
+    void buildBuilding(Settler *settler);
 private:
     Map *map;
     std::vector<Building*> buildings;

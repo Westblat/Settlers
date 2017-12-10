@@ -19,3 +19,9 @@ bool operator==(Coordinates const&a, Coordinates const&b) {
     return a.getX()==b.getX() && a.getY()==b.getY();
 }
 
+std::ostream& operator <<(std::ostream& os, Coordinates& coordinates){
+	os << coordinates.getX();
+    os << ",";
+	os << coordinates.getY();
+	return os;
+}

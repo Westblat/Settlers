@@ -94,7 +94,7 @@ bool Game::simulate(){
         (**it).reduceDelay();
        }else{
            if((**it).move()){
-               (**it).setDelay(2);
+               (**it).setDelay(0);
            }else {
                checkTask((**it).getTask(), *it);
            }
@@ -133,7 +133,7 @@ bool Game::atWarehouse(Settler *settler){
 
 int Game::checkTask(int task, Settler *settler) {
     if(task == 1){
-        //buildBuilding(settler, building);
+        buildBuilding(settler);
     }else if(task == 2){
         cutTree(settler);
     }
@@ -175,11 +175,51 @@ void Game::cutTree(Settler *settler){
     }
 }
 
-/*void Game::buildBuilding(Settler *settler, Building *building){
-    if(settler->inventoryEmpty()){
-        pathToNearbyBuilding(settler, 2);
-    }
+void Game::buildBuilding(Settler *settler){
+    Building *buildThis;
+    std::vector<int> requirements;
+    for(std::vector<Building*>::iterator it = buildings.begin(); it != buildings.end(); it++){
+        if(!((*it)->getReadiness())){
+            buildThis = *it;
+            requirements = buildThis->getInventory().first;
+        }
+    } 
     
+
+    /*if(!(settler->inventoryFull())){
+        pathToNearbyBuilding(settler, 2);
+    
+    }else*/ 
+    if(map->getTerrain(settler->getLocation())->getBuildingType() == 2 && !(settler->inventoryFull())){
+        //gets items from 
+        
+        Building *warehouse = map->getTerrain(settler->getLocation())->getBuilding();
+        for(int it = 0; it != (int)warehouse->getInventory().first.size(); it++){
+            if(warehouse->getInventory().first[it] == requirements[0]){
+                settler->addItem(it);
+                warehouse->removeItem(it);
+                it--;
+                return;
+            }
+        }
+    }else if(settler->inventoryFull() && map->getTerrain(settler->getLocation())->getLocation() != buildThis->getLocation()){
+        std::cout<< "moi" << std::endl;
+        settler->setPath(map->solvePath(settler->getLocation(),buildThis->getLocation()));
+        
+    }else if((*settler->getLocation()) == (*buildThis->getLocation()) ){
+        std::cout << "plzno" << std::endl;
+        if(settler->getItems()[0] == requirements[0]){
+            settler->removeItem(requirements[0]);
+            buildThis->build(requirements[0]);
+        }
+    } else if(!(settler->inventoryFull())){
+        pathToNearbyBuilding(settler, 2);
+    } else {
+        std::cout<<"eieieieeieiei" << std::endl;
+        std::cout <<(*(*settler).getLocation()) <<std::endl;
+        std::cout <<(*(*buildThis).getLocation()) <<std::endl;
+    }
+    /*
     if(map->findNearby(settler->getLocation(),2) == settler->getLocation()){
         settler->addItem(0);
     }
@@ -187,5 +227,5 @@ void Game::cutTree(Settler *settler){
     if(settler->getLocation() == building->getLocation()){
         
         building->build(0);
-    }
-}*/
+    }*/
+}

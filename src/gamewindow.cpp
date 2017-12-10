@@ -47,11 +47,12 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     buildings = game.getBuildings();
     settlers = game.getSettlers();
 
-    /*
+    
     // DEBUG, say hello to Bob, he's a free settler not tied to a building
     Coordinates *loc = new Coordinates(0,0);
     settlers.push_back(new Settler("Bob", loc));
-	settlers[0]->setTask(2);
+	game.addBuilding(1, (map.get_map()[5][5])->getLocation(), false);
+	settlers[0]->setTask(1);
 
     draw_terrain(scene); //draws the terrain on the map
     draw_buildings(scene);
@@ -113,12 +114,12 @@ void GameWindow::draw_buildings(QGraphicsScene *scene) {
 	//draws the buildings (and trees) on the map
 
     // DEBUG
-    /*
+    
     std::vector<Building*> buildings = game.getBuildings();
     for (auto i : buildings) {
 		std::cout << "Type: " << i->getType();
 		std::cout << " Location: " << i->getLocation()->getX() << " " << i->getLocation()->getY() << std::endl;
-    }*/
+    }
 
     int x = 0;
     for (auto building : buildings) {

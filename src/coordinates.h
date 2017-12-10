@@ -1,5 +1,6 @@
 #ifndef COORDINATES_H
 #define COORDINATES_H
+#include <iostream>
 
 
 class Coordinates
@@ -16,5 +17,6 @@ private:
 };
 
 bool operator==(Coordinates const& a, Coordinates const& b);
+std::ostream& operator <<(std::ostream& os, Coordinates& coordinates);
 
 #endif // COORDINATES_H

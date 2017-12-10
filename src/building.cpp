@@ -52,7 +52,7 @@ void Building::setReady() {
 }
 
 bool Building::takeDamage(){
-	hp --;
+	hp--;
 	if(hp == 0){
 		return true;
 	}
@@ -65,6 +65,7 @@ std::pair<std::vector<int>, int> Building::getInventory(){
 
 std::ostream& operator <<(std::ostream& os, Building& building){
 	os << building.getType();
+	os << building.getReadiness();
 	return os;
 }
 
