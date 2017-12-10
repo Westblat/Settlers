@@ -22,6 +22,7 @@ public:
    	std::vector<int> availableBuildings(); 
     //returns vector of building types, if it returns -1, there is no available buildings
 
+    int getBuildingType();
     void setBuildingType(int newtype);
 
 

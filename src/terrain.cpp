@@ -48,6 +48,7 @@ std::vector<int> Terrain::availableBuildings(){
     return available;    
 }
 
+int Terrain::getBuildingType(){return this->buildingType;}
 void Terrain::setBuildingType(int newtype) {
     buildingType = newtype;
 }
