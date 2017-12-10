@@ -52,11 +52,13 @@ private:
 	//int x; //used for debugging timer
 
 	QPushButton *menu_button;
+	QPushButton *build_button;
 
 public slots:
 	void ShowMainMenu();
+	void refresh();
 	void moveSettlers();
-	void refreshBuildings();
+	void addBuilding();
 
 	void randomLocation(); //debug function, gives settlers and buildings random new locations
 };

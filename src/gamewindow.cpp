@@ -9,16 +9,24 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     QGridLayout *grid = new QGridLayout;
     setLayout(grid);
 
-    menu_button = new QPushButton("Main Menu");  //button that shows the main menu
-    grid->addWidget(menu_button, 0, 0);
+    // button that shows the main menu
+    menu_button = new QPushButton("Main Menu");
+    grid->addWidget(menu_button, 0, 10);
     connect(menu_button, SIGNAL (clicked()), this , SLOT (ShowMainMenu()));
 
-    QGraphicsScene *scene = new QGraphicsScene(this); //scene for viewing game map
+    // button for adding new buildings
+    build_button = new QPushButton("Build");
+    grid->addWidget(build_button, 1, 0);
+    connect(build_button, SIGNAL (clicked()), this, SLOT (addBuilding()));
+
+    // creates the scene for viewing game map
+    QGraphicsScene *scene = new QGraphicsScene(this);
     QGraphicsView *view = new QGraphicsView(scene);
     view->show();
-    grid->addWidget(view, 1, 0, 10, 10);
+    grid->addWidget(view, 1, 1, 10, 10);
 
-    game.setBuildings(); // the buildings the player starts with
+    // the buildings the player starts with
+    game.setBuildings();
 
     buildings = game.getBuildings();
     settlers = game.getSettlers();
@@ -37,12 +45,16 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     QTimer *timer = new QTimer();
     //x = 0;
     connect(timer, SIGNAL (timeout()), this, SLOT (moveSettlers()));
-    //connect(timer, SIGNAL (timeout()), this, SLOT (refreshBuildings()));
+    //connect(timer, SIGNAL (timeout()), this, SLOT (refresh()));
 
     //connect(timer, SIGNAL (timeout()), this, SLOT (randomLocation()));
 
     timer->start(refresh_time);
 
+}
+
+void GameWindow::addBuilding() {
+	std::cout << "Whaddya wanna build?" << std::endl;
 }
 
 void GameWindow::randomLocation() {
@@ -131,25 +143,16 @@ void GameWindow::moveSettlers() {
 		settleritems[i]->setPos(tilesize*x, 0);
 	}
 	x++;*/
+	std::cout << "Refresh" << std::endl;
 	for (unsigned int i = 0; i < settlers.size(); i++) {
 		int x = tilesize*settlers[i]->getLocation()->getX();
 		int y = tilesize*settlers[i]->getLocation()->getY();
 		settleritems[i]->setPos(x, y);
 	}
-	std::cout << "Refresh" << std::endl;
 }
 
-void GameWindow::refreshBuildings() {
-	//DEBUG
-	/*
-	std::cout << "Buildings refreshed!" << std::endl;
-	for (unsigned int i = 0; i < buildings.size(); i++) {
-		buildingitems[i]->setPos(0, tilesize*x);
-	}*/
-	// UMMH updating the location of settlers seems to update location of houses too... note: only affects Houses.
-	for (unsigned int i = 0; i < buildings.size(); i++) {
-		int x = tilesize*buildings[i]->getLocation()->getX();
-		int y = tilesize*buildings[i]->getLocation()->getY();
-		buildingitems[i]->setPos(x, y);
-	}
+void GameWindow::refresh() {
+	std::cout << "Refresh" << std::endl;
+	buildings = game.getBuildings();
+	settlers = game.getSettlers();
 }
