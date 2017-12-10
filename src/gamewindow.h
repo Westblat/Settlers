@@ -5,11 +5,12 @@
 #include <QPushButton>
 #include <QtWidgets>
 #include <QGraphicsScene>
-#include <QGraphicsRectItem>
 #include <QGraphicsView>
 #include <QTimer>
 #include <QLabel>
 #include <QString>
+#include <QGraphicsPixmapItem>
+#include <QMouseEvent>
 
 #include "game.h"
 #include "map.h"
@@ -35,6 +36,10 @@ public:
 	void draw_buildings(QGraphicsScene* scene);
 	void draw_settlers(QGraphicsScene* scene);
 
+	/*QGraphicsPixmapItem *buildcursor;
+	void setBuildcursor(QString imagefile, QGraphicsScene *scene);
+	void mouseMoveEvent(QMouseEvent *event);*/
+
 
 private:
 	Game game; // creates the game
@@ -43,6 +48,7 @@ private:
 	int height = map.get_height();
 
 	std::vector<std::vector<Terrain*>> terrain_map = map.get_map();
+	//std::vector<TerrainItem*> terrainitems;
 
 	std::vector<Building*> buildings;
 	std::vector<BuildingItem*> buildingitems;
@@ -55,7 +61,6 @@ private:
 	//int x; //used for debugging timer
 
 	QPushButton *menu_button;
-	QPushButton *build_button;
 
 public slots:
 	void ShowMainMenu();

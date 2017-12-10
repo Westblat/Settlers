@@ -3,10 +3,18 @@
 
 #include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
+#include <QGraphicsSceneMouseEvent>
+
+#include "terrain.h"
 
 class TerrainItem : public QGraphicsPixmapItem {
 public:
-	TerrainItem(int type, QGraphicsItem *parent = 0);
+	TerrainItem(int type, Terrain *terrainptr, QGraphicsItem *parent = 0);
+	Terrain *getTerrain() {return terrain;};
+	void mousePressEvent(QGraphicsSceneMouseEvent *event);
+
+private:
+	Terrain *terrain;
 };
 
 #endif

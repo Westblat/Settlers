@@ -20,12 +20,14 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     connect(build_button, SIGNAL (clicked()), this, SLOT (addBuilding()));
     */
 
+    // GAMEMAP
     // creates the scene for viewing game map
     QGraphicsScene *scene = new QGraphicsScene(this);
     QGraphicsView *view = new QGraphicsView(scene);
     view->show();
     grid->addWidget(view, 1, 1, 10, 10);
 
+    // BUILDMENU
     // scene for viewing build menu/buildingselection
     QGraphicsScene *buildscene = new QGraphicsScene(this);
     QGraphicsView *buildview = new QGraphicsView(buildscene);
@@ -57,6 +59,14 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     draw_buildings(scene);
     draw_settlers(scene);
 
+    //DEBUG terraintesting
+    /*
+    for (auto terrain : terrainitems) {
+    	int x = terrain->getTerrain()->getLocation()->getX();
+    	int y = terrain->getTerrain()->getLocation()->getY();
+    	std::cout << "x: " << x << " y: " << y << std::endl;
+    }*/
+
     //add a timer
     //refresh the scene in regards to settlers and buildings
     QTimer *timer = new QTimer();
@@ -87,10 +97,6 @@ void GameWindow::ShowMainMenu() {
 
 void GameWindow::draw_terrain(QGraphicsScene *scene) {
 	//draws the terrain on the map
-
-	// DEBUG
-	//std::cout << "width: " << width << " ";
-	//std::cout << "height: " << height << std::endl;
 	
 	int x = 0;
 	int y = 0;
@@ -98,8 +104,9 @@ void GameWindow::draw_terrain(QGraphicsScene *scene) {
 		x = 0;
 		for (int i = 0; i < height; i++) { //draw a TerrainItem (which is a rectangle)
 			int type = terrain_map[j][i]->getType();
-			TerrainItem *titem = new TerrainItem(type);
+			TerrainItem *titem = new TerrainItem(type, terrain_map[j][i]);
 			titem->setPos(x,y);
+			//terrainitems.push_back(titem);
 			scene->addItem(titem);
 			x += tilesize;
 
@@ -169,7 +176,7 @@ void GameWindow::moveSettlers() {
 }
 
 void GameWindow::refresh() {
-	std::cout << "Refresh" << std::endl;
+	//std::cout << "Refresh" << std::endl;
 	buildings = game.getBuildings();
 	settlers = game.getSettlers();
 }

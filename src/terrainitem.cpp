@@ -1,6 +1,8 @@
 #include "terrainitem.h"
 
-TerrainItem::TerrainItem(int type, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
+TerrainItem::TerrainItem(int type, Terrain *terrainptr, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
+	terrain = terrainptr;
+
 	if (type == 0) {		// 0: GRASS/PLAINS
 		setPixmap(QPixmap(":/graphics/grass.png"));
 	}
@@ -16,4 +18,10 @@ TerrainItem::TerrainItem(int type, QGraphicsItem *parent) : QGraphicsPixmapItem(
 	else if (type == 4) {	// 4: WATER
 		setPixmap(QPixmap(":/graphics/water.png"));
 	}
+}
+
+void TerrainItem::mousePressEvent(QGraphicsSceneMouseEvent *event) {
+	int x = terrain->getLocation()->getX();
+    int y = terrain->getLocation()->getY();
+    std::cout << "You clicked on x: " << x << " y: " << y << std::endl;
 }

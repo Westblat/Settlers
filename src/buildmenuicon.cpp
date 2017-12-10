@@ -1,5 +1,7 @@
 #include "buildmenuicon.h"
 
+#include <iostream>
+
 /*	Building types are
 	0: tree
 	1: House
@@ -11,7 +13,8 @@
 	7: Road
 */
 
-BuildmenuIcon::BuildmenuIcon(int type, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
+BuildmenuIcon::BuildmenuIcon(int buildingtype, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
+	type = buildingtype;
 	if (type == 1) {
 		setPixmap(QPixmap(":/graphics/houseicon.png"));
 	}
@@ -33,4 +36,16 @@ BuildmenuIcon::BuildmenuIcon(int type, QGraphicsItem *parent) : QGraphicsPixmapI
 	/*else if (type == 7) {
 		setPixmap(QPixmap(":/graphics/roadicon.png"));
 	}*/
+}
+
+void BuildmenuIcon::mousePressEvent(QGraphicsSceneMouseEvent *) {
+    if (type == 1) {
+    	std::cout << "You clicked on a House!" << std::endl;
+    }
+    else if (type == 2) {
+    	std::cout << "This is a WAREHOUSE!" << std::endl;
+    }
+    else {
+    	std::cout << "Hey!" << std::endl;
+    }
 }
