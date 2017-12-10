@@ -1,4 +1,5 @@
 #include "settler.h"
+//#include <stdlib.h> //DEBUG
 
 // Constructor take the name of the settler and sets the values for max inventory size, max hp, (current) hp and playerControlled to true
 Settler::Settler(std::string name, Coordinates *location) : name(name), location(location) {
@@ -6,6 +7,7 @@ Settler::Settler(std::string name, Coordinates *location) : name(name), location
 	hp = 10;
 	maxHp = 10;
 	playerControlled = true;
+    task = 0; //0 stands for idle task
 }
 
 
@@ -17,14 +19,15 @@ Settler::~Settler() {
 // These functions take no parameters and return the wanted variable
 std::string Settler::getName() { return name; }
 
-std::string Settler::getTask() { return task; }
+int Settler::getTask() { return task; }
 
 // TODO
-bool Settler::setTask(std::string newTask)
+/*
+bool Settler::setTask(int = task)
 {
 	task = newTask;
 	return true;
-}
+}*/
 
 std::vector<int> Settler::getItems() { return inventory.first; }
 
@@ -87,6 +90,8 @@ int Settler::addHP(int newHp)
     }
 }
 
+Coordinates* Settler::getLocation(){return this->location;}
+
 // Sets new path
 void Settler::setPath(std::stack<std::pair<int, int> > newPath){
     this->path = newPath;
@@ -94,36 +99,40 @@ void Settler::setPath(std::stack<std::pair<int, int> > newPath){
 
 // Returns next step
 bool Settler::move() {
+	
     if (this->path.size() > 0) {
         std::pair<int,int> next (this->path.top());
         this->path.pop();
         return this->location->updateCoords(next.first,next.second);
     }
     else {return false;}
+    
+    //DEBUG
+    //remember to remove stdlib.h
+    /*
+    int x = rand() % 10;
+    int y = rand() % 10;
+    return this->location->updateCoords(x,y);
+    */
 }
 
 // Sets action delay to the given value
 void Settler::setDelay(int delay) { actionDelay = delay; }
 
 // Reduces the delay by 1, until the delay is 0 and returns true once it is
-bool Settler::reduceDelay()
-{
-	if (actionDelay - 1 <= 0)
-	{
+bool Settler::reduceDelay() {
+    actionDelay -= 1;
+    if (actionDelay <= 0) {
 		actionDelay = 0;
 		return true;
 	}
-	else
-	{
-		actionDelay--;
-		return false;
-	}
+    else {return false;}
 }
 
 // Returns the delay
 int Settler::getDelay() { return actionDelay; }
 
 std::ostream& operator <<(std::ostream& os, Settler& settler){
-	os << "He's name is "<< settler.getName();
+	os << "His name is "<< settler.getName();
 	return os;
 }

@@ -1,5 +1,5 @@
 #ifndef SETTLER_H
-#define SETLLER_H
+#define SETTLER_H
 
 #include <string>
 #include <vector>
@@ -17,8 +17,8 @@ public:
 
     std::string getName();
 
-    std::string getTask();
-    bool setTask(std::string newTask);
+    int getTask();
+    bool setTask(int newTask);
 
 	std::vector<int> getItems();
 	bool addItem(int item);
@@ -27,6 +27,8 @@ public:
 	int getHP();
 	int removeHP(int hpChange);
 	int addHP(int hpChange);
+
+    Coordinates* getLocation();
 
     void setPath(std::stack<std::pair<int, int> > newPath);
     bool move();
@@ -37,7 +39,7 @@ public:
 
 private:
 	std::string name; // Settlers name
-	std::string task; // Current task
+    int task; // Current task
     int hp; // Current hp of the settler
     int maxHp; // Maximum hp of the settler
     //Building *home;

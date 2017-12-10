@@ -47,17 +47,34 @@ void Game::setBuildings(){
 }
 
 void Game::addBuilding(int type, Coordinates *location, bool initialize){
-    if(type == 1) {
+/*  Building types are
+    0: tree
+    1: House
+    2: Warehouse
+    3: Stonecutter
+    4: Mine
+    5: Blacksmith
+    6: Keep
+*/
+    if(type == 0) {
+        Tree *tree = new Tree(map->get_map()[location->getX()][location->getY()], initialize);
+        buildings.push_back(tree);
+    } else if (type == 1){
         House *talo = new House(map->get_map()[location->getX()][location->getY()], initialize);
         buildings.push_back(talo);
         addSettler(talo,map->get_map()[location->getX()][location->getY()]->getLocation());
         addSettler(talo,map->get_map()[location->getX()][location->getY()]->getLocation());
-    } else if (type == 2){
+    } else if(type == 2){
         Warehouse *varasto = new Warehouse(map->get_map()[location->getX()][location->getY()], initialize);
         buildings.push_back(varasto);
-    } else if(type == 0){
-        Tree *tree = new Tree(map->get_map()[location->getX()][location->getY()], initialize);
-        buildings.push_back(tree);
+    } else if(type == 3){
+        
+    } else if(type == 4){
+        
+    } else if(type == 5){
+        
+    } else if(type == 6){
+        
     }
 }
 

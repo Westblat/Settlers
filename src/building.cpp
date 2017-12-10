@@ -1,6 +1,6 @@
 #include "building.h"
 
-Building::Building(int type, int hp,bool initialize): type(type), hp(hp), isReady(initialize) { }
+Building::Building(int type, int hp, bool initialize): type(type), hp(hp), isReady(initialize) { }
 
 
 

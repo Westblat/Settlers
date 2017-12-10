@@ -6,3 +6,7 @@ Tree::Tree(Terrain *terrain, bool initialize) : Building(0, 20, initialize), ter
     }
 
 Tree::~Tree() { }
+
+Coordinates* Tree::getLocation() {
+	return terrain->getLocation();
+}

@@ -1,0 +1,19 @@
+#include "terrainitem.h"
+
+TerrainItem::TerrainItem(int type, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
+	if (type == 0) {		// 0: GRASS/PLAINS
+		setPixmap(QPixmap(":/graphics/grass.png"));
+	}
+	else if (type == 1) {	// 1: STONE
+		setPixmap(QPixmap(":/graphics/stone.png"));
+	}
+	else if (type == 2) {	// 2: MOUNTAIN
+		setPixmap(QPixmap(":/graphics/mountain.png"));
+	}
+	else if (type == 3) {	// 3: BEACH
+		setPixmap(QPixmap(":/graphics/beach.png"));
+	}
+	else if (type == 4) {	// 4: WATER
+		setPixmap(QPixmap(":/graphics/water.png"));
+	}
+}
