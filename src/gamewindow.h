@@ -18,6 +18,7 @@
 #include "buildingitem.h"
 #include "settleritem.h"
 #include "buildmenuicon.h"
+#include "cmdmenuicon.h"
 
 /*
 Imagefiles taken from kenney.nl!

@@ -28,5 +28,6 @@
         <file>road2icon.png</file>
         <file>road3.png</file>
         <file>road3icon.png</file>
+        <file>cmdicon.png</file>
     </qresource>
 </RCC>
