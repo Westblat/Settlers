@@ -116,8 +116,8 @@ void GameWindow::draw_terrain(QGraphicsScene *scene) {
 	for (int j = 0; j < width; j++) {
 		x = 0;
 		for (int i = 0; i < height; i++) { //draw a TerrainItem (which is a rectangle)
-			int type = terrain_map[j][i]->getType();
-			TerrainItem *titem = new TerrainItem(type, terrain_map[j][i]);
+			int type = terrain_map[i][j]->getType();
+			TerrainItem *titem = new TerrainItem(type, terrain_map[i][j]);
 			titem->setPos(x,y);
 			//terrainitems.push_back(titem);
 			scene->addItem(titem);
