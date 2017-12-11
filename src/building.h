@@ -15,11 +15,12 @@ public:
     bool addItem(int item);
 	bool removeItem(int item);
 	void setReady();
-	bool getReadiness() {return isReady;};
+    bool getReadiness() {return isReady;}
 	int getType();
-	int getHp() {return hp;};
+    int getHp() {return hp;}
 	virtual Coordinates* getLocation() = 0;
-	void takeDamage();
+	bool takeDamage();
+	std::pair<std::vector<int>, int> getInventory();
 
 protected:
 	int type;
@@ -37,8 +38,16 @@ protected:
 	4: Mine
 	5: Blacksmith
 	6: Keep
+    7: Road
+*/
+
+/*Item types are
+    0: Wood
+    1: Stone
+    2: Iron
+    3: Sword
 */
 
 std::ostream& operator <<(std::ostream& os, Building& building);
-
+bool operator==(Building &a, Building &b);
 #endif // !BUILDING_H

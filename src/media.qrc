@@ -8,11 +8,17 @@
         <file>settler.png</file>
         <file>tree.png</file>
         <file>house.png</file>
+        <file>houseicon.png</file>
         <file>warehouse.png</file>
+        <file>warehouseicon.png</file>
         <file>stonecutter.png</file>
+        <file>stonecuttericon.png</file>
         <file>mine.png</file>
+        <file>mineicon.png</file>
         <file>blacksmith.png</file>
+        <file>blacksmithicon.png</file>
         <file>keep.png</file>
+        <file>keepicon.png</file>
         <file>constructionsite.png</file>
         <file>cut_tree.png</file>
     </qresource>

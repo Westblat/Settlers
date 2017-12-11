@@ -9,6 +9,7 @@ BuildingItem::BuildingItem(int type, bool ready, int hp, QGraphicsItem *parent) 
 	4: Mine
 	5: Blacksmith
 	6: Keep
+	7: Road
 */
 	if (ready == false) {
 		setPixmap(QPixmap(":/graphics/constructionsite.png"));

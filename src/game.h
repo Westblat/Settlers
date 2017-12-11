@@ -19,12 +19,17 @@ public:
     std::vector<Settler*> getSettlers();
     std::vector<Building*> getBuildings();
     bool simulate();
-    int checkTask(int task, Settler *settler, Building *building);
-    int cutTree(Settler *settler, Building *tree);
+    void pathToNearbyBuilding(Settler *settler, int building);
+    bool atWarehouse(Settler *settler);
+    int checkTask(int task, Settler *settler);
+    void removeBuilding(Building *building);
+    void cutTree(Settler *settler);
+    void buildBuilding(Settler *settler);
 private:
     Map *map;
     std::vector<Building*> buildings;
     std::vector<Settler*> settlers;
+    std::vector<Building*> notReady;
     /* Types for task:
     0 = idle
     1 = build

@@ -9,6 +9,7 @@ House::House(Terrain *terrain, bool initialize) : Building(1,10,initialize), ter
     inventory.first.push_back(0);//UUUUUUUUUUUUUUUUUUUUUHHHHHH
     inventory.first.push_back(0);
     inventory.first.push_back(0);
+    inventory.first.push_back(0);
     }
 }
 
