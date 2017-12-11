@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_GameWindow_t {
-    QByteArrayData data[13];
-    char stringdata0[148];
+    QByteArrayData data[14];
+    char stringdata0[160];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,15 +40,16 @@ QT_MOC_LITERAL(7, 86, 4), // "type"
 QT_MOC_LITERAL(8, 91, 15), // "getSiteLocation"
 QT_MOC_LITERAL(9, 107, 8), // "Terrain*"
 QT_MOC_LITERAL(10, 116, 7), // "terrain"
-QT_MOC_LITERAL(11, 124, 14), // "randomLocation"
-QT_MOC_LITERAL(12, 139, 8) // "removeHP"
+QT_MOC_LITERAL(11, 124, 11), // "giveCommand"
+QT_MOC_LITERAL(12, 136, 14), // "randomLocation"
+QT_MOC_LITERAL(13, 151, 8) // "removeHP"
 
     },
     "GameWindow\0ShowMainMenu\0\0refresh\0"
     "moveSettlers\0refreshBuildings\0"
     "selectBuildingLocation\0type\0getSiteLocation\0"
-    "Terrain*\0terrain\0randomLocation\0"
-    "removeHP"
+    "Terrain*\0terrain\0giveCommand\0"
+    "randomLocation\0removeHP"
 };
 #undef QT_MOC_LITERAL
 
@@ -58,7 +59,7 @@ static const uint qt_meta_data_GameWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -66,14 +67,15 @@ static const uint qt_meta_data_GameWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   54,    2, 0x0a /* Public */,
-       3,    0,   55,    2, 0x0a /* Public */,
-       4,    0,   56,    2, 0x0a /* Public */,
-       5,    0,   57,    2, 0x0a /* Public */,
-       6,    1,   58,    2, 0x0a /* Public */,
-       8,    1,   61,    2, 0x0a /* Public */,
-      11,    0,   64,    2, 0x0a /* Public */,
-      12,    0,   65,    2, 0x0a /* Public */,
+       1,    0,   59,    2, 0x0a /* Public */,
+       3,    0,   60,    2, 0x0a /* Public */,
+       4,    0,   61,    2, 0x0a /* Public */,
+       5,    0,   62,    2, 0x0a /* Public */,
+       6,    1,   63,    2, 0x0a /* Public */,
+       8,    1,   66,    2, 0x0a /* Public */,
+      11,    1,   69,    2, 0x0a /* Public */,
+      12,    0,   72,    2, 0x0a /* Public */,
+      13,    0,   73,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -81,6 +83,7 @@ static const uint qt_meta_data_GameWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,    7,
+    QMetaType::Void, 0x80000000 | 9,   10,
     QMetaType::Void, 0x80000000 | 9,   10,
     QMetaType::Void,
     QMetaType::Void,
@@ -100,8 +103,9 @@ void GameWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 3: _t->refreshBuildings(); break;
         case 4: _t->selectBuildingLocation((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 5: _t->getSiteLocation((*reinterpret_cast< Terrain*(*)>(_a[1]))); break;
-        case 6: _t->randomLocation(); break;
-        case 7: _t->removeHP(); break;
+        case 6: _t->giveCommand((*reinterpret_cast< Terrain*(*)>(_a[1]))); break;
+        case 7: _t->randomLocation(); break;
+        case 8: _t->removeHP(); break;
         default: ;
         }
     }
@@ -132,13 +136,13 @@ int GameWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 9)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 8;
+        _id -= 9;
     }
     return _id;
 }

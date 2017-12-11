@@ -27,7 +27,8 @@ void TerrainItem::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     std::cout << "You clicked on x: " << x << " y: " << y << std::endl;
     */
     if (event->button() == Qt::RightButton) {
-    	std::cout << "You pressed the RIGHT mousebutton!" << std::endl;
+    	//std::cout << "You pressed the RIGHT mousebutton!" << std::endl;
+    	emit rightclicked(terrain);
     }
     else {
     	emit clicked(terrain);

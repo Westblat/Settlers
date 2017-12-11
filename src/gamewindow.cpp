@@ -119,6 +119,11 @@ void GameWindow::getSiteLocation(Terrain *terrain) {
     }
 }
 
+void GameWindow::giveCommand(Terrain *terrain) {
+	buildmode = false; // buildmode can be cancelled with rightclick
+	std::cout << "You pressed the RIGHT mousebutton!" << std::endl;
+}
+
 void GameWindow::randomLocation() {
 	// used for DEBUG, moves Bob to a random location
 	settlers[2]->move();
