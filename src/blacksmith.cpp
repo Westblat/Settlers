@@ -15,3 +15,7 @@ bool Blacksmith::makeWeapon() {
     }
     else{return false;}
 }
+
+Coordinates* Blacksmith::getLocation() {
+    return terrain->getLocation();
+}

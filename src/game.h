@@ -6,6 +6,7 @@
 #include "warehouse.h"
 #include "tree.h"
 #include "road.h"
+#include "blacksmith.h"
 
 
 class Game

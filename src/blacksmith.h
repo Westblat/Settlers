@@ -10,6 +10,7 @@ public:
 	Blacksmith(Terrain *terrain, bool initialize);
 	void addSettler(Settler *settler);
     bool makeWeapon();
+    Coordinates* getLocation();
 private:
     Terrain *terrain;
 };

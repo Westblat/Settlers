@@ -44,11 +44,6 @@ public:
 	bool buildmode;
 	int newBuildingType = -1;
 
-	/*QGraphicsPixmapItem *buildcursor;
-	void setBuildcursor(QString imagefile, QGraphicsScene *scene);
-	void mouseMoveEvent(QMouseEvent *event);*/
-
-
 private:
 	Game game; // creates the game
 	Map map = game.getMap();

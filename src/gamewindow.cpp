@@ -76,17 +76,17 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
 }
 
 void GameWindow::selectBuildingLocation(int type) {
-	std::cout << "Where ya wanna build?" << std::endl;
-	std::cout << "You've selected a " << type << std::endl;
+	//std::cout << "Where ya wanna build?" << std::endl;
+	//std::cout << "You've selected a " << type << std::endl;
 	buildmode = true;
 	newBuildingType = type;
 }
 
 void GameWindow::getSiteLocation(Terrain *terrain) {
 	// Builds a new building in the given location
-	int x = terrain->getLocation()->getX();
-    int y = terrain->getLocation()->getY();
-    std::cout << "You clicked on x: " << x << " y: " << y << std::endl;
+	//int x = terrain->getLocation()->getX();
+    //int y = terrain->getLocation()->getY();
+    //std::cout << "You clicked on x: " << x << " y: " << y << std::endl;
     if (buildmode == true) {
 
     	BuildingItem *buildingitem;
@@ -103,12 +103,9 @@ void GameWindow::getSiteLocation(Terrain *terrain) {
 
     	if (newBuildingType >= 7) {
     		buildingitem = new BuildingItem(newBuildingType, buildings.back()->getReadiness(), buildings.back()->getHp());
-    		//buildingitem = new BuildingItem(newBuildingType, true, 1);
-    		//buildingitem->setPos(tilesize*terrain->getLocation()->getX(), tilesize*terrain->getLocation()->getY());
     	}
     	else {
     		buildingitem = new BuildingItem(buildings.back()->getType(), buildings.back()->getReadiness(), buildings.back()->getHp());
-    		//buildingitem->setPos(tilesize*buildings.back()->getLocation()->getX(), tilesize*buildings.back()->getLocation()->getY());
     	}
 
     	buildingitem->setPos(tilesize*buildings.back()->getLocation()->getX(), tilesize*buildings.back()->getLocation()->getY());
@@ -118,7 +115,7 @@ void GameWindow::getSiteLocation(Terrain *terrain) {
 
     	buildmode = false;
     	newBuildingType = -1;
-    	std::cout << "House built" << std::endl;
+    	//std::cout << "House built" << std::endl;
     }
 }
 
@@ -126,12 +123,11 @@ void GameWindow::randomLocation() {
 	// used for DEBUG, moves Bob to a random location
 	settlers[1]->move();
 	//std::cout << buildings[1]->getLocation()->getX() << " " << buildings[1]->getLocation()->getY() << std::endl;
-	//std::cout << settlers[1]->getLocation()->getX() << " " << settlers[1]->getLocation()->getY() << std::endl;
-
-	//game.simulate();
+	std::cout << settlers[1]->getLocation()->getX() << " " << settlers[1]->getLocation()->getY() << std::endl;
 }
 
 void GameWindow::removeHP() {
+	//DEBUG
 	/*
 	bool destroyed = false;
 	for (auto building : buildings) {
@@ -155,10 +151,11 @@ void GameWindow::draw_terrain(QGraphicsScene *scene) {
 	int y = 0;
 	for (int j = 0; j < width; j++) {
 		x = 0;
-		for (int i = 0; i < height; i++) { //draw a TerrainItem
+		for (int i = 0; i < height; i++) {
+			//draw a TerrainItem
 			int type = terrain_map[j][i]->getType();
 			//TerrainItem *titem = new TerrainItem(type, terrain_map[j][i]);
-			TerrainItem *titem = new TerrainItem(type, terrain_map[i][j]); // QUICK AND DIRTY FIX
+			TerrainItem *titem = new TerrainItem(type, terrain_map[i][j]); // QUICK AND DIRTY FIX !!
 			titem->setPos(x,y);
 			scene->addItem(titem);
 			x += tilesize;
@@ -183,7 +180,7 @@ void GameWindow::draw_buildings(QGraphicsScene *scene) {
     for (auto building : buildings) {
     	BuildingItem *buildingitem = new BuildingItem(building->getType(), building->getReadiness(), building->getHp());
     	//BuildingItem *buildingitem = new BuildingItem(building->getType(), true, 10); //DEBUG
-    	//BuildingItem *buildingitem = new BuildingItem(building->getType(), false, 0);
+    	//BuildingItem *buildingitem = new BuildingItem(building->getType(), false, 0); //DEBUG
     	buildingitem->setPos(tilesize*building->getLocation()->getX(), tilesize*building->getLocation()->getY());
     	buildingitem->setZValue(1);
     	buildingitems.push_back(buildingitem);
@@ -241,7 +238,7 @@ void GameWindow::refreshBuildings() {
 }
 
 void GameWindow::refresh() {
+
 	//std::cout << "Refresh" << std::endl;
-	buildings = game.getBuildings();
 	settlers = game.getSettlers();
 }
