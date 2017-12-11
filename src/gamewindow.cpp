@@ -11,6 +11,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     // button that shows the main menu
     menu_button = new QPushButton("Main Menu");
     grid->addWidget(menu_button, 0, 10);
+    //grid->addWidget(menu_button, 1, 0);
     connect(menu_button, SIGNAL (clicked()), this , SLOT (ShowMainMenu()));
 
     // GAMEMAP
@@ -19,6 +20,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     view = new QGraphicsView(scene);
     view->show();
     grid->addWidget(view, 1, 1, 10, 10);
+    //grid->addWidget(view, 2, 1, 10, 10);
 
     // BUILDMENU
     // scene for viewing build menu/buildingselection
@@ -28,10 +30,12 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     buildview->show();
     buildview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     grid->addWidget(buildview, 1, 0, 8, 1);
+    //grid->addWidget(buildview, 3, 0, 9, 1);
     QLabel *buildlabel = new QLabel(this); // text above the buildingselection
     buildlabel->setText(QString("Buildings"));
     buildlabel->show();
     grid->addWidget(buildlabel, 0, 0);
+    //grid->addWidget(buildlabel, 2, 0);
     for (int i = 1; i < 10; i++) {
     	//std::cout << "icon: " << i << std::endl;
     	BuildmenuIcon *icon = new BuildmenuIcon(i);
@@ -39,7 +43,29 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     	buildscene->addItem(icon);
     	connect(icon, SIGNAL(clicked(int)), this, SLOT(selectBuildingLocation(int)));
     }
+/*
+    // RESOURCES
+    // scene for viewing resourcecount
+    resscene = new QGraphicsScene(this);
+    resview = new QGraphicsView(resscene);
+    resview->show();
+    grid->addWidget(resview, 1, 1, 1, 1);
+    QLabel *reslabel = new QLabel(this); // text above the buildingselection
+    reslabel->setText(QString("Resources"));
+    reslabel->show();
+    grid->addWidget(reslabel, 0, 1);
 
+    // COMMANDMENU
+    // scene for viewing commands
+    commandscene = new QGraphicsScene(this);
+    commandview = new QGraphicsView(commandscene);
+    commandview->show();
+    grid->addWidget(commandview, 1, 2, 1, 1);
+    QLabel *cmdlabel = new QLabel(this);
+    cmdlabel->setText(QString("Commands"));
+    cmdlabel->show();
+    grid->addWidget(cmdlabel, 0, 2);
+*/
     // the buildings the player starts with
     game.setBuildings();
 
@@ -119,9 +145,12 @@ void GameWindow::getSiteLocation(Terrain *terrain) {
     }
 }
 
-void GameWindow::giveCommand(Terrain *terrain) {
+void GameWindow::cancelBuild() {
 	buildmode = false; // buildmode can be cancelled with rightclick
-	std::cout << "You pressed the RIGHT mousebutton!" << std::endl;
+}
+
+void GameWindow::giveCommand() {
+	std::cout << "You clicked on a SETTLER!" << std::endl;
 }
 
 void GameWindow::randomLocation() {
@@ -165,7 +194,7 @@ void GameWindow::draw_terrain(QGraphicsScene *scene) {
 			scene->addItem(titem);
 			x += tilesize;
 			connect(titem, SIGNAL(clicked(Terrain*)), this, SLOT(getSiteLocation(Terrain*)));
-			connect(titem, SIGNAL(rightclicked(Terrain*)), this, SLOT(giveCommand(Terrain*)));
+			connect(titem, SIGNAL(rightclicked(Terrain*)), this, SLOT(cancelBuild()));
 		}
 		//next row
 		y += tilesize;
@@ -209,10 +238,11 @@ void GameWindow::draw_settlers(QGraphicsScene *scene) {
 	}*/
 
 	for (auto settler : settlers) {
-		SettlerItem *settleritem = new SettlerItem();
+		SettlerItem *settleritem = new SettlerItem(settler);
 		settleritem->setPos(tilesize*settler->getLocation()->getX(), tilesize*settler->getLocation()->getY());
 		settleritems.push_back(settleritem);
 		scene->addItem(settleritem);
+		connect(settleritem, SIGNAL(clicked()), this, SLOT(giveCommand()));
 	}
 }
 

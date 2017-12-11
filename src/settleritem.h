@@ -3,10 +3,23 @@
 
 #include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
+#include <QGraphicsSceneMouseEvent>
+#include <QObject>
 
-class SettlerItem : public QGraphicsPixmapItem {
+#include "settler.h"
+
+class SettlerItem : public QObject, public QGraphicsPixmapItem {
+	Q_OBJECT
 public:
-	SettlerItem(QGraphicsItem *parent = 0);
+	SettlerItem(Settler *settlerptr, QGraphicsItem *parent = 0);
+	Settler *getSettler() {return settler;};
+	void mousePressEvent(QGraphicsSceneMouseEvent *event);
+
+private:
+	Settler *settler;
+
+signals:
+	void clicked();
 };
 
 #endif

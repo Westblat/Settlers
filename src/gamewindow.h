@@ -40,6 +40,10 @@ public:
 	QGraphicsView *view;
 	QGraphicsScene *buildscene;
 	QGraphicsView *buildview;
+	QGraphicsScene *commandscene;
+	QGraphicsView *commandview;
+	QGraphicsScene *resscene;
+	QGraphicsView *resview;
 
 	bool buildmode;
 	int newBuildingType = -1;
@@ -72,7 +76,8 @@ public slots:
 
 	void selectBuildingLocation(int type);
 	void getSiteLocation(Terrain *terrain);
-	void giveCommand(Terrain *terrain);
+	void cancelBuild();
+	void giveCommand();
 
 	void randomLocation(); //debug function, gives settlers and buildings random new locations
 	void removeHP(); //debug, destroys buildings
