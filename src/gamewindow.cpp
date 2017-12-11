@@ -33,7 +33,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     buildlabel->show();
     grid->addWidget(buildlabel, 0, 0);
     for (int i = 1; i < 10; i++) {
-    	std::cout << "icon: " << i << std::endl;
+    	//std::cout << "icon: " << i << std::endl;
     	BuildmenuIcon *icon = new BuildmenuIcon(i);
     	icon->setPos(0, tilesize*(i-1));
     	buildscene->addItem(icon);
@@ -46,11 +46,11 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     buildings = game.getBuildings();
     settlers = game.getSettlers();
 
-    /*
+    
     // DEBUG, say hello to Bob, he's a free settler not tied to a building
     Coordinates *loc = new Coordinates(0,0);
     settlers.push_back(new Settler("Bob", loc));
-    */
+    
 
     draw_terrain(scene); //draws the terrain on the map
     draw_buildings(scene);
@@ -121,9 +121,9 @@ void GameWindow::getSiteLocation(Terrain *terrain) {
 
 void GameWindow::randomLocation() {
 	// used for DEBUG, moves Bob to a random location
-	settlers[1]->move();
+	settlers[2]->move();
 	//std::cout << buildings[1]->getLocation()->getX() << " " << buildings[1]->getLocation()->getY() << std::endl;
-	std::cout << settlers[1]->getLocation()->getX() << " " << settlers[1]->getLocation()->getY() << std::endl;
+	//std::cout << settlers[1]->getLocation()->getX() << " " << settlers[1]->getLocation()->getY() << std::endl;
 }
 
 void GameWindow::removeHP() {
