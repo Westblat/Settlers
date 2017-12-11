@@ -24,6 +24,8 @@ public:
     int checkTask(int task, Settler *settler);
     void removeBuilding(Building *building);
     void cutTree(Settler *settler);
+    void cutStone(Settler *settler);
+    void cutIron(Settler *settler);
     void buildBuilding(Settler *settler);
 private:
     Map *map;
