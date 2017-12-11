@@ -1,5 +1,5 @@
 #include "settler.h"
-//#include <stdlib.h> //DEBUG
+#include <stdlib.h> //DEBUG
 
 // Constructor take the name of the settler and sets the values for max inventory size, max hp, (current) hp and playerControlled to true
 Settler::Settler(std::string name, Coordinates *location) : name(name), location(location) {
@@ -115,21 +115,21 @@ void Settler::setPath(std::stack<std::pair<int, int> > newPath){
 
 // Returns next step
 bool Settler::move() {
-	
+	/*
     if (this->path.size() > 0) {
         std::pair<int,int> next (this->path.top());
         this->path.pop();
         return this->location->updateCoords(this->getLocation()->getX() + next.first,this->getLocation()->getY() + next.second);
     }
     else {return false;}
-    
+    */
     //DEBUG
     //remember to remove stdlib.h
-    /*
+    
     int x = rand() % 10;
     int y = rand() % 10;
     return this->location->updateCoords(x,y);
-    */
+    
 }
 
 // Sets action delay to the given value

@@ -17,6 +17,9 @@ BuildingItem::BuildingItem(int buildingtype, bool ready, int health, QGraphicsIt
 	if (readiness == false && type != 0) {
 		setPixmap(QPixmap(":/graphics/constructionsite.png"));
 	}
+	else if (hp == 0 && type != 0) {
+		setPixmap(QPixmap(":/graphics/destroyedbuilding.png"));
+	}
 	else {
 		if (type == 0) {
 			if (hp != 0) {
@@ -43,6 +46,15 @@ BuildingItem::BuildingItem(int buildingtype, bool ready, int health, QGraphicsIt
 		}
 		else if (type == 6) {
 			setPixmap(QPixmap(":/graphics/keep.png"));
+		}
+		else if (type == 7) {
+			setPixmap(QPixmap(":/graphics/road1.png"));
+		}
+		else if (type == 8) {
+			setPixmap(QPixmap(":/graphics/road2.png"));	
+		}
+		else if (type == 9) {
+			setPixmap(QPixmap(":/graphics/road3.png"));
 		}
 	}
 }

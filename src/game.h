@@ -5,6 +5,7 @@
 #include "house.h"
 #include "warehouse.h"
 #include "tree.h"
+#include "road.h"
 
 
 class Game

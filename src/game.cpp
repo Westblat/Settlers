@@ -75,6 +75,9 @@ void Game::addBuilding(int type, Coordinates *location, bool initialize){
         
     } else if(type == 6){
         
+    } else if(type == 7){
+        Road *road = new Road(map->get_map()[location->getX()][location->getY()], initialize);
+        buildings.push_back(road);
     }
 }
 

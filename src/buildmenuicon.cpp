@@ -33,9 +33,15 @@ BuildmenuIcon::BuildmenuIcon(int buildingtype, QGraphicsItem *parent) : QGraphic
 	else if (type == 6) {
 		setPixmap(QPixmap(":/graphics/keepicon.png"));
 	}
-	/*else if (type == 7) {
-		setPixmap(QPixmap(":/graphics/roadicon.png"));
-	}*/
+	else if (type == 7) {
+		setPixmap(QPixmap(":/graphics/road1icon.png"));
+	}
+	else if (type == 8) {
+		setPixmap(QPixmap(":/graphics/road2icon.png"));
+	}
+	else if (type == 9) {
+		setPixmap(QPixmap(":/graphics/road3icon.png"));
+	}
 }
 
 void BuildmenuIcon::mousePressEvent(QGraphicsSceneMouseEvent *) {

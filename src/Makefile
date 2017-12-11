@@ -395,16 +395,23 @@ qrc_media.cpp: media.qrc \
 		mountain.png \
 		constructionsite.png \
 		blacksmithicon.png \
+		road3icon.png \
 		stonecuttericon.png \
 		beach.png \
+		road1icon.png \
 		settler.png \
 		stonecutter.png \
 		mineicon.png \
+		destroyedbuilding.png \
 		house.png \
 		stone.png \
+		road1.png \
 		houseicon.png \
+		road2.png \
+		road3.png \
 		mine.png \
-		grass.png
+		grass.png \
+		road2icon.png
 	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name media media.qrc -o qrc_media.cpp
 
 compiler_moc_header_make_all: moc_mainwindow.cpp moc_gamewindow.cpp moc_terrainitem.cpp moc_buildmenuicon.cpp
