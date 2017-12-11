@@ -20,6 +20,7 @@ private:
 
 signals:
 	void clicked(Terrain *terrain);
+	void rightclicked(Terrain *terrain);
 	//void clicked(int i);
 };
 

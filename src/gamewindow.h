@@ -72,6 +72,7 @@ public slots:
 
 	void selectBuildingLocation(int type);
 	void getSiteLocation(Terrain *terrain);
+	void giveCommand(Terrain *terrain);
 
 	void randomLocation(); //debug function, gives settlers and buildings random new locations
 	void removeHP(); //debug, destroys buildings

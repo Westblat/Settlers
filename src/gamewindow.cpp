@@ -160,6 +160,7 @@ void GameWindow::draw_terrain(QGraphicsScene *scene) {
 			scene->addItem(titem);
 			x += tilesize;
 			connect(titem, SIGNAL(clicked(Terrain*)), this, SLOT(getSiteLocation(Terrain*)));
+			connect(titem, SIGNAL(rightclicked(Terrain*)), this, SLOT(giveCommand(Terrain*)));
 		}
 		//next row
 		y += tilesize;
