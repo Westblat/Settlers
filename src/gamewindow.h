@@ -56,7 +56,6 @@ private:
 	int height = map.get_height();
 
 	std::vector<std::vector<Terrain*>> terrain_map = map.get_map();
-	//std::vector<TerrainItem*> terrainitems;
 
 	std::vector<Building*> buildings;
 	std::vector<BuildingItem*> buildingitems;

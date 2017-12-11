@@ -91,7 +91,7 @@ void GameWindow::getSiteLocation(Terrain *terrain) {
 
     	buildmode = false;
     	newBuildingType = -1;
-    	std::cout << "house built" << std::endl;
+    	std::cout << "House built" << std::endl;
     }
 }
 
@@ -110,16 +110,17 @@ void GameWindow::ShowMainMenu() {
 
 void GameWindow::draw_terrain(QGraphicsScene *scene) {
 	//draws the terrain on the map
-	
+	//NOTE: x and y seem to be mirrored in terrain_map location-coordinates compared to their actual location...
+
 	int x = 0;
 	int y = 0;
 	for (int j = 0; j < width; j++) {
 		x = 0;
-		for (int i = 0; i < height; i++) { //draw a TerrainItem (which is a rectangle)
-			int type = terrain_map[i][j]->getType();
-			TerrainItem *titem = new TerrainItem(type, terrain_map[i][j]);
+		for (int i = 0; i < height; i++) { //draw a TerrainItem
+			int type = terrain_map[j][i]->getType();
+			//TerrainItem *titem = new TerrainItem(type, terrain_map[j][i]);
+			TerrainItem *titem = new TerrainItem(type, terrain_map[i][j]); // QUICK AND DIRTY FIX
 			titem->setPos(x,y);
-			//terrainitems.push_back(titem);
 			scene->addItem(titem);
 			x += tilesize;
 			connect(titem, SIGNAL(clicked(Terrain*)), this, SLOT(getSiteLocation(Terrain*)));
