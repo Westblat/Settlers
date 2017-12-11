@@ -167,7 +167,7 @@ void Game::cutTree(Settler *settler){
         if(tree->takeDamage()){
             removeBuilding(tree);
         }
-        settler->addItem(1);
+        settler->addItem(0);
         settler->setDelay(0);
     } else if (settler->inventoryFull() && atWarehouse(settler)){
         Building *building = map->getTerrain(settler->getLocation())->getBuilding();
@@ -182,6 +182,58 @@ void Game::cutTree(Settler *settler){
     else {
         pathToNearbyBuilding(settler, 0);
     }
+}
+
+void Game::cutStone(Settler *settler) {
+	if (map->getTerrain(settler->getLocation())->getBuildingType() == 3 && !(settler->inventoryFull())) {
+		Building *stonecutter = map->getTerrain(settler->getLocation())->getBuilding();
+		bool notEmpty = stonecutter->removeItem(1);
+		if (!notEmpty) {
+			removeBuilding(stonecutter);
+		}
+		settler->addItem(1);
+		settler->setDelay(0);
+	}
+	else if (settler->inventoryFull() && atWarehouse(settler)) {
+		Building *building = map->getTerrain(settler->getLocation())->getBuilding();
+		std::vector<int> items = settler->getItems();
+		for (int i = 0; i != (int)items.size(); i++) {
+			building->addItem(items[i]);
+		}
+		settler->emptyInventory();
+	}
+	else if (settler->inventoryFull())
+		pathToNearbyBuilding(settler, 2);
+
+	else {
+		pathToNearbyBuilding(settler, 0);
+	}
+}
+
+void Game::cutIron(Settler *settler) {
+	if (map->getTerrain(settler->getLocation())->getBuildingType() == 4 && !(settler->inventoryFull())) {
+		Building *mine = map->getTerrain(settler->getLocation())->getBuilding();
+		bool notEmpty = mine->removeItem(2);
+		if (!notEmpty) {
+			removeBuilding(mine);
+		}
+		settler->addItem(2);
+		settler->setDelay(0);
+	}
+	else if (settler->inventoryFull() && atWarehouse(settler)) {
+		Building *building = map->getTerrain(settler->getLocation())->getBuilding();
+		std::vector<int> items = settler->getItems();
+		for (int i = 0; i != (int)items.size(); i++) {
+			building->addItem(items[i]);
+		}
+		settler->emptyInventory();
+	}
+	else if (settler->inventoryFull())
+		pathToNearbyBuilding(settler, 2);
+
+	else {
+		pathToNearbyBuilding(settler, 0);
+	}
 }
 
 void Game::buildBuilding(Settler *settler){
