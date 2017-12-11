@@ -55,18 +55,27 @@ void Game::addBuilding(int type, Coordinates *location, bool initialize){
     4: Mine
     5: Blacksmith
     6: Keep
-*/
+*/  
     if(type == 0) {
-        Tree *tree = new Tree(map->get_map()[location->getX()][location->getY()], initialize);
-        buildings.push_back(tree);
+        Tree *building = new Tree(map->get_map()[location->getX()][location->getY()], initialize);
+        buildings.push_back(building);
+        if(!initialize){
+        notReady.push_back(building);
+    }
     } else if (type == 1){
-        House *talo = new House(map->get_map()[location->getX()][location->getY()], initialize);
-        buildings.push_back(talo);
-        addSettler(talo,map->get_map()[location->getX()][location->getY()]->getLocation());
-        addSettler(talo,map->get_map()[location->getX()][location->getY()]->getLocation());
+        House *building = new House(map->get_map()[location->getX()][location->getY()], initialize);
+        buildings.push_back(building);
+        addSettler(building,map->get_map()[location->getX()][location->getY()]->getLocation());
+        addSettler(building,map->get_map()[location->getX()][location->getY()]->getLocation());
+        if(!initialize){
+        notReady.push_back(building);
+    }
     } else if(type == 2){
-        Warehouse *varasto = new Warehouse(map->get_map()[location->getX()][location->getY()], initialize);
-        buildings.push_back(varasto);
+        Warehouse *building = new Warehouse(map->get_map()[location->getX()][location->getY()], initialize);
+        buildings.push_back(building);
+        if(!initialize){
+        notReady.push_back(building);
+    }
     } else if(type == 3){
         
     } else if(type == 4){
@@ -176,20 +185,12 @@ void Game::cutTree(Settler *settler){
 }
 
 void Game::buildBuilding(Settler *settler){
-    Building *buildThis;
-    std::vector<int> requirements;
-    for(std::vector<Building*>::iterator it = buildings.begin(); it != buildings.end(); it++){
-        if(!((*it)->getReadiness())){
-            buildThis = *it;
-            requirements = buildThis->getInventory().first;
-        }
-    } 
+    if((int)notReady.size() == 0){
+        return;
+    }
+    Building *buildThis = notReady[0];
+    std::vector<int> requirements = buildThis->getInventory().first;    
     
-
-    /*if(!(settler->inventoryFull())){
-        pathToNearbyBuilding(settler, 2);
-    
-    }else*/ 
     if(map->getTerrain(settler->getLocation())->getBuildingType() == 2 && !(settler->inventoryFull())){
         //gets items from 
         
@@ -210,7 +211,9 @@ void Game::buildBuilding(Settler *settler){
         std::cout << "plzno" << std::endl;
         if(settler->getItems()[0] == requirements[0]){
             settler->removeItem(requirements[0]);
-            buildThis->build(requirements[0]);
+            if(buildThis->build(requirements[0])){
+                notReady.erase(notReady.begin());
+            }
         }
     } else if(!(settler->inventoryFull())){
         pathToNearbyBuilding(settler, 2);
@@ -219,13 +222,4 @@ void Game::buildBuilding(Settler *settler){
         std::cout <<(*(*settler).getLocation()) <<std::endl;
         std::cout <<(*(*buildThis).getLocation()) <<std::endl;
     }
-    /*
-    if(map->findNearby(settler->getLocation(),2) == settler->getLocation()){
-        settler->addItem(0);
-    }
-    
-    if(settler->getLocation() == building->getLocation()){
-        
-        building->build(0);
-    }*/
 }

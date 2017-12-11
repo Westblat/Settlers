@@ -2,7 +2,7 @@
 //#include <stdlib.h> //DEBUG
 
 // Constructor take the name of the settler and sets the values for max inventory size, max hp, (current) hp and playerControlled to true
-Settler::Settler(std::string name, Coordinates *location) : name(name), location(location) {
+Settler::Settler(std::string name, Coordinates *location) : name(name), location(location), actionDelay(0) {
 	inventory.second = 5;
 	hp = 10;
 	maxHp = 10;

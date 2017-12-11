@@ -29,6 +29,7 @@ private:
     Map *map;
     std::vector<Building*> buildings;
     std::vector<Settler*> settlers;
+    std::vector<Building*> notReady;
     /* Types for task:
     0 = idle
     1 = build
