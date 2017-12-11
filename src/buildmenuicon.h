@@ -15,7 +15,7 @@ private:
 	int type;
 
 signals:
-	void clicked();
+	void clicked(int type);
 };
 
 #endif

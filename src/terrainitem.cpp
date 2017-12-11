@@ -20,8 +20,12 @@ TerrainItem::TerrainItem(int type, Terrain *terrainptr, QGraphicsItem *parent) :
 	}
 }
 
-void TerrainItem::mousePressEvent(QGraphicsSceneMouseEvent *event) {
+void TerrainItem::mousePressEvent(QGraphicsSceneMouseEvent *) {
+	/*
 	int x = terrain->getLocation()->getX();
     int y = terrain->getLocation()->getY();
     std::cout << "You clicked on x: " << x << " y: " << y << std::endl;
+    */
+    emit clicked(terrain);
+    //emit clicked(0);
 }

@@ -69,6 +69,7 @@ SOURCES       = main.cpp \
 		buildmenuicon.cpp qrc_media.cpp \
 		moc_mainwindow.cpp \
 		moc_gamewindow.cpp \
+		moc_terrainitem.cpp \
 		moc_buildmenuicon.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
@@ -92,6 +93,7 @@ OBJECTS       = main.o \
 		qrc_media.o \
 		moc_mainwindow.o \
 		moc_gamewindow.o \
+		moc_terrainitem.o \
 		moc_buildmenuicon.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -405,9 +407,9 @@ qrc_media.cpp: media.qrc \
 		grass.png
 	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name media media.qrc -o qrc_media.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_gamewindow.cpp moc_buildmenuicon.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_gamewindow.cpp moc_terrainitem.cpp moc_buildmenuicon.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_gamewindow.cpp moc_buildmenuicon.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_gamewindow.cpp moc_terrainitem.cpp moc_buildmenuicon.cpp
 moc_mainwindow.cpp: game.h \
 		map.h \
 		priorityqueue.h \
@@ -437,6 +439,12 @@ moc_gamewindow.cpp: game.h \
 		buildmenuicon.h \
 		gamewindow.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/mini_bunney/Desktop/prog/c++/settlers-2/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include gamewindow.h -o moc_gamewindow.cpp
+
+moc_terrainitem.cpp: terrain.h \
+		coordinates.h \
+		building.h \
+		terrainitem.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/mini_bunney/Desktop/prog/c++/settlers-2/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include terrainitem.h -o moc_terrainitem.cpp
 
 moc_buildmenuicon.cpp: buildmenuicon.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/mini_bunney/Desktop/prog/c++/settlers-2/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include buildmenuicon.h -o moc_buildmenuicon.cpp
@@ -604,6 +612,9 @@ moc_mainwindow.o: moc_mainwindow.cpp
 
 moc_gamewindow.o: moc_gamewindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_gamewindow.o moc_gamewindow.cpp
+
+moc_terrainitem.o: moc_terrainitem.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_terrainitem.o moc_terrainitem.cpp
 
 moc_buildmenuicon.o: moc_buildmenuicon.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_buildmenuicon.o moc_buildmenuicon.cpp

@@ -4,10 +4,12 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
+#include <QObject>
 
 #include "terrain.h"
 
-class TerrainItem : public QGraphicsPixmapItem {
+class TerrainItem : public QObject, public QGraphicsPixmapItem {
+	Q_OBJECT
 public:
 	TerrainItem(int type, Terrain *terrainptr, QGraphicsItem *parent = 0);
 	Terrain *getTerrain() {return terrain;};
@@ -15,6 +17,10 @@ public:
 
 private:
 	Terrain *terrain;
+
+signals:
+	void clicked(Terrain *terrain);
+	//void clicked(int i);
 };
 
 #endif

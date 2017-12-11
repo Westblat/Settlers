@@ -42,6 +42,7 @@ public:
 	QGraphicsView *buildview;
 
 	bool buildmode;
+	int newBuildingType = -1;
 
 	/*QGraphicsPixmapItem *buildcursor;
 	void setBuildcursor(QString imagefile, QGraphicsScene *scene);
@@ -74,8 +75,9 @@ public slots:
 	void refresh();
 	void moveSettlers();
 	void refreshBuildings();
-	
-	void addBuilding();
+
+	void selectBuildingLocation(int type);
+	void getSiteLocation(Terrain *terrain);
 
 	void randomLocation(); //debug function, gives settlers and buildings random new locations
 };

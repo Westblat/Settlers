@@ -13,13 +13,6 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     grid->addWidget(menu_button, 0, 10);
     connect(menu_button, SIGNAL (clicked()), this , SLOT (ShowMainMenu()));
 
-    /*
-    // button for adding new buildings
-    build_button = new QPushButton("Build");
-    grid->addWidget(build_button, 1, 0);
-    connect(build_button, SIGNAL (clicked()), this, SLOT (addBuilding()));
-    */
-
     // GAMEMAP
     // creates the scene for viewing game map
     scene = new QGraphicsScene(this);
@@ -42,7 +35,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     	BuildmenuIcon *icon = new BuildmenuIcon(i);
     	icon->setPos(0, tilesize*(i-1));
     	buildscene->addItem(icon);
-    	connect(icon, SIGNAL(clicked()), this, SLOT(addBuilding()));
+    	connect(icon, SIGNAL(clicked(int)), this, SLOT(selectBuildingLocation(int)));
     }
 
     // the buildings the player starts with
@@ -61,14 +54,6 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     draw_buildings(scene);
     draw_settlers(scene);
 
-    //DEBUG terraintesting
-    /*
-    for (auto terrain : terrainitems) {
-    	int x = terrain->getTerrain()->getLocation()->getX();
-    	int y = terrain->getTerrain()->getLocation()->getY();
-    	std::cout << "x: " << x << " y: " << y << std::endl;
-    }*/
-
     //add a timer
     //refresh the scene in regards to settlers and buildings
     QTimer *timer = new QTimer();
@@ -83,13 +68,38 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
 
 }
 
-void GameWindow::addBuilding() {
-	std::cout << "Whaddya wanna build?" << std::endl;
+void GameWindow::selectBuildingLocation(int type) {
+	std::cout << "Where ya wanna build?" << std::endl;
+	std::cout << "You've selected a " << type << std::endl;
+	buildmode = true;
+	newBuildingType = type;
+}
+
+void GameWindow::getSiteLocation(Terrain *terrain) {
+	int x = terrain->getLocation()->getX();
+    int y = terrain->getLocation()->getY();
+    std::cout << "You clicked on x: " << x << " y: " << y << std::endl;
+    if (buildmode == true) {
+    	game.addBuilding(newBuildingType, terrain->getLocation(), false);
+
+    	buildings = game.getBuildings();
+    	BuildingItem *buildingitem = new BuildingItem(buildings.back()->getType(), buildings.back()->getReadiness(), buildings.back()->getHp());
+    	buildingitem->setPos(tilesize*buildings.back()->getLocation()->getX(), tilesize*buildings.back()->getLocation()->getY());
+    	buildingitem->setZValue(1);
+    	buildingitems.push_back(buildingitem);
+    	scene->addItem(buildingitem);
+
+    	buildmode = false;
+    	newBuildingType = -1;
+    	std::cout << "house built" << std::endl;
+    }
 }
 
 void GameWindow::randomLocation() {
 	// used for DEBUG, moves Bob to a random location
-	//settlers[2]->move();
+	settlers[1]->move();
+	std::cout << buildings[1]->getLocation()->getX() << " " << buildings[1]->getLocation()->getY() << std::endl;
+	std::cout << settlers[1]->getLocation()->getX() << " " << settlers[1]->getLocation()->getY() << std::endl;
 
 	//game.simulate();
 }
@@ -112,7 +122,7 @@ void GameWindow::draw_terrain(QGraphicsScene *scene) {
 			//terrainitems.push_back(titem);
 			scene->addItem(titem);
 			x += tilesize;
-
+			connect(titem, SIGNAL(clicked(Terrain*)), this, SLOT(getSiteLocation(Terrain*)));
 		}
 		//next row
 		y += tilesize;
@@ -163,13 +173,7 @@ void GameWindow::draw_settlers(QGraphicsScene *scene) {
 }
 
 void GameWindow::moveSettlers() {
-	//DEBUG
-	/*
-	std::cout << "Settlers moved!" << std::endl;
-	for (unsigned int i = 0; i < settlers.size(); i++) {
-		settleritems[i]->setPos(tilesize*x, 0);
-	}
-	x++;*/
+	// Refreshes the location of settlers
 	std::cout << "Refresh" << std::endl;
 	for (unsigned int i = 0; i < settlers.size(); i++) {
 		int x = tilesize*settlers[i]->getLocation()->getX();
@@ -181,6 +185,7 @@ void GameWindow::moveSettlers() {
 void GameWindow::refreshBuildings() {
 	for (unsigned int i = 0; i < buildings.size(); i++) {
 		bool ready = buildings[i]->getReadiness();
+		// check readiness of buildings, update from constructionsite to complete building
 		if (buildingitems[i]->getReadiness() != ready) {
 			//remove old and replace with new
 			scene->removeItem(buildingitems[i]);
@@ -190,6 +195,7 @@ void GameWindow::refreshBuildings() {
 			buildingitems[i] = buildingitem;
 			scene->addItem(buildingitem);
 		}
+		// check health of building, update from whole tree to cut tree (yet to implement destroyed buildings)
 		else if (buildingitems[i]->getHP() == 0) {
 			scene->removeItem(buildingitems[i]);
 			BuildingItem *buildingitem = new BuildingItem(buildings[i]->getType(), buildings[i]->getReadiness(), buildings[i]->getHp());

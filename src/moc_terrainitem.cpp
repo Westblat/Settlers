@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'buildmenuicon.h'
+** Meta object code from reading C++ file 'terrainitem.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.5.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "buildmenuicon.h"
+#include "terrainitem.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'buildmenuicon.h' doesn't include <QObject>."
+#error "The header file 'terrainitem.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.5.1. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -18,28 +18,29 @@
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
-struct qt_meta_stringdata_BuildmenuIcon_t {
-    QByteArrayData data[4];
-    char stringdata0[28];
+struct qt_meta_stringdata_TerrainItem_t {
+    QByteArrayData data[5];
+    char stringdata0[38];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_BuildmenuIcon_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_TerrainItem_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_BuildmenuIcon_t qt_meta_stringdata_BuildmenuIcon = {
+static const qt_meta_stringdata_TerrainItem_t qt_meta_stringdata_TerrainItem = {
     {
-QT_MOC_LITERAL(0, 0, 13), // "BuildmenuIcon"
-QT_MOC_LITERAL(1, 14, 7), // "clicked"
-QT_MOC_LITERAL(2, 22, 0), // ""
-QT_MOC_LITERAL(3, 23, 4) // "type"
+QT_MOC_LITERAL(0, 0, 11), // "TerrainItem"
+QT_MOC_LITERAL(1, 12, 7), // "clicked"
+QT_MOC_LITERAL(2, 20, 0), // ""
+QT_MOC_LITERAL(3, 21, 8), // "Terrain*"
+QT_MOC_LITERAL(4, 30, 7) // "terrain"
 
     },
-    "BuildmenuIcon\0clicked\0\0type"
+    "TerrainItem\0clicked\0\0Terrain*\0terrain"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_BuildmenuIcon[] = {
+static const uint qt_meta_data_TerrainItem[] = {
 
  // content:
        7,       // revision
@@ -56,54 +57,54 @@ static const uint qt_meta_data_BuildmenuIcon[] = {
        1,    1,   19,    2, 0x06 /* Public */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::Int,    3,
+    QMetaType::Void, 0x80000000 | 3,    4,
 
        0        // eod
 };
 
-void BuildmenuIcon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void TerrainItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        BuildmenuIcon *_t = static_cast<BuildmenuIcon *>(_o);
+        TerrainItem *_t = static_cast<TerrainItem *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->clicked((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 0: _t->clicked((*reinterpret_cast< Terrain*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         void **func = reinterpret_cast<void **>(_a[1]);
         {
-            typedef void (BuildmenuIcon::*_t)(int );
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&BuildmenuIcon::clicked)) {
+            typedef void (TerrainItem::*_t)(Terrain * );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&TerrainItem::clicked)) {
                 *result = 0;
             }
         }
     }
 }
 
-const QMetaObject BuildmenuIcon::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_BuildmenuIcon.data,
-      qt_meta_data_BuildmenuIcon,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+const QMetaObject TerrainItem::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_TerrainItem.data,
+      qt_meta_data_TerrainItem,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
 
-const QMetaObject *BuildmenuIcon::metaObject() const
+const QMetaObject *TerrainItem::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *BuildmenuIcon::qt_metacast(const char *_clname)
+void *TerrainItem::qt_metacast(const char *_clname)
 {
     if (!_clname) return Q_NULLPTR;
-    if (!strcmp(_clname, qt_meta_stringdata_BuildmenuIcon.stringdata0))
-        return static_cast<void*>(const_cast< BuildmenuIcon*>(this));
+    if (!strcmp(_clname, qt_meta_stringdata_TerrainItem.stringdata0))
+        return static_cast<void*>(const_cast< TerrainItem*>(this));
     if (!strcmp(_clname, "QGraphicsPixmapItem"))
-        return static_cast< QGraphicsPixmapItem*>(const_cast< BuildmenuIcon*>(this));
+        return static_cast< QGraphicsPixmapItem*>(const_cast< TerrainItem*>(this));
     return QObject::qt_metacast(_clname);
 }
 
-int BuildmenuIcon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int TerrainItem::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
@@ -121,7 +122,7 @@ int BuildmenuIcon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void BuildmenuIcon::clicked(int _t1)
+void TerrainItem::clicked(Terrain * _t1)
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
