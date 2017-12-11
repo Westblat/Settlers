@@ -39,6 +39,7 @@ BuildmenuIcon::BuildmenuIcon(int buildingtype, QGraphicsItem *parent) : QGraphic
 }
 
 void BuildmenuIcon::mousePressEvent(QGraphicsSceneMouseEvent *) {
+	emit clicked();
     if (type == 1) {
     	std::cout << "You clicked on a House!" << std::endl;
     }

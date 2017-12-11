@@ -36,6 +36,13 @@ public:
 	void draw_buildings(QGraphicsScene* scene);
 	void draw_settlers(QGraphicsScene* scene);
 
+	QGraphicsScene *scene;
+	QGraphicsView *view;
+	QGraphicsScene *buildscene;
+	QGraphicsView *buildview;
+
+	bool buildmode;
+
 	/*QGraphicsPixmapItem *buildcursor;
 	void setBuildcursor(QString imagefile, QGraphicsScene *scene);
 	void mouseMoveEvent(QMouseEvent *event);*/
@@ -66,6 +73,8 @@ public slots:
 	void ShowMainMenu();
 	void refresh();
 	void moveSettlers();
+	void refreshBuildings();
+	
 	void addBuilding();
 
 	void randomLocation(); //debug function, gives settlers and buildings random new locations

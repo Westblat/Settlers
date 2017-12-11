@@ -22,15 +22,16 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
 
     // GAMEMAP
     // creates the scene for viewing game map
-    QGraphicsScene *scene = new QGraphicsScene(this);
-    QGraphicsView *view = new QGraphicsView(scene);
+    scene = new QGraphicsScene(this);
+    view = new QGraphicsView(scene);
     view->show();
     grid->addWidget(view, 1, 1, 10, 10);
 
     // BUILDMENU
+    buildmode = false;
     // scene for viewing build menu/buildingselection
-    QGraphicsScene *buildscene = new QGraphicsScene(this);
-    QGraphicsView *buildview = new QGraphicsView(buildscene);
+    buildscene = new QGraphicsScene(this);
+    buildview = new QGraphicsView(buildscene);
     buildview->show();
     grid->addWidget(buildview, 1, 0, 6, 1);
     QLabel *buildlabel = new QLabel(this); // text above the buildingselection
@@ -41,6 +42,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     	BuildmenuIcon *icon = new BuildmenuIcon(i);
     	icon->setPos(0, tilesize*(i-1));
     	buildscene->addItem(icon);
+    	connect(icon, SIGNAL(clicked()), this, SLOT(addBuilding()));
     }
 
     // the buildings the player starts with
@@ -71,8 +73,9 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     //refresh the scene in regards to settlers and buildings
     QTimer *timer = new QTimer();
     //x = 0;
-    connect(timer, SIGNAL (timeout()), this, SLOT (moveSettlers()));
     //connect(timer, SIGNAL (timeout()), this, SLOT (refresh()));
+    connect(timer, SIGNAL (timeout()), this, SLOT (moveSettlers()));
+    connect(timer, SIGNAL (timeout()), this, SLOT (refreshBuildings()));
 
     //connect(timer, SIGNAL (timeout()), this, SLOT (randomLocation()));
 
@@ -127,13 +130,13 @@ void GameWindow::draw_buildings(QGraphicsScene *scene) {
 		std::cout << " Location: " << i->getLocation()->getX() << " " << i->getLocation()->getY() << std::endl;
     }*/
 
-    int x = 0;
     for (auto building : buildings) {
     	BuildingItem *buildingitem = new BuildingItem(building->getType(), building->getReadiness(), building->getHp());
+    	//BuildingItem *buildingitem = new BuildingItem(building->getType(), false, 0);
     	buildingitem->setPos(tilesize*building->getLocation()->getX(), tilesize*building->getLocation()->getY());
+    	buildingitem->setZValue(1);
     	buildingitems.push_back(buildingitem);
     	scene->addItem(buildingitem);
-    	x += tilesize;
     }
 
 }
@@ -172,6 +175,29 @@ void GameWindow::moveSettlers() {
 		int x = tilesize*settlers[i]->getLocation()->getX();
 		int y = tilesize*settlers[i]->getLocation()->getY();
 		settleritems[i]->setPos(x, y);
+	}
+}
+
+void GameWindow::refreshBuildings() {
+	for (unsigned int i = 0; i < buildings.size(); i++) {
+		bool ready = buildings[i]->getReadiness();
+		if (buildingitems[i]->getReadiness() != ready) {
+			//remove old and replace with new
+			scene->removeItem(buildingitems[i]);
+			BuildingItem *buildingitem = new BuildingItem(buildings[i]->getType(), buildings[i]->getReadiness(), buildings[i]->getHp());
+			buildingitem->setPos(tilesize*buildings[i]->getLocation()->getX(), tilesize*buildings[i]->getLocation()->getY());
+			buildingitem->setZValue(1);
+			buildingitems[i] = buildingitem;
+			scene->addItem(buildingitem);
+		}
+		else if (buildingitems[i]->getHP() == 0) {
+			scene->removeItem(buildingitems[i]);
+			BuildingItem *buildingitem = new BuildingItem(buildings[i]->getType(), buildings[i]->getReadiness(), buildings[i]->getHp());
+			buildingitem->setPos(tilesize*buildings[i]->getLocation()->getX(), tilesize*buildings[i]->getLocation()->getY());
+			buildingitem->setZValue(1);
+			buildingitems[i] = buildingitem;
+			scene->addItem(buildingitem);
+		}
 	}
 }
 
