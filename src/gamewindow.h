@@ -66,7 +66,7 @@ private:
     std::vector<SettlerItem*> settleritems;
 
 	int tilesize = 64; // images used are 64x64 pixels
-	int refresh_time = 1000; // milliseconds, after how much time locations update on screen, 40 ms = roughly 25 fps
+	int refresh_time = 10; // milliseconds, after how much time locations update on screen, 40 ms = roughly 25 fps
 
 	//int x; //used for debugging timer
 
