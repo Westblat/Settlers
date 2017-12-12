@@ -157,7 +157,11 @@ int Game::checkTask(int task, Settler *settler) {
         buildBuilding(settler);
     }else if(task == 2){
         cutTree(settler);
-    }
+    } else if(task == 3){
+        cutStone(settler);
+    } else if (task == 4){
+        cutIron(settler);
+    } 
     return 0;
 }
 
@@ -165,15 +169,6 @@ void Game::removeBuilding(Building *building){
     std::vector<Building*>::iterator it = std::find(buildings.begin(), buildings.end(), building);
     buildings.erase(it);
     delete building;
-    /*int counter = 0;
-        for(std::vector<Building*>::iterator it = buildings.begin(); it !=buildings.end(); it++){
-            if(*it == building){
-                buildings.erase(buildings.begin() + counter);
-                delete building;
-                return;
-            }
-            counter ++;
-        }*/
 }
 
 void Game::cutTree(Settler *settler){
