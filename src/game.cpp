@@ -245,6 +245,7 @@ void Game::cutIron(Settler *settler) {
 
 void Game::buildBuilding(Settler *settler){
     if((int)notReady.size() == 0){
+        pathToNearbyBuilding(settler, 0);
         return;
     }
     Building *buildThis = notReady[0];
@@ -262,14 +263,12 @@ void Game::buildBuilding(Settler *settler){
                 return;
             }
         }
-    }else if(settler->inventoryFull() && map->getTerrain(settler->getLocation())->getLocation() != buildThis->getLocation()){
-        std::cout<< "moi" << std::endl;
+    }else if(settler->inventoryFull() && settler->getLocation != buildThis->getLocation()){
         settler->setPath(map->solvePath(settler->getLocation(),buildThis->getLocation()));
         
     }else if(settler->inventoryEmpty()){
            pathToNearbyBuilding(settler, 2);
     }else if((*settler->getLocation()) == (*buildThis->getLocation()) ){
-        std::cout << "plzno" << std::endl;
         if(settler->getItems()[0] == requirements[0]){
             settler->removeItem(requirements[0]);
             if(buildThis->build(requirements[0])){
@@ -279,7 +278,6 @@ void Game::buildBuilding(Settler *settler){
     } else if(!(settler->inventoryFull())){
         pathToNearbyBuilding(settler, 2);
     } else {
-        std::cout<<"eieieieeieiei" << std::endl;
         std::cout <<(*(*settler).getLocation()) <<std::endl;
         std::cout <<(*(*buildThis).getLocation()) <<std::endl;
     }
