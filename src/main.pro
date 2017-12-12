@@ -44,7 +44,8 @@ SOURCES += \
         road.cpp \
         buildmenuicon.cpp \
         stonecutter.cpp \
-        cmdmenuicon.cpp
+        cmdmenuicon.cpp \
+        ironcutter.cpp \
 
 HEADERS += \
         mainwindow.h \
@@ -66,7 +67,8 @@ HEADERS += \
         road.h \
         buildmenuicon.h \
         stonecutter.h \
-        cmdmenuicon.h
+        cmdmenuicon.h \
+        ironcutter.h \
 
 RESOURCES += \
     media.qrc
