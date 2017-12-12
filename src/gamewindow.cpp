@@ -78,12 +78,12 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     buildings = game.getBuildings();
     settlers = game.getSettlers();
 
-    
+/*  
     // DEBUG, say hello to Bob, he's a free settler not tied to a building (or the game for that matter)
     Coordinates *loc = new Coordinates(1,0);
     settlers.push_back(new Settler("Bob", loc));
     //std::cout << settlers.size() << std::endl;
-
+*/
     draw_terrain(scene); //draws the terrain on the map
     draw_buildings(scene);
     draw_settlers(scene);
@@ -92,7 +92,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     //refresh the scene in regards to settlers and buildings
     QTimer *timer = new QTimer();
     //x = 0;
-    //connect(timer, SIGNAL (timeout()), this, SLOT (refresh()));
+    connect(timer, SIGNAL (timeout()), this, SLOT (refresh()));
     connect(timer, SIGNAL (timeout()), this, SLOT (moveSettlers()));
     connect(timer, SIGNAL (timeout()), this, SLOT (refreshBuildings()));
     timer->start(refresh_time);
@@ -262,7 +262,6 @@ void GameWindow::draw_settlers(QGraphicsScene *scene) {
 
 void GameWindow::moveSettlers() {
 	// Refreshes the location of settlers
-	std::cout << "Refresh" << std::endl;
 	for (unsigned int i = 0; i < settlers.size(); i++) {
 		int x = tilesize*settlers[i]->getLocation()->getX();
 		int y = tilesize*settlers[i]->getLocation()->getY();
@@ -276,7 +275,7 @@ void GameWindow::refreshBuildings() {
 	for (unsigned int i = 0; i < buildings.size(); i++) {
 		bool ready = buildings[i]->getReadiness();
 		if (buildingitems[i]->getReadiness() != ready || buildings[i]->getHp() == 0) {
-			//remove old and replace with new
+			//remove old image and replace with new
 			scene->removeItem(buildingitems[i]);
 			BuildingItem *buildingitem = new BuildingItem(buildings[i]->getType(), buildings[i]->getReadiness(), buildings[i]->getHp());
 			buildingitem->setPos(tilesize*buildings[i]->getLocation()->getX(), tilesize*buildings[i]->getLocation()->getY());
@@ -288,11 +287,23 @@ void GameWindow::refreshBuildings() {
 }
 
 void GameWindow::refresh() {
+	std::cout << "Refresh" << std::endl;
 
-	//std::cout << "Refresh" << std::endl;
+	// ---------------------------------------------------------------------------------------------------
+	// THIS IS WIP, haven't tested it since Joonas was working on the same thing
+	// ---------------------------------------------------------------------------------------------------
+
+	// First, either remove corresponding settleritems if settlers have been removed
 	settlers = game.getSettlers();
-	// checks if new settlers have appeared, adds them to the scene and the settleritems vector
-	if (settlers.size() > settleritems.size()) {
+	if (settlers.size() < settleritems.size()) {
+		unsigned int i = settlers.size();
+		while (i < settleritems.size()) {
+			scene->removeItem(settleritems[i]);
+			settleritems.erase(settleritems.end()-i);
+		}
+	}
+	// or, check if new settlers have appeared, add them to the scene and the settleritems vector
+	else if (settlers.size() > settleritems.size()) {
 		unsigned int i = settleritems.size();
 		for (; i < settlers.size(); i++) {
 			//SettlerItem *settleritem = new SettlerItem(settlers[i]);
@@ -301,6 +312,17 @@ void GameWindow::refresh() {
 			settleritems.push_back(settleritem);
 			scene->addItem(settleritem);
 			connect(settleritem, SIGNAL(clicked(int)), this, SLOT(giveCommand(int)));
+		}
+	}
+
+	// Second, repeat process for buildings
+	// only checking destroyed buildings, since new buildings are handled by getSiteLocation()
+	buildings = game.getBuildings();
+	if (buildings.size() < buildingitems.size()) {
+		unsigned int i = buildings.size();
+		while (i < buildingitems.size()) {
+			scene->removeItem(buildingitems[i]);
+			buildingitems.erase(buildingitems.end()-i);
 		}
 	}
 }
