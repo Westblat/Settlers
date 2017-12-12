@@ -162,15 +162,18 @@ int Game::checkTask(int task, Settler *settler) {
 }
 
 void Game::removeBuilding(Building *building){
-    int counter = 0;
+    std::vector<Building*>::iterator it = std::find(buildings.begin(), buildings.end(), building);
+    buildings.erase(it);
+    delete building;
+    /*int counter = 0;
         for(std::vector<Building*>::iterator it = buildings.begin(); it !=buildings.end(); it++){
             if(*it == building){
                 buildings.erase(buildings.begin() + counter);
-                map->get_map()[(**it).getLocation()->getX()][(**it).getLocation()->getY()]->removeBuilding();
+                delete building;
                 return;
             }
             counter ++;
-        }
+        }*/
 }
 
 void Game::cutTree(Settler *settler){
