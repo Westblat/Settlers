@@ -166,6 +166,7 @@ void Game::cutTree(Settler *settler){
         Building *tree = map->getTerrain(settler->getLocation())->getBuilding();
         if(tree->takeDamage()){
             removeBuilding(tree);
+			map->getTerrain(settler->getLocation())->setType(0);
         }
         settler->addItem(0);
         settler->setDelay(0);
@@ -190,9 +191,12 @@ void Game::cutStone(Settler *settler) {
 		bool notEmpty = stonecutter->removeItem(1);
 		if (!notEmpty) {
 			removeBuilding(stonecutter);
+			map->getTerrain(settler->getLocation())->setType(0);
 		}
-		settler->addItem(1);
-		settler->setDelay(0);
+		else {
+			settler->addItem(1);
+			settler->setDelay(0);
+		}
 	}
 	else if (settler->inventoryFull() && atWarehouse(settler)) {
 		Building *building = map->getTerrain(settler->getLocation())->getBuilding();
@@ -216,9 +220,12 @@ void Game::cutIron(Settler *settler) {
 		bool notEmpty = mine->removeItem(2);
 		if (!notEmpty) {
 			removeBuilding(mine);
+			map->getTerrain(settler->getLocation())->setType(0);
 		}
-		settler->addItem(2);
-		settler->setDelay(0);
+		else {
+			settler->addItem(2);
+			settler->setDelay(0);
+		}
 	}
 	else if (settler->inventoryFull() && atWarehouse(settler)) {
 		Building *building = map->getTerrain(settler->getLocation())->getBuilding();
