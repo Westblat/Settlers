@@ -42,7 +42,8 @@ SOURCES += \
         priorityqueue.cpp \
 	blacksmith.cpp \
         road.cpp \
-        buildmenuicon.cpp
+        buildmenuicon.cpp \
+        stonecutter.cpp \
 
 HEADERS += \
         mainwindow.h \
@@ -62,7 +63,8 @@ HEADERS += \
         warehouse.h \
  	blacksmith.h \
         road.h \
-        buildmenuicon.h
+        buildmenuicon.h \
+        stonecutter.h \
 
 RESOURCES += \
     media.qrc

@@ -9,10 +9,10 @@ Stonecutter::Stonecutter(Terrain *terrain, bool initialize) : Building(3, 10, in
     }
 }
 
-Stonecutter::~Stonecutter {
+Stonecutter::~Stonecutter() {
     this->terrain->setBuildingType(-1);
 }
 
-Coordinates* Tree::getLocation() {
+Coordinates* Stonecutter::getLocation() {
 	return terrain->getLocation();
 }
