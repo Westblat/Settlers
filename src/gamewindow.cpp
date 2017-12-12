@@ -79,10 +79,10 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     settlers = game.getSettlers();
 
     
-    // DEBUG, say hello to Bob, he's a free settler not tied to a building
+    // DEBUG, say hello to Bob, he's a free settler not tied to a building (or the game for that matter)
     Coordinates *loc = new Coordinates(1,0);
     settlers.push_back(new Settler("Bob", loc));
-    
+    //std::cout << settlers.size() << std::endl;
 
     draw_terrain(scene); //draws the terrain on the map
     draw_buildings(scene);
@@ -92,7 +92,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     //refresh the scene in regards to settlers and buildings
     QTimer *timer = new QTimer();
     //x = 0;
-    connect(timer, SIGNAL (timeout()), this, SLOT (refresh()));
+    //connect(timer, SIGNAL (timeout()), this, SLOT (refresh()));
     connect(timer, SIGNAL (timeout()), this, SLOT (moveSettlers()));
     connect(timer, SIGNAL (timeout()), this, SLOT (refreshBuildings()));
     timer->start(refresh_time);
@@ -157,8 +157,10 @@ void GameWindow::cancelBuild() {
 	buildmode = false; // buildmode can be cancelled with rightclick
 }
 
-void GameWindow::giveCommand() {
+void GameWindow::giveCommand(int n) {
 	std::cout << "You clicked on a SETTLER!" << std::endl;
+	std::cout << "This is " << settlers[n]->getName() << std::endl;
+	//std::cout << "settler number: " << n << std::endl;
 }
 
 void GameWindow::randomLocation() {
@@ -246,14 +248,15 @@ void GameWindow::draw_settlers(QGraphicsScene *scene) {
 		std::cout << "Name: " << settler->getName();
 		std::cout << " Location: " << settler->getLocation()->getX() << " " << settler->getLocation()->getY() << std::endl;
 	}*/
-
+	int i = 0;
 	for (auto settler : settlers) {
 		//SettlerItem *settleritem = new SettlerItem(settler);
-		SettlerItem *settleritem = new SettlerItem();
+		SettlerItem *settleritem = new SettlerItem(i);
 		settleritem->setPos(tilesize*settler->getLocation()->getX(), tilesize*settler->getLocation()->getY());
 		settleritems.push_back(settleritem);
 		scene->addItem(settleritem);
-		connect(settleritem, SIGNAL(clicked()), this, SLOT(giveCommand()));
+		connect(settleritem, SIGNAL(clicked(int)), this, SLOT(giveCommand(int)));
+		i++;
 	}
 }
 
@@ -293,11 +296,11 @@ void GameWindow::refresh() {
 		unsigned int i = settleritems.size();
 		for (; i < settlers.size(); i++) {
 			//SettlerItem *settleritem = new SettlerItem(settlers[i]);
-			SettlerItem *settleritem = new SettlerItem();
+			SettlerItem *settleritem = new SettlerItem(i);
 			settleritem->setPos(tilesize*settlers[i]->getLocation()->getX(), tilesize*settlers[i]->getLocation()->getY());
 			settleritems.push_back(settleritem);
 			scene->addItem(settleritem);
-			connect(settleritem, SIGNAL(clicked()), this, SLOT(giveCommand()));
+			connect(settleritem, SIGNAL(clicked(int)), this, SLOT(giveCommand(int)));
 		}
 	}
 }

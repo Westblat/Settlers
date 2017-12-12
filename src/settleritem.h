@@ -12,15 +12,16 @@ class SettlerItem : public QObject, public QGraphicsPixmapItem {
 	Q_OBJECT
 public:
 	//SettlerItem(Settler *settlerptr, QGraphicsItem *parent = 0);
-	SettlerItem(QGraphicsItem *parent = 0);
+	SettlerItem(int n, QGraphicsItem *parent = 0);
 	//Settler *getSettler() {return settler;};
 	void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
 private:
 	//Settler *settler;
+	int number;
 
 signals:
-	void clicked();
+	void clicked(int n);
 };
 
 #endif
