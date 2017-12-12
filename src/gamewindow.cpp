@@ -3,7 +3,7 @@
 GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
 
 	setWindowTitle("The Settlers");
-    setMinimumSize(800, 600);
+    setFixedSize(1000, 800);
 
     QGridLayout *grid = new QGridLayout;
     setLayout(grid);
@@ -86,6 +86,8 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     settlers.push_back(new Settler("Bob", loc));
     //std::cout << settlers.size() << std::endl;
 */
+
+    // DEBUG
     //game.addBuilding(1, (map.get_map()[15][15])->getLocation(), false);
     game.addBuilding(2, (map.get_map()[5][5])->getLocation(), false);
 	settlers[0]->setTask(1);
@@ -238,12 +240,13 @@ void GameWindow::draw_buildings(QGraphicsScene *scene) {
 	//draws the buildings (and trees) on the map
 
     // DEBUG
-    
+    /*
     std::vector<Building*> buildings = game.getBuildings();
     for (auto i : buildings) {
 		std::cout << "Type: " << i->getType();
 		std::cout << " Location: " << i->getLocation()->getX() << " " << i->getLocation()->getY() << std::endl;
     }
+    */
 
     for (auto building : buildings) {
     	BuildingItem *buildingitem = new BuildingItem(building->getType(), building->getReadiness(), building->getHp());
@@ -310,12 +313,13 @@ void GameWindow::refreshBuildings() {
 void GameWindow::refresh() {
 	std::cout << "Refresh" << std::endl;
 
+	game.simulate();
+
 	// ---------------------------------------------------------------------------------------------------
 	// THIS IS WIP, haven't tested it since Joonas was working on the same thing
 	// ---------------------------------------------------------------------------------------------------
 
 	// First, either remove corresponding settleritems if settlers have been removed
-	game.simulate();
 	settlers = game.getSettlers();
 	if (settlers.size() < settleritems.size()) {
 		unsigned int i = settlers.size();
