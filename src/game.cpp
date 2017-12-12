@@ -57,21 +57,21 @@ void Game::addBuilding(int type, Coordinates *location, bool initialize){
     6: Keep
 */  
     if(type == 0) {
-        Tree *building = new Tree(map->get_map()[location->getX()][location->getY()], initialize);
+        Tree *building = new Tree(map->getTerrain(location), initialize);
         buildings.push_back(building);
         if(!initialize){
         notReady.push_back(building);
     }
     } else if (type == 1){
-        House *building = new House(map->get_map()[location->getX()][location->getY()], initialize);
+        House *building = new House(map->getTerrain(location), initialize);
         buildings.push_back(building);
-        addSettler(building,map->get_map()[location->getX()][location->getY()]->getLocation());
-        addSettler(building,map->get_map()[location->getX()][location->getY()]->getLocation());
+        addSettler(building,location);
+        addSettler(building,location);
         if(!initialize){
         notReady.push_back(building);
     }
     } else if(type == 2){
-        Warehouse *building = new Warehouse(map->get_map()[location->getX()][location->getY()], initialize);
+        Warehouse *building = new Warehouse(map->getTerrain(location), initialize);
         buildings.push_back(building);
         if(!initialize){
         notReady.push_back(building);
