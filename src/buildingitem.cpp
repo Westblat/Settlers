@@ -1,6 +1,6 @@
 #include "buildingitem.h"
 
-BuildingItem::BuildingItem(int buildingtype, bool ready, int health, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
+BuildingItem::BuildingItem(int buildingtype, bool ready, int health, int x, int y, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
 /*	Building types are
 	0: tree
 	1: House
@@ -14,6 +14,8 @@ BuildingItem::BuildingItem(int buildingtype, bool ready, int health, QGraphicsIt
 	readiness = ready;
 	type = buildingtype;
 	hp = health;
+    this->x = x;
+    this->y = y;
 	if (readiness == false && type != 0) {
 		setPixmap(QPixmap(":/graphics/constructionsite.png"));
 	}

@@ -83,7 +83,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     Coordinates *loc = new Coordinates(0,0);
     settlers.push_back(new Settler("Bob", loc));
     //game.addBuilding(1, (map.get_map()[15][15])->getLocation(), false);
-    game.addBuilding(2, (map.get_map()[5][5])->getLocation(), false);
+    //game.addBuilding(2, (map.get_map()[5][5])->getLocation(), false);
 	settlers[0]->setTask(1);
     settlers[1]->setTask(2);
 	
@@ -137,10 +137,10 @@ void GameWindow::getSiteLocation(Terrain *terrain) {
     	buildings = game.getBuildings();
 
     	if (newBuildingType >= 7) {
-    		buildingitem = new BuildingItem(newBuildingType, buildings.back()->getReadiness(), buildings.back()->getHp());
+            buildingitem = new BuildingItem(newBuildingType, buildings.back()->getReadiness(), buildings.back()->getHp(), buildings.back()->getLocation()->getX(), buildings.back()->getLocation()->getY());
     	}
     	else {
-    		buildingitem = new BuildingItem(buildings.back()->getType(), buildings.back()->getReadiness(), buildings.back()->getHp());
+            buildingitem = new BuildingItem(buildings.back()->getType(), buildings.back()->getReadiness(), buildings.back()->getHp(), buildings.back()->getLocation()->getX(), buildings.back()->getLocation()->getY());
     	}
 
     	buildingitem->setPos(tilesize*buildings.back()->getLocation()->getX(), tilesize*buildings.back()->getLocation()->getY());
@@ -222,7 +222,7 @@ void GameWindow::draw_buildings(QGraphicsScene *scene) {
     }
 
     for (auto building : buildings) {
-    	BuildingItem *buildingitem = new BuildingItem(building->getType(), building->getReadiness(), building->getHp());
+        BuildingItem *buildingitem = new BuildingItem(building->getType(), building->getReadiness(), building->getHp(), building->getLocation()->getX(), building->getLocation()->getY());
     	//BuildingItem *buildingitem = new BuildingItem(building->getType(), true, 10); //DEBUG
     	//BuildingItem *buildingitem = new BuildingItem(building->getType(), false, 0); //DEBUG
     	buildingitem->setPos(tilesize*building->getLocation()->getX(), tilesize*building->getLocation()->getY());
@@ -268,23 +268,49 @@ void GameWindow::moveSettlers() {
 void GameWindow::refreshBuildings() {
 	// check readiness and health of buildings, update from constructionsite to complete building, tree to cut tree
 	// or building to destroyed building
+
+    //*___________Copies buildingitems to temp container______________
+    auto tempBuildItems (buildingitems);
+    //_______________________________________________________________*/
+
 	for (unsigned int i = 0; i < buildings.size(); i++) {
 		bool ready = buildings[i]->getReadiness();
-		if (buildingitems[i]->getReadiness() != ready || buildings[i]->getHp() == 0) {
+        if (buildingitems[i]->getReadiness() != ready) {
 			//remove old and replace with new
 			scene->removeItem(buildingitems[i]);
-			BuildingItem *buildingitem = new BuildingItem(buildings[i]->getType(), buildings[i]->getReadiness(), buildings[i]->getHp());
+            BuildingItem *buildingitem = new BuildingItem(buildings[i]->getType(), buildings[i]->getReadiness(), buildings[i]->getHp(), buildings[i]->getLocation()->getX(), buildings[i]->getLocation()->getY());
 			buildingitem->setPos(tilesize*buildings[i]->getLocation()->getX(), tilesize*buildings[i]->getLocation()->getY());
 			buildingitem->setZValue(1);
 			buildingitems[i] = buildingitem;
 			scene->addItem(buildingitem);
-		}
+        }
+        //*_______________________REMOVES EXISTING ITEMS FROM TEMP CONTAINER___________________________________
+        for (auto iter = tempBuildItems.begin(); iter != tempBuildItems.end(); iter++){
+            if((*iter)->getX() == buildingitems[i]->getX() && (*iter)->getY() == buildingitems[i]->getY()){
+                tempBuildItems.erase(iter);
+                break;
+            }
+        }
+        //____________________________________________________________________________________________________*/
 	}
+    //*______________REMOVES ITEMS LEFT IN TEMP CONTAINER FROM QGRAPHICSSCENE__________________________________
+    for(auto item : tempBuildItems){
+        scene->removeItem(item);
+        for(std::vector<BuildingItem*>::iterator it = buildingitems.begin(); it != buildingitems.end(); it++){
+            if(item->getX()==(*it)->getX() && item->getY()==(*it)->getY()){
+                buildingitems.erase(it);
+                break;
+            }
+        }
+    }
+    tempBuildItems.clear();
+    //________________________________________________________________________________________________________*/
 }
 
 void GameWindow::refresh() {
 
 	//std::cout << "Refresh" << std::endl;
 	game.simulate();
+    buildings = game.getBuildings();
 	settlers = game.getSettlers();
 }
