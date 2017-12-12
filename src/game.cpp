@@ -250,7 +250,7 @@ void Game::buildBuilding(Settler *settler){
     Building *buildThis = notReady[0];
     std::vector<int> requirements = buildThis->getInventory().first;    
     
-    if(map->getTerrain(settler->getLocation())->getBuildingType() == 2 && !(settler->inventoryFull())){
+    if(map->getTerrain(settler->getLocation())->getBuildingType() == 2 && !(settler->inventoryFull()) && map->getTerrain(settler->getLocation())->getBuilding()->getReadiness()){
         //gets items from 
         
         Building *warehouse = map->getTerrain(settler->getLocation())->getBuilding();
