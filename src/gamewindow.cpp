@@ -82,9 +82,10 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     // DEBUG, say hello to Bob, he's a free settler not tied to a building
     Coordinates *loc = new Coordinates(0,0);
     settlers.push_back(new Settler("Bob", loc));
-	game.addBuilding(1, (map.get_map()[15][15])->getLocation(), false);
-	//game.addBuilding(1, (map.get_map()[5][5])->getLocation(), false);
+    //game.addBuilding(1, (map.get_map()[15][15])->getLocation(), false);
+    game.addBuilding(2, (map.get_map()[5][5])->getLocation(), false);
 	settlers[0]->setTask(1);
+    settlers[1]->setTask(2);
 	
     draw_terrain(scene); //draws the terrain on the map
     draw_buildings(scene);
