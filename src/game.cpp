@@ -263,7 +263,7 @@ void Game::buildBuilding(Settler *settler){
                 return;
             }
         }
-    }else if(settler->inventoryFull() && settler->getLocation != buildThis->getLocation()){
+    }else if(settler->inventoryFull() && settler->getLocation() != buildThis->getLocation()){
         settler->setPath(map->solvePath(settler->getLocation(),buildThis->getLocation()));
         
     }else if(settler->inventoryEmpty()){
