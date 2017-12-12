@@ -12,6 +12,11 @@
     8 = combat
     */
 
-cmdMenuIcon::cmdMenuIcon(QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
+cmdMenuIcon::cmdMenuIcon(int type, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
+    cmdtype = type;
 	setPixmap(QPixmap(":/graphics/cmdicon.png"));
+}
+
+void cmdMenuIcon::mousePressEvent(QGraphicsSceneMouseEvent *) {
+    emit clicked(cmdtype);
 }

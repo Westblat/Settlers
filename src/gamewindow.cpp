@@ -41,7 +41,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     	BuildmenuIcon *icon = new BuildmenuIcon(i);
     	icon->setPos(0, tilesize*(i-1));
     	buildscene->addItem(icon);
-    	connect(icon, SIGNAL(clicked(int)), this, SLOT(selectBuildingLocation(int)));
+    	connect(icon, SIGNAL(clicked(int)), this, SLOT(selectBuildingType(int)));
     }
 
     // RESOURCES
@@ -58,6 +58,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
 
     // COMMANDMENU
     // scene for viewing commands
+    commandmode = false;
     commandscene = new QGraphicsScene(this);
     commandview = new QGraphicsView(commandscene);
     commandview->show();
@@ -67,9 +68,10 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     cmdlabel->show();
     grid->addWidget(cmdlabel, 0, 2);
     for (int i = 0; i < 8; i++) {
-    	cmdMenuIcon *icon = new cmdMenuIcon();
+    	cmdMenuIcon *icon = new cmdMenuIcon(i);
     	icon->setPos(tilesize*i, 0);
     	commandscene->addItem(icon);
+    	connect(icon, SIGNAL(clicked(int)), this, SLOT(selectCommand(int)));
     }
 
     // the buildings the player starts with
@@ -107,7 +109,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
 
 }
 
-void GameWindow::selectBuildingLocation(int type) {
+void GameWindow::selectBuildingType(int type) {
 	//std::cout << "Where ya wanna build?" << std::endl;
 	//std::cout << "You've selected a " << type << std::endl;
 	buildmode = true;
@@ -153,14 +155,26 @@ void GameWindow::getSiteLocation(int x, int y) {
     }
 }
 
-void GameWindow::cancelBuild() {
+void GameWindow::cancel() {
 	buildmode = false; // buildmode can be cancelled with rightclick
+	commandmode = false; // commandmode can also be cancelled
 }
 
 void GameWindow::giveCommand(int n) {
 	std::cout << "You clicked on a SETTLER!" << std::endl;
 	std::cout << "This is " << settlers[n]->getName() << std::endl;
-	//std::cout << "settler number: " << n << std::endl;
+	commandmode = true;
+	selectedSettler = n;
+}
+
+void GameWindow::selectCommand(int cmdtype) {
+	std::cout << "clicked!" << std::endl;
+	if (commandmode == true) {
+		std::cout << "Command: " << cmdtype << std::endl;
+
+		commandmode = false;
+		selectedSettler = -1;
+	}
 }
 
 void GameWindow::randomLocation() {
@@ -206,7 +220,7 @@ void GameWindow::draw_terrain(QGraphicsScene *scene) {
 			scene->addItem(titem);
 			x += tilesize;
 			connect(titem, SIGNAL(clicked(int, int)), this, SLOT(getSiteLocation(int, int)));
-			connect(titem, SIGNAL(rightclicked(int, int)), this, SLOT(cancelBuild()));
+			connect(titem, SIGNAL(rightclicked(int, int)), this, SLOT(cancel()));
 		}
 		//next row
 		y += tilesize;

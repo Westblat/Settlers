@@ -49,6 +49,9 @@ public:
 	bool buildmode;
 	int newBuildingType = -1;
 
+	bool commandmode;
+	int selectedSettler = -1;
+
 private:
 	Game game; // creates the game
 	Map map = game.getMap();
@@ -71,15 +74,16 @@ private:
 
 public slots:
 	void ShowMainMenu();
-	void refresh();
-	void moveSettlers();
-	void refreshBuildings();
+	void refresh();								// refreshes building- and settlervectors
+	void moveSettlers();						// moves the settlers
+	void refreshBuildings();					// checks readiness of buildings and changes image accordingly
 
-	void selectBuildingLocation(int type);
-	//void getSiteLocation(Terrain *terrain);
-	void getSiteLocation(int x, int y);
-	void cancelBuild();
-	void giveCommand(int n);
+	void selectBuildingType(int type);			// sets buildmode to true, selects the type of building
+	//void getSiteLocation(Terrain *terrain);	
+	void getSiteLocation(int x, int y);			// builds a new building in the left-clicked location
+	void cancel();								// sets both modes to false
+	void giveCommand(int n);					// selects a settler
+	void selectCommand(int cmd);				// selects the command and gives this command to the selected settler
 
 	void randomLocation(); //debug function, gives settlers and buildings random new locations
 	void removeHP(); //debug, destroys buildings
