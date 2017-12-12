@@ -76,7 +76,8 @@ public slots:
 	void refreshBuildings();
 
 	void selectBuildingLocation(int type);
-	void getSiteLocation(Terrain *terrain);
+	//void getSiteLocation(Terrain *terrain);
+	void getSiteLocation(int x, int y);
 	void cancelBuild();
 	void giveCommand();
 

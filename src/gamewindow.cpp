@@ -78,11 +78,11 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     buildings = game.getBuildings();
     settlers = game.getSettlers();
 
-    /*
+    
     // DEBUG, say hello to Bob, he's a free settler not tied to a building
     Coordinates *loc = new Coordinates(1,0);
     settlers.push_back(new Settler("Bob", loc));
-    */
+    
 
     draw_terrain(scene); //draws the terrain on the map
     draw_buildings(scene);
@@ -114,7 +114,7 @@ void GameWindow::selectBuildingLocation(int type) {
 	newBuildingType = type;
 }
 
-void GameWindow::getSiteLocation(Terrain *terrain) {
+void GameWindow::getSiteLocation(int x, int y) {
 	// Builds a new building in the given location
 	//int x = terrain->getLocation()->getX();
     //int y = terrain->getLocation()->getY();
@@ -124,11 +124,13 @@ void GameWindow::getSiteLocation(Terrain *terrain) {
     	BuildingItem *buildingitem;
 
     	if (newBuildingType >= 7) {
-    		game.addBuilding(7, terrain->getLocation(), true);
+    		//game.addBuilding(7, terrain->getLocation(), true);
+    		game.addBuilding(7, terrain_map[x][y]->getLocation(), true);
     	}
     	else {
     		//game.addBuilding(newBuildingType, terrain->getLocation(), true); //DEBUG
-    		game.addBuilding(newBuildingType, terrain->getLocation(), false);
+    		//game.addBuilding(newBuildingType, terrain->getLocation(), false);
+    		game.addBuilding(newBuildingType, terrain_map[x][y]->getLocation(), false);
     	}
 
     	buildings = game.getBuildings();
@@ -196,12 +198,13 @@ void GameWindow::draw_terrain(QGraphicsScene *scene) {
 			//int type = terrain_map[j][i]->getType();
             int type = terrain_map[i][j]->getType();
 			//TerrainItem *titem = new TerrainItem(type, terrain_map[j][i]);
-			TerrainItem *titem = new TerrainItem(type, terrain_map[i][j]); // QUICK AND DIRTY FIX !!
+			//TerrainItem *titem = new TerrainItem(type, terrain_map[i][j]); // QUICK AND DIRTY FIX !!
+			TerrainItem *titem = new TerrainItem(type, i, j);
 			titem->setPos(x,y);
 			scene->addItem(titem);
 			x += tilesize;
-			connect(titem, SIGNAL(clicked(Terrain*)), this, SLOT(getSiteLocation(Terrain*)));
-			connect(titem, SIGNAL(rightclicked(Terrain*)), this, SLOT(cancelBuild()));
+			connect(titem, SIGNAL(clicked(int, int)), this, SLOT(getSiteLocation(int, int)));
+			connect(titem, SIGNAL(rightclicked(int, int)), this, SLOT(cancelBuild()));
 		}
 		//next row
 		y += tilesize;
@@ -245,7 +248,8 @@ void GameWindow::draw_settlers(QGraphicsScene *scene) {
 	}*/
 
 	for (auto settler : settlers) {
-		SettlerItem *settleritem = new SettlerItem(settler);
+		//SettlerItem *settleritem = new SettlerItem(settler);
+		SettlerItem *settleritem = new SettlerItem();
 		settleritem->setPos(tilesize*settler->getLocation()->getX(), tilesize*settler->getLocation()->getY());
 		settleritems.push_back(settleritem);
 		scene->addItem(settleritem);
@@ -288,7 +292,8 @@ void GameWindow::refresh() {
 	if (settlers.size() > settleritems.size()) {
 		unsigned int i = settleritems.size();
 		for (; i < settlers.size(); i++) {
-			SettlerItem *settleritem = new SettlerItem(settlers[i]);
+			//SettlerItem *settleritem = new SettlerItem(settlers[i]);
+			SettlerItem *settleritem = new SettlerItem();
 			settleritem->setPos(tilesize*settlers[i]->getLocation()->getX(), tilesize*settlers[i]->getLocation()->getY());
 			settleritems.push_back(settleritem);
 			scene->addItem(settleritem);

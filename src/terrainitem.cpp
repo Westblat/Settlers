@@ -1,7 +1,10 @@
 #include "terrainitem.h"
 
-TerrainItem::TerrainItem(int type, Terrain *terrainptr, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
-	terrain = terrainptr;
+//TerrainItem::TerrainItem(int type, Terrain *terrainptr, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
+TerrainItem::TerrainItem(int type, int coord_x, int coord_y, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
+	//terrain = terrainptr;
+	x = coord_x;
+	y = coord_y;
 
 	if (type == 0) {		// 0: GRASS/PLAINS
 		setPixmap(QPixmap(":/graphics/grass.png"));
@@ -28,10 +31,12 @@ void TerrainItem::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     */
     if (event->button() == Qt::RightButton) {
     	//std::cout << "You pressed the RIGHT mousebutton!" << std::endl;
-    	emit rightclicked(terrain);
+    	//emit rightclicked(terrain);
+    	emit rightclicked(x, y);
     }
     else {
-    	emit clicked(terrain);
+    	//emit clicked(terrain);
+    	emit clicked(x, y);
     	//std::cout << "You pressed the LEFT mousebutton!" << std::endl;
     }
     //emit clicked(0);

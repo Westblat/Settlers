@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_TerrainItem_t {
     QByteArrayData data[6];
-    char stringdata0[51];
+    char stringdata0[38];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,13 +32,12 @@ static const qt_meta_stringdata_TerrainItem_t qt_meta_stringdata_TerrainItem = {
 QT_MOC_LITERAL(0, 0, 11), // "TerrainItem"
 QT_MOC_LITERAL(1, 12, 7), // "clicked"
 QT_MOC_LITERAL(2, 20, 0), // ""
-QT_MOC_LITERAL(3, 21, 8), // "Terrain*"
-QT_MOC_LITERAL(4, 30, 7), // "terrain"
-QT_MOC_LITERAL(5, 38, 12) // "rightclicked"
+QT_MOC_LITERAL(3, 21, 1), // "x"
+QT_MOC_LITERAL(4, 23, 1), // "y"
+QT_MOC_LITERAL(5, 25, 12) // "rightclicked"
 
     },
-    "TerrainItem\0clicked\0\0Terrain*\0terrain\0"
-    "rightclicked"
+    "TerrainItem\0clicked\0\0x\0y\0rightclicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,12 +55,12 @@ static const uint qt_meta_data_TerrainItem[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   24,    2, 0x06 /* Public */,
-       5,    1,   27,    2, 0x06 /* Public */,
+       1,    2,   24,    2, 0x06 /* Public */,
+       5,    2,   29,    2, 0x06 /* Public */,
 
  // signals: parameters
-    QMetaType::Void, 0x80000000 | 3,    4,
-    QMetaType::Void, 0x80000000 | 3,    4,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
 
        0        // eod
 };
@@ -72,21 +71,21 @@ void TerrainItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         TerrainItem *_t = static_cast<TerrainItem *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->clicked((*reinterpret_cast< Terrain*(*)>(_a[1]))); break;
-        case 1: _t->rightclicked((*reinterpret_cast< Terrain*(*)>(_a[1]))); break;
+        case 0: _t->clicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 1: _t->rightclicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         void **func = reinterpret_cast<void **>(_a[1]);
         {
-            typedef void (TerrainItem::*_t)(Terrain * );
+            typedef void (TerrainItem::*_t)(int , int );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&TerrainItem::clicked)) {
                 *result = 0;
             }
         }
         {
-            typedef void (TerrainItem::*_t)(Terrain * );
+            typedef void (TerrainItem::*_t)(int , int );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&TerrainItem::rightclicked)) {
                 *result = 1;
             }
@@ -133,16 +132,16 @@ int TerrainItem::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void TerrainItem::clicked(Terrain * _t1)
+void TerrainItem::clicked(int _t1, int _t2)
 {
-    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void TerrainItem::rightclicked(Terrain * _t1)
+void TerrainItem::rightclicked(int _t1, int _t2)
 {
-    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 QT_END_MOC_NAMESPACE
