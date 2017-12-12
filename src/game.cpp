@@ -7,6 +7,10 @@ Game::Game() {
 }
 
 Game::~Game() {
+    
+    for(std::vector<Building*>::iterator iter = buildings.begin(); iter!= buildings.end();iter++){
+        delete *iter;
+    }
     delete map;
 }
 Map& Game::getMap() {return *map;}
