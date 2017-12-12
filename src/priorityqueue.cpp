@@ -151,14 +151,18 @@ Node* Heap::removeMin(){
 void Heap::decreaseKey(Node* node, int value) {
     if (value >= node->first()) {return;}
     node->difficulty = value;
+
     Node *p = node->parent;
+
     if (p == node){
         if (value < this->minnode->first()){
             this->minnode = node;
         }
         return;
     }
-    else if(p->first() <= value){return;}
+    else if(p->first() <= value){
+        return;
+    }
     while (p->parent != p){
         p->removeChild(node);
         this->insertNode(node);
