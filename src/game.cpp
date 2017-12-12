@@ -266,6 +266,8 @@ void Game::buildBuilding(Settler *settler){
         std::cout<< "moi" << std::endl;
         settler->setPath(map->solvePath(settler->getLocation(),buildThis->getLocation()));
         
+    }else if(settler->inventoryEmpty()){
+           pathToNearbyBuilding(settler, 2);
     }else if((*settler->getLocation()) == (*buildThis->getLocation()) ){
         std::cout << "plzno" << std::endl;
         if(settler->getItems()[0] == requirements[0]){
