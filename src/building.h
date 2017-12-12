@@ -35,7 +35,7 @@ protected:
 	1: House
 	2: Warehouse
 	3: Stonecutter
-	4: Mine
+	4: Iron cutter
 	5: Blacksmith
 	6: Keep
     7: Road

@@ -4,6 +4,8 @@
 #include "building.h"
 #include "house.h"
 #include "warehouse.h"
+#include "stonecutter.h"
+#include "ironcutter.h"
 #include "tree.h"
 #include "road.h"
 #include "blacksmith.h"
@@ -21,13 +23,19 @@ public:
     std::vector<Settler*> getSettlers();
     std::vector<Building*> getBuildings();
     bool simulate();
-    int checkTask(int task, Settler *settler, Building *building);
+    void pathToNearbyBuilding(Settler *settler, int building);
+    bool atWarehouse(Settler *settler);
+    int checkTask(int task, Settler *settler);
     void removeBuilding(Building *building);
-    int cutTree(Settler *settler, Building *building);
+    void cutTree(Settler *settler);
+    void cutStone(Settler *settler);
+    void cutIron(Settler *settler);
+    void buildBuilding(Settler *settler);
 private:
     Map *map;
     std::vector<Building*> buildings;
     std::vector<Settler*> settlers;
+    std::vector<Building*> notReady;
     /* Types for task:
     0 = idle
     1 = build

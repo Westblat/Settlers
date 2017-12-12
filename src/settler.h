@@ -23,6 +23,7 @@ public:
 	std::vector<int> getItems();
 	bool addItem(int item);
 	bool removeItem(int item);
+    void emptyInventory();
     bool inventoryFull();
     bool inventoryEmpty();
 

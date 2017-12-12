@@ -1,5 +1,6 @@
 #ifndef COORDINATES_H
 #define COORDINATES_H
+#include <iostream>
 
 
 class Coordinates
@@ -10,11 +11,14 @@ public:
     int getX() const;
     int getY() const;
     bool updateCoords(int x, int y);
+    bool updateCoords(Coordinates &coords);
 private:
     int x;
     int y;
 };
 
 bool operator==(Coordinates const& a, Coordinates const& b);
+bool operator!=(Coordinates const& a, Coordinates const& b);
+std::ostream& operator <<(std::ostream& os, Coordinates& coordinates);
 
 #endif // COORDINATES_H

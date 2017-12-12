@@ -114,7 +114,7 @@ std::stack<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates* 
         int uposindex = upos->getX()*this->width + upos->getY();
 
         if (distances[uposindex] == INT_MAX) {break;} //Unable to find path
-        if (upos == endpos ){std::cout<<"Target found, smallest distance "<< next->difficulty<<std::endl;break;} //Search is completed
+        if (upos == endpos ){std::cout<<"Path found:";break;} //Search is completed
 
         for(auto iter = directions.begin(); iter!=directions.end(); ++iter) {
             int tempX = upos->getX()+(*iter).first;
@@ -122,17 +122,18 @@ std::stack<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates* 
             if (this->contains(tempX, tempY)) {
                 int vposindex = tempX*width + tempY;
                 if (!checked[vposindex]){
-                    int new_distance = distances[uposindex] + 1;
-                    /*__________New distance is based on terrain difficulty_____________TODO FIX Heap::decreaseKEY
-
-                    if(u->getBuildingType() == -1){
-                        if(u->getType() == 0){new_distance = distances[uposindex] + 1;}
-                        else if(u->getType() == 1){new_distance = distances[uposindex] + 2;}
-                        else if(u->getType() == 2){new_distance = distances[uposindex] + 3;}
-                        else if(u->getType() == 3){new_distance = distances[uposindex] + 2;}
+                    int new_distance;
+                    //*__________New distance is based on terrain difficulty_____________
+                    Terrain *v = this->getTerrain(tempX,tempY);
+                    if(v->getBuildingType() == -1){
+                        if(v->getType() == 0){new_distance = distances[uposindex] + 2;}
+                        else if(v->getType() == 1){new_distance = distances[uposindex] + 3;}
+                        else if(v->getType() == 2){new_distance = distances[uposindex] + 4;}
+                        else if(v->getType() == 3){new_distance = distances[uposindex] + 3;}
                         else{new_distance = distances[uposindex] + 10;}
                     }
-                    else{new_distance = distances[uposindex] + 2;}
+                    else if (v->getBuildingType() == 7){new_distance = distances[uposindex] + 1;}
+                    else{new_distance = distances[uposindex] + 4;}
                     //__________________________________________________________________*/
                     if (new_distance < distances[vposindex]) {
                         if (nodeIndex[vposindex]->difficulty != -1) {
@@ -154,13 +155,16 @@ std::stack<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates* 
         checked[uposindex] = true;
     }
 
+
     Terrain *cur = end;
     Terrain *prev;
     while (cur != start) {
+        std::cout<<"("<<cur->getLocation()->getX()<<","<<cur->getLocation()->getY()<<")"<<" ";
         prev = previous[cur->getLocation()->getX()*this->width + cur->getLocation()->getY()];
         temp.push(std::pair<int, int> (cur->getLocation()->getX() - prev->getLocation()->getX(), cur->getLocation()->getY() - prev->getLocation()->getY()));
         cur = prev;
     }
+    std::cout<<*(this->getTerrain(8,5))<<std::endl;
 
 
     for (std::vector<Node*>::iterator it = nodes.begin(); it != nodes.end(); ++it){
@@ -172,7 +176,7 @@ std::stack<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates* 
 }
 
 Coordinates* Map::findNearby(Coordinates *s, int building){
-    Coordinates* temp;
+    Coordinates* temp = s;
 
     Terrain *start = this->getTerrain(s);
 
@@ -209,7 +213,9 @@ Coordinates* Map::findNearby(Coordinates *s, int building){
         int uposindex = upos->getX()*this->width + upos->getY();
 
         if (distances[uposindex] == INT_MAX) {break;} //Unable to find path
-        if (u->getBuildingType() == building ){temp = u->getLocation();break;} //Search is completed
+        if (u->getBuildingType() == building && u->getBuilding()->getReadiness()){temp = u->getLocation();
+            std::cout<<"Target found: ("<<upos->getX()<<","<<upos->getY()<<")"<<std::endl;
+            break;} //Search is completed
 
         for(auto iter = directions.begin(); iter!=directions.end(); ++iter) {
             int tempX = upos->getX()+(*iter).first;
@@ -217,17 +223,18 @@ Coordinates* Map::findNearby(Coordinates *s, int building){
             if (this->contains(tempX, tempY)) {
                 int vposindex = tempX*width + tempY;
                 if (!checked[vposindex]){
-                    int new_distance = distances[uposindex] + 1;
-                    /*__________New distance is based on terrain difficulty_____________TODO FIX Heap::decreaseKey()
-
-                    if(u->getBuildingType() == -1){
-                        if(u->getType() == 0){new_distance = distances[uposindex] + 1;}
-                        else if(u->getType() == 1){new_distance = distances[uposindex] + 2;}
-                        else if(u->getType() == 2){new_distance = distances[uposindex] + 3;}
-                        else if(u->getType() == 3){new_distance = distances[uposindex] + 2;}
+                    int new_distance;
+                    //*__________New distance is based on terrain difficulty_____________
+                    Terrain *v = this->getTerrain(tempX,tempY);
+                    if(v->getBuildingType() == -1){
+                        if(v->getType() == 0){new_distance = distances[uposindex] + 2;}
+                        else if(v->getType() == 1){new_distance = distances[uposindex] + 3;}
+                        else if(v->getType() == 2){new_distance = distances[uposindex] + 4;}
+                        else if(v->getType() == 3){new_distance = distances[uposindex] + 3;}
                         else{new_distance = distances[uposindex] + 10;}
                     }
-                    else{new_distance = distances[uposindex] + 2;}
+                    else if (v->getBuildingType() == 7){new_distance = distances[uposindex] + 1;}
+                    else{new_distance = distances[uposindex] + 4;}
                     //__________________________________________________________________*/
                     if (new_distance < distances[vposindex]) {
                         if (nodeIndex[vposindex]->difficulty != -1) {
