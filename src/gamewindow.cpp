@@ -170,8 +170,10 @@ void GameWindow::giveCommand(int n) {
 void GameWindow::selectCommand(int cmdtype) {
 	std::cout << "clicked!" << std::endl;
 	if (commandmode == true) {
-		std::cout << "Command: " << cmdtype << std::endl;
+		std::cout << "Command: " << cmdtype << " to " << settlers[selectedSettler]->getName() << std::endl;
 
+		settlers[selectedSettler]->setTask(cmdtype);
+		
 		commandmode = false;
 		selectedSettler = -1;
 	}

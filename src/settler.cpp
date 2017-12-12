@@ -22,12 +22,12 @@ std::string Settler::getName() { return name; }
 int Settler::getTask() { return task; }
 
 // TODO
-/*
-bool Settler::setTask(int = task)
+
+bool Settler::setTask(int newTask)
 {
-	task = newTask;
-	return true;
-}*/
+	  task = newTask;
+	  return true;
+}
 
 std::vector<int> Settler::getItems() { return inventory.first; }
 
