@@ -33,7 +33,7 @@ bool Building::addItem(int item) {
 // Function that deletes a given item (int) from inventory vector assuming the inventory isn't empty (vector.size != 0)
 bool Building::removeItem(int item)
 {
-	if (inventory.first.size() != 0)
+	if (inventory.first.size() != 0 && std::find(inventory.first.begin(), inventory.first.end(), item) != inventory.first.end())
 	{
 		std::vector<int>::iterator it = std::find(inventory.first.begin(), inventory.first.end(), item);
 		inventory.first.erase(it);
