@@ -28,6 +28,14 @@
         <file>road2icon.png</file>
         <file>road3.png</file>
         <file>road3icon.png</file>
-        <file>cmdicon.png</file>
+        <file>cmdicon0.png</file>
+        <file>cmdicon1.png</file>
+        <file>cmdicon2.png</file>
+        <file>cmdicon3.png</file>
+        <file>cmdicon4.png</file>
+        <file>cmdicon5.png</file>
+        <file>cmdicon6.png</file>
+        <file>cmdicon7.png</file>
+        <file>cmdicon8.png</file>
     </qresource>
 </RCC>

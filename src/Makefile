@@ -401,7 +401,6 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_media.cpp
 qrc_media.cpp: media.qrc \
 		keepicon.png \
-		cmdicon.png \
 		warehouse.png \
 		keep.png \
 		blacksmith.png \
@@ -421,14 +420,23 @@ qrc_media.cpp: media.qrc \
 		mineicon.png \
 		destroyedbuilding.png \
 		house.png \
+		cmdicon0.png \
 		stone.png \
+		cmdicon1.png \
 		road1.png \
+		cmdicon2.png \
 		houseicon.png \
 		road2.png \
+		cmdicon3.png \
 		road3.png \
+		cmdicon4.png \
+		cmdicon5.png \
 		mine.png \
+		cmdicon6.png \
 		grass.png \
-		road2icon.png
+		road2icon.png \
+		cmdicon7.png \
+		cmdicon8.png
 	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name media media.qrc -o qrc_media.cpp
 
 compiler_moc_header_make_all: moc_mainwindow.cpp moc_gamewindow.cpp moc_terrainitem.cpp moc_settleritem.cpp moc_buildmenuicon.cpp moc_cmdmenuicon.cpp
