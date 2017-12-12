@@ -78,11 +78,11 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     buildings = game.getBuildings();
     settlers = game.getSettlers();
 
-    
+    /*
     // DEBUG, say hello to Bob, he's a free settler not tied to a building
-    Coordinates *loc = new Coordinates(0,0);
+    Coordinates *loc = new Coordinates(1,0);
     settlers.push_back(new Settler("Bob", loc));
-    
+    */
 
     draw_terrain(scene); //draws the terrain on the map
     draw_buildings(scene);
@@ -92,7 +92,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     //refresh the scene in regards to settlers and buildings
     QTimer *timer = new QTimer();
     //x = 0;
-    //connect(timer, SIGNAL (timeout()), this, SLOT (refresh()));
+    connect(timer, SIGNAL (timeout()), this, SLOT (refresh()));
     connect(timer, SIGNAL (timeout()), this, SLOT (moveSettlers()));
     connect(timer, SIGNAL (timeout()), this, SLOT (refreshBuildings()));
     timer->start(refresh_time);
@@ -185,7 +185,7 @@ void GameWindow::ShowMainMenu() {
 
 void GameWindow::draw_terrain(QGraphicsScene *scene) {
 	//draws the terrain on the map
-	//NOTE: x and y seem to be mirrored in terrain_map location-coordinates compared to their actual location...
+	//NOTE: map.txt is ("because reasons") in (y,x)-, not (x,y)-coordinate system
 
 	int x = 0;
 	int y = 0;
@@ -193,6 +193,7 @@ void GameWindow::draw_terrain(QGraphicsScene *scene) {
 		x = 0;
 		for (int i = 0; i < height; i++) {
 			//draw a TerrainItem
+			//int type = terrain_map[j][i]->getType();
             int type = terrain_map[i][j]->getType();
 			//TerrainItem *titem = new TerrainItem(type, terrain_map[j][i]);
 			TerrainItem *titem = new TerrainItem(type, terrain_map[i][j]); // QUICK AND DIRTY FIX !!
@@ -283,4 +284,15 @@ void GameWindow::refresh() {
 
 	//std::cout << "Refresh" << std::endl;
 	settlers = game.getSettlers();
+	// checks if new settlers have appeared, adds them to the scene and the settleritems vector
+	if (settlers.size() > settleritems.size()) {
+		unsigned int i = settleritems.size();
+		for (; i < settlers.size(); i++) {
+			SettlerItem *settleritem = new SettlerItem(settlers[i]);
+			settleritem->setPos(tilesize*settlers[i]->getLocation()->getX(), tilesize*settlers[i]->getLocation()->getY());
+			settleritems.push_back(settleritem);
+			scene->addItem(settleritem);
+			connect(settleritem, SIGNAL(clicked()), this, SLOT(giveCommand()));
+		}
+	}
 }
