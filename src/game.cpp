@@ -88,7 +88,7 @@ void Game::addBuilding(int type, Coordinates *location, bool initialize){
 }
 
 void Game::addSettler(House *house, Coordinates *location) {
-    Settler *settler = new Settler("John Cena", location);
+    Settler *settler = new Settler("John Cena", new Coordinates(*location));
     house->addSettler(settler);
     settlers.push_back(settler);
 }
