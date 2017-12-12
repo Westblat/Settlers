@@ -310,38 +310,37 @@ void GameWindow::refresh() {
 	// ---------------------------------------------------------------------------------------------------
 	// THIS IS WIP, haven't tested it since Joonas was working on the same thing
 	// ---------------------------------------------------------------------------------------------------
- 
-  // First, either remove corresponding settleritems if settlers have been removed
-  settlers = game.getSettlers();
-  if (settlers.size() < settleritems.size()) {
-    unsigned int i = settlers.size();
-    while (i < settleritems.size()) {
-      scene->removeItem(settleritems[i]);
-      settleritems.erase(settleritems.end()-i);
-    }
-  }
-  // or, check if new settlers have appeared, add them to the scene and the settleritems vector
-  else if (settlers.size() > settleritems.size()) {
-    unsigned int i = settleritems.size();
-    for (; i < settlers.size(); i++) {
-      //SettlerItem *settleritem = new SettlerItem(settlers[i]);
-      SettlerItem *settleritem = new SettlerItem(i);
-      settleritem->setPos(tilesize*settlers[i]->getLocation()->getX(), tilesize*settlers[i]->getLocation()->getY());
-      settleritems.push_back(settleritem);
-      scene->addItem(settleritem);
-      connect(settleritem, SIGNAL(clicked(int)), this, SLOT(giveCommand(int)));
-    }
-  }
- 
-  	// Second, repeat process for buildings
-  	// only checking destroyed buildings, since new buildings are handled by getSiteLocation()
-  	buildings = game.getBuildings();
+	/* 
+	// First, either remove corresponding settleritems if settlers have been removed
+	settlers = game.getSettlers();
+	if (settlers.size() < settleritems.size()) {
+		unsigned int i = settlers.size();
+		while (i < settleritems.size()) {
+	  		scene->removeItem(settleritems[i]);
+	  		settleritems.erase(settleritems.end()-i);
+		}
+	}
+	// or, check if new settlers have appeared, add them to the scene and the settleritems vector
+	else if (settlers.size() > settleritems.size()) {
+		unsigned int i = settleritems.size();
+		for (; i < settlers.size(); i++) {
+	  		//SettlerItem *settleritem = new SettlerItem(settlers[i]);
+	  		SettlerItem *settleritem = new SettlerItem(i);
+	  		settleritem->setPos(tilesize*settlers[i]->getLocation()->getX(), tilesize*settlers[i]->getLocation()->getY());
+	  		settleritems.push_back(settleritem);
+	  		scene->addItem(settleritem);
+	  		connect(settleritem, SIGNAL(clicked(int)), this, SLOT(giveCommand(int)));
+		}
+	}
+
+	// Second, repeat process for buildings
+	// only checking destroyed buildings, since new buildings are handled by getSiteLocation()
+	buildings = game.getBuildings();
 	if (buildings.size() < buildingitems.size()) {
-	unsigned int i = buildings.size();
-	while (i < buildingitems.size()) {
-		scene->removeItem(buildingitems[i]);
+		unsigned int i = buildings.size();
+		while (i < buildingitems.size()) {
+			scene->removeItem(buildingitems[i]);
 		buildingitems.erase(buildingitems.end()-i);
-    }
-  }
+		}
+	}*/
 }
- 
