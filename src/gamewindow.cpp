@@ -193,7 +193,7 @@ void GameWindow::draw_terrain(QGraphicsScene *scene) {
 		x = 0;
 		for (int i = 0; i < height; i++) {
 			//draw a TerrainItem
-			int type = terrain_map[j][i]->getType();
+            int type = terrain_map[i][j]->getType();
 			//TerrainItem *titem = new TerrainItem(type, terrain_map[j][i]);
 			TerrainItem *titem = new TerrainItem(type, terrain_map[i][j]); // QUICK AND DIRTY FIX !!
 			titem->setPos(x,y);
