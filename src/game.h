@@ -4,6 +4,8 @@
 #include "building.h"
 #include "house.h"
 #include "warehouse.h"
+#include "stonecutter.h"
+#include "ironcutter.h"
 #include "tree.h"
 #include "road.h"
 #include "blacksmith.h"
