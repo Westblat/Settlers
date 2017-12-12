@@ -81,9 +81,13 @@ void Game::addBuilding(int type, Coordinates *location, bool initialize){
     } else if(type == 4){
         
     } else if(type == 5){
-        
+        Blacksmith *blacksmith = new Blacksmith(map->get_map()[location->getX()][location->getY()], initialize);
+        buildings.push_back(blacksmith);
     } else if(type == 6){
         
+    } else if(type == 7){
+        Road *road = new Road(map->get_map()[location->getX()][location->getY()], initialize);
+        buildings.push_back(road);
     }
 }
 

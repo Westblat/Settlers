@@ -1,6 +1,6 @@
 #include "buildingitem.h"
 
-BuildingItem::BuildingItem(int type, bool ready, int hp, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
+BuildingItem::BuildingItem(int buildingtype, bool ready, int health, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
 /*	Building types are
 	0: tree
 	1: House
@@ -11,8 +11,14 @@ BuildingItem::BuildingItem(int type, bool ready, int hp, QGraphicsItem *parent) 
 	6: Keep
 	7: Road
 */
-	if (ready == false) {
+	readiness = ready;
+	type = buildingtype;
+	hp = health;
+	if (readiness == false && type != 0) {
 		setPixmap(QPixmap(":/graphics/constructionsite.png"));
+	}
+	else if (hp == 0 && type != 0) {
+		setPixmap(QPixmap(":/graphics/destroyedbuilding.png"));
 	}
 	else {
 		if (type == 0) {
@@ -40,6 +46,15 @@ BuildingItem::BuildingItem(int type, bool ready, int hp, QGraphicsItem *parent) 
 		}
 		else if (type == 6) {
 			setPixmap(QPixmap(":/graphics/keep.png"));
+		}
+		else if (type == 7) {
+			setPixmap(QPixmap(":/graphics/road1.png"));
+		}
+		else if (type == 8) {
+			setPixmap(QPixmap(":/graphics/road2.png"));	
+		}
+		else if (type == 9) {
+			setPixmap(QPixmap(":/graphics/road3.png"));
 		}
 	}
 }

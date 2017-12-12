@@ -6,7 +6,14 @@
 
 class BuildingItem : public QGraphicsPixmapItem {
 public:
-	BuildingItem(int type, bool ready, int hp, QGraphicsItem *parent = 0);
+	BuildingItem(int buildingtype, bool ready, int health, QGraphicsItem *parent = 0);
+	bool getReadiness() {return readiness;};
+	int getType() {return type;};
+	int getHP() {return hp;};
+private:
+	bool readiness;
+	int type;
+	int hp;
 };
 
 #endif

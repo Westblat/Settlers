@@ -21,5 +21,13 @@
         <file>keepicon.png</file>
         <file>constructionsite.png</file>
         <file>cut_tree.png</file>
+        <file>destroyedbuilding.png</file>
+        <file>road1.png</file>
+        <file>road1icon.png</file>
+        <file>road2.png</file>
+        <file>road2icon.png</file>
+        <file>road3.png</file>
+        <file>road3icon.png</file>
+        <file>cmdicon.png</file>
     </qresource>
 </RCC>

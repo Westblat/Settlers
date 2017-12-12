@@ -4,7 +4,8 @@ Map::Map(int w, int h) : width(w), height(h) {
     for(int i = 0; i < width; i++){
         std::vector<Terrain*> temp;
         for(int j = 0; j < height; j++){
-            temp.push_back(new Terrain(new Coordinates(i,j),0));
+            temp.push_back(new Terrain(new Coordinates(i,j),0)); // this might be where axises get swapped?
+            //temp.push_back(new Terrain(new Coordinates(j,i),0)); // doing this swaps something else though
         }
         map.push_back(temp);
     }
@@ -46,9 +47,11 @@ void Map::setMap() {
 
         for(std::vector<std::vector<Terrain*> >::iterator it = map.begin(); it != map.end(); it++){
             for(std::vector<Terrain*>::iterator iter = it->begin(); iter != it->end(); iter++){
+                //std::cout << temp[counter] << " ";
                 (**iter).setType(temp[counter]);
                 counter++;
             }
+            //std::cout << std::endl;
         }
     }catch (...) {
         std::cout << "Error reading map.txt file" << std::endl;

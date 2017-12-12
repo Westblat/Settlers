@@ -5,11 +5,12 @@
 #include <QPushButton>
 #include <QtWidgets>
 #include <QGraphicsScene>
-#include <QGraphicsRectItem>
 #include <QGraphicsView>
 #include <QTimer>
 #include <QLabel>
 #include <QString>
+#include <QGraphicsPixmapItem>
+#include <QMouseEvent>
 
 #include "game.h"
 #include "map.h"
@@ -17,6 +18,7 @@
 #include "buildingitem.h"
 #include "settleritem.h"
 #include "buildmenuicon.h"
+#include "cmdmenuicon.h"
 
 /*
 Imagefiles taken from kenney.nl!
@@ -35,6 +37,17 @@ public:
 	void draw_buildings(QGraphicsScene* scene);
 	void draw_settlers(QGraphicsScene* scene);
 
+	QGraphicsScene *scene;
+	QGraphicsView *view;
+	QGraphicsScene *buildscene;
+	QGraphicsView *buildview;
+	QGraphicsScene *commandscene;
+	QGraphicsView *commandview;
+	QGraphicsScene *resscene;
+	QGraphicsView *resview;
+
+	bool buildmode;
+	int newBuildingType = -1;
 
 private:
 	Game game; // creates the game
@@ -55,15 +68,20 @@ private:
 	//int x; //used for debugging timer
 
 	QPushButton *menu_button;
-	QPushButton *build_button;
 
 public slots:
 	void ShowMainMenu();
 	void refresh();
 	void moveSettlers();
-	void addBuilding();
+	void refreshBuildings();
+
+	void selectBuildingLocation(int type);
+	void getSiteLocation(Terrain *terrain);
+	void cancelBuild();
+	void giveCommand();
 
 	void randomLocation(); //debug function, gives settlers and buildings random new locations
+	void removeHP(); //debug, destroys buildings
 };
 
 #endif
