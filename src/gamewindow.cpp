@@ -121,38 +121,43 @@ void GameWindow::getSiteLocation(int x, int y) {
   //int x = terrain->getLocation()->getX();
     //int y = terrain->getLocation()->getY();
     //std::cout << "You clicked on x: " << x << " y: " << y << std::endl;
-    if (buildmode == true) {
- 
-      BuildingItem *buildingitem;
- 
-      if (newBuildingType >= 7) {
-        //game.addBuilding(7, terrain->getLocation(), true);
-        game.addBuilding(7, terrain_map[x][y]->getLocation(), true);
-      }
-      else {
-        //game.addBuilding(newBuildingType, terrain->getLocation(), true); //DEBUG
-        //game.addBuilding(newBuildingType, terrain->getLocation(), false);
-        game.addBuilding(newBuildingType, terrain_map[x][y]->getLocation(), false);
-      }
- 
-      buildings = game.getBuildings();
- 
-      if (newBuildingType >= 7) {
-        buildingitem = new BuildingItem(newBuildingType, buildings.back()->getReadiness(), buildings.back()->getHp());
-      }
-      else {
-        buildingitem = new BuildingItem(buildings.back()->getType(), buildings.back()->getReadiness(), buildings.back()->getHp());
-      }
- 
-      buildingitem->setPos(tilesize*buildings.back()->getLocation()->getX(), tilesize*buildings.back()->getLocation()->getY());
-      buildingitem->setZValue(1);
-      buildingitems.push_back(buildingitem);
-      scene->addItem(buildingitem);
- 
-      buildmode = false;
-      newBuildingType = -1;
-      //std::cout << "House built" << std::endl;
-    }
+	if (buildmode == true) {
+
+		BuildingItem *buildingitem;
+
+		if (newBuildingType >= 7) {
+			//game.addBuilding(7, terrain->getLocation(), true);
+			game.addBuilding(7, terrain_map[x][y]->getLocation(), true);
+		}
+		else {
+			//game.addBuilding(newBuildingType, terrain->getLocation(), true); //DEBUG
+			//game.addBuilding(newBuildingType, terrain->getLocation(), false);
+			game.addBuilding(newBuildingType, terrain_map[x][y]->getLocation(), false);
+		}
+
+		buildings = game.getBuildings();
+
+		if (newBuildingType >= 7) {
+			buildingitem = new BuildingItem(newBuildingType, buildings.back()->getReadiness(), buildings.back()->getHp());
+		}
+		else {
+			buildingitem = new BuildingItem(buildings.back()->getType(), buildings.back()->getReadiness(), buildings.back()->getHp());
+		}
+
+		buildingitem->setPos(tilesize*buildings.back()->getLocation()->getX(), tilesize*buildings.back()->getLocation()->getY());
+		if (newBuildingType >= 7) {
+			buildingitem->setZValue(0);
+		}
+		else {
+			//buildingitem->setZValue(1);
+		}
+		buildingitems.push_back(buildingitem);
+		scene->addItem(buildingitem);
+
+		buildmode = false;
+		newBuildingType = -1;
+		//std::cout << "House built" << std::endl;
+	}
 }
 
 void GameWindow::cancel() {
@@ -245,7 +250,7 @@ void GameWindow::draw_buildings(QGraphicsScene *scene) {
       //BuildingItem *buildingitem = new BuildingItem(building->getType(), true, 10); //DEBUG
       //BuildingItem *buildingitem = new BuildingItem(building->getType(), false, 0); //DEBUG
       buildingitem->setPos(tilesize*building->getLocation()->getX(), tilesize*building->getLocation()->getY());
-      buildingitem->setZValue(1);
+      //buildingitem->setZValue(1);
       buildingitems.push_back(buildingitem);
       scene->addItem(buildingitem);
     }
@@ -270,6 +275,7 @@ void GameWindow::draw_settlers(QGraphicsScene *scene) {
     SettlerItem *settleritem = new SettlerItem(i);
     settleritem->setPos(tilesize*settler->getLocation()->getX(), tilesize*settler->getLocation()->getY());
     settleritems.push_back(settleritem);
+    settleritem->setZValue(1);
     scene->addItem(settleritem);
     connect(settleritem, SIGNAL(clicked(int)), this, SLOT(giveCommand(int)));
     i++;
@@ -295,7 +301,7 @@ void GameWindow::refreshBuildings() {
       scene->removeItem(buildingitems[i]);
       BuildingItem *buildingitem = new BuildingItem(buildings[i]->getType(), buildings[i]->getReadiness(), buildings[i]->getHp());
       buildingitem->setPos(tilesize*buildings[i]->getLocation()->getX(), tilesize*buildings[i]->getLocation()->getY());
-      buildingitem->setZValue(1);
+      //buildingitem->setZValue(1);
       buildingitems[i] = buildingitem;
       scene->addItem(buildingitem);
     }
@@ -305,7 +311,21 @@ void GameWindow::refreshBuildings() {
 void GameWindow::refresh() {
 	std::cout << "Refresh" << std::endl;
 
+	std::cout << "Tree (3,4) HP: " << buildings[2]->getHp() << std::endl;
+
 	game.simulate();
+
+	// if amount of buildings changes, redraw the buildings
+	std::vector<Building*> newbuildings = game.getBuildings();
+	if (buildings.size() != newbuildings.size()) {
+		buildings.clear();
+		buildings = newbuildings;
+		for (auto i : buildingitems) {
+			scene->removeItem(i);
+		}
+		buildingitems.clear();
+		draw_buildings(scene);
+	}
 
 	// ---------------------------------------------------------------------------------------------------
 	// THIS IS WIP, haven't tested it since Joonas was working on the same thing
@@ -328,19 +348,10 @@ void GameWindow::refresh() {
 	  		SettlerItem *settleritem = new SettlerItem(i);
 	  		settleritem->setPos(tilesize*settlers[i]->getLocation()->getX(), tilesize*settlers[i]->getLocation()->getY());
 	  		settleritems.push_back(settleritem);
+	  		settleritem->setZValue(1);
 	  		scene->addItem(settleritem);
 	  		connect(settleritem, SIGNAL(clicked(int)), this, SLOT(giveCommand(int)));
 		}
 	}
-
-	// Second, repeat process for buildings
-	// only checking destroyed buildings, since new buildings are handled by getSiteLocation()
-	buildings = game.getBuildings();
-	if (buildings.size() < buildingitems.size()) {
-		unsigned int i = buildings.size();
-		while (i < buildingitems.size()) {
-			scene->removeItem(buildingitems[i]);
-		buildingitems.erase(buildingitems.end()-i);
-		}
-	}*/
+	*/
 }
