@@ -80,12 +80,13 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     buildings = game.getBuildings();
     settlers = game.getSettlers();
  
-/*  
+/*  //--------------------------------------------
     // DEBUG, say hello to Bob, he's a free settler not tied to a building (or the game for that matter)
     Coordinates *loc = new Coordinates(1,0);
     settlers.push_back(new Settler("Bob", loc));
     //std::cout << settlers.size() << std::endl;
-*/
+*/	//--------------------------------------------
+
     draw_terrain(scene); //draws the terrain on the map
     draw_buildings(scene);
     draw_settlers(scene);
@@ -99,13 +100,15 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     connect(timer, SIGNAL (timeout()), this, SLOT (refreshBuildings()));
     timer->start(refresh_time);
  
+ 	//--------------------------------------------
     //connect(timer, SIGNAL (timeout()), this, SLOT (randomLocation())); //DEBUG
+    //--------------------------------------------
     //DEBUG
-    /*
+    /*//--------------------------------------------
     QTimer *damager = new QTimer();
     connect(damager, SIGNAL (timeout()), this, SLOT (removeHP()));
     damager->start(1000);
-    */
+    *///--------------------------------------------
  
 }
 
@@ -183,14 +186,16 @@ void GameWindow::selectCommand(int cmdtype) {
     selectedSettler = -1;
   }
 }
- 
+
+//--------------------------------------------
 void GameWindow::randomLocation() {
   // used for DEBUG, moves Bob to a random location
   settlers[2]->move();
   //std::cout << buildings[1]->getLocation()->getX() << " " << buildings[1]->getLocation()->getY() << std::endl;
   //std::cout << settlers[1]->getLocation()->getX() << " " << settlers[1]->getLocation()->getY() << std::endl;
 }
- 
+//--------------------------------------------
+//--------------------------------------------
 void GameWindow::removeHP() {
   //DEBUG
   /*
@@ -203,6 +208,7 @@ void GameWindow::removeHP() {
   }
   */
 }
+//--------------------------------------------
 
 void GameWindow::ShowMainMenu() {
     this->hide();
@@ -238,12 +244,12 @@ void GameWindow::draw_buildings(QGraphicsScene *scene) {
   //draws the buildings (and trees) on the map
  
     // DEBUG
-    /*
+    /*//--------------------------------------------
     std::vector<Building*> buildings = game.getBuildings();
     for (auto i : buildings) {
     std::cout << "Type: " << i->getType();
     std::cout << " Location: " << i->getLocation()->getX() << " " << i->getLocation()->getY() << std::endl;
-    }*/
+    }*///--------------------------------------------
  
     for (auto building : buildings) {
       BuildingItem *buildingitem = new BuildingItem(building->getType(), building->getReadiness(), building->getHp());
@@ -261,14 +267,14 @@ void GameWindow::draw_settlers(QGraphicsScene *scene) {
   //draws settlers on the map
  
   // DEBUG
-  /*
+  /*//--------------------------------------------
   int i = 0;
   for (auto settler : settlers) {
     i++;
     std::cout << i << ": ";
     std::cout << "Name: " << settler->getName();
     std::cout << " Location: " << settler->getLocation()->getX() << " " << settler->getLocation()->getY() << std::endl;
-  }*/
+  }*///--------------------------------------------
   int i = 0;
   for (auto settler : settlers) {
     //SettlerItem *settleritem = new SettlerItem(settler);
@@ -292,11 +298,10 @@ void GameWindow::moveSettlers() {
 }
  
 void GameWindow::refreshBuildings() {
-  // check readiness and health of buildings, update from constructionsite to complete building, tree to cut tree
-  // or building to destroyed building
+  // check readiness and health of buildings, update from constructionsite to complete building
   for (unsigned int i = 0; i < buildings.size(); i++) {
     bool ready = buildings[i]->getReadiness();
-    if (buildingitems[i]->getReadiness() != ready || buildings[i]->getHp() == 0) {
+    if (buildingitems[i]->getReadiness() != ready) {
       //remove old image and replace with new
       scene->removeItem(buildingitems[i]);
       BuildingItem *buildingitem = new BuildingItem(buildings[i]->getType(), buildings[i]->getReadiness(), buildings[i]->getHp());
@@ -311,10 +316,22 @@ void GameWindow::refreshBuildings() {
 void GameWindow::refresh() {
 	std::cout << "Refresh" << std::endl;
 
-	std::cout << "Tree (3,4) HP: " << buildings[2]->getHp() << std::endl;
 
-	game.simulate();
+	// DEBUG
+	/*//--------------------------------------------
+	for (auto building : buildings) {
+		std::cout << "Building type: " << building->getType() << ": , HP: " << building->getHp() << std::endl;
+	}
+	std::cout << std::endl;
+	for (auto settler : settlers) {
+		std::cout << "Settler name: " << settler->getName() << std::endl;
+	}
+	std::cout << std::endl;
+	*///--------------------------------------------
 
+	game.simulate(); // drives game one step forward
+
+	// REFRESH BUILDINGS
 	// if amount of buildings changes, redraw the buildings
 	std::vector<Building*> newbuildings = game.getBuildings();
 	if (buildings.size() != newbuildings.size()) {
@@ -327,31 +344,16 @@ void GameWindow::refresh() {
 		draw_buildings(scene);
 	}
 
-	// ---------------------------------------------------------------------------------------------------
-	// THIS IS WIP, haven't tested it since Joonas was working on the same thing
-	// ---------------------------------------------------------------------------------------------------
-	/* 
-	// First, either remove corresponding settleritems if settlers have been removed
-	settlers = game.getSettlers();
-	if (settlers.size() < settleritems.size()) {
-		unsigned int i = settlers.size();
-		while (i < settleritems.size()) {
-	  		scene->removeItem(settleritems[i]);
-	  		settleritems.erase(settleritems.end()-i);
+	// REFRESH SETTLERS
+	// if amount of settlers changes, redraw settlers
+	std::vector<Settler*> newsettlers = game.getSettlers();
+	if (settlers.size() != newsettlers.size()) {
+		settlers.clear();
+		settlers = newsettlers;
+		for (auto i : settleritems) {
+			scene->removeItem(i);
 		}
+		settleritems.clear();
+		draw_settlers(scene);
 	}
-	// or, check if new settlers have appeared, add them to the scene and the settleritems vector
-	else if (settlers.size() > settleritems.size()) {
-		unsigned int i = settleritems.size();
-		for (; i < settlers.size(); i++) {
-	  		//SettlerItem *settleritem = new SettlerItem(settlers[i]);
-	  		SettlerItem *settleritem = new SettlerItem(i);
-	  		settleritem->setPos(tilesize*settlers[i]->getLocation()->getX(), tilesize*settlers[i]->getLocation()->getY());
-	  		settleritems.push_back(settleritem);
-	  		settleritem->setZValue(1);
-	  		scene->addItem(settleritem);
-	  		connect(settleritem, SIGNAL(clicked(int)), this, SLOT(giveCommand(int)));
-		}
-	}
-	*/
 }
