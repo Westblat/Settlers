@@ -7,7 +7,6 @@ Window::Window(QWidget *parent) : QWidget(parent) {
 
 
     grid = new QGridLayout;
-    //grid->setSpacing(5);
     setLayout(grid);
 
     quit_button = new QPushButton();
@@ -23,7 +22,6 @@ Window::Window(QWidget *parent) : QWidget(parent) {
     grid->addWidget(quit_button, 0, 0);
     grid->addWidget(start_button, 1, 0);
 
-    //connect(quit_button, SIGNAL (clicked()), QApplication::instance(), SLOT (quit()));
     connect(quit_button, SIGNAL (clicked()), this, SLOT (close()));
 
     connect(start_button, SIGNAL (clicked()), this , SLOT (NewGame()));

@@ -1,7 +1,5 @@
 #include "buildmenuicon.h"
 
-#include <iostream>
-
 /*	Building types are
 	0: tree
 	1: House
@@ -46,14 +44,4 @@ BuildmenuIcon::BuildmenuIcon(int buildingtype, QGraphicsItem *parent) : QGraphic
 
 void BuildmenuIcon::mousePressEvent(QGraphicsSceneMouseEvent *) {
 	emit clicked(type);
-	/*
-    if (type == 1) {
-    	std::cout << "You clicked on a House!" << std::endl;
-    }
-    else if (type == 2) {
-    	std::cout << "This is a WAREHOUSE!" << std::endl;
-    }
-    else {
-    	std::cout << "Hey!" << std::endl;
-    }*/
 }

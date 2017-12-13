@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_GameWindow_t {
-    QByteArrayData data[18];
-    char stringdata0[170];
+    QByteArrayData data[16];
+    char stringdata0[146];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -44,16 +44,14 @@ QT_MOC_LITERAL(11, 107, 6), // "cancel"
 QT_MOC_LITERAL(12, 114, 11), // "giveCommand"
 QT_MOC_LITERAL(13, 126, 1), // "n"
 QT_MOC_LITERAL(14, 128, 13), // "selectCommand"
-QT_MOC_LITERAL(15, 142, 3), // "cmd"
-QT_MOC_LITERAL(16, 146, 14), // "randomLocation"
-QT_MOC_LITERAL(17, 161, 8) // "removeHP"
+QT_MOC_LITERAL(15, 142, 3) // "cmd"
 
     },
     "GameWindow\0ShowMainMenu\0\0refresh\0"
     "moveSettlers\0refreshBuildings\0"
     "selectBuildingType\0type\0getSiteLocation\0"
     "x\0y\0cancel\0giveCommand\0n\0selectCommand\0"
-    "cmd\0randomLocation\0removeHP"
+    "cmd"
 };
 #undef QT_MOC_LITERAL
 
@@ -63,7 +61,7 @@ static const uint qt_meta_data_GameWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -71,17 +69,15 @@ static const uint qt_meta_data_GameWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   69,    2, 0x0a /* Public */,
-       3,    0,   70,    2, 0x0a /* Public */,
-       4,    0,   71,    2, 0x0a /* Public */,
-       5,    0,   72,    2, 0x0a /* Public */,
-       6,    1,   73,    2, 0x0a /* Public */,
-       8,    2,   76,    2, 0x0a /* Public */,
-      11,    0,   81,    2, 0x0a /* Public */,
-      12,    1,   82,    2, 0x0a /* Public */,
-      14,    1,   85,    2, 0x0a /* Public */,
-      16,    0,   88,    2, 0x0a /* Public */,
-      17,    0,   89,    2, 0x0a /* Public */,
+       1,    0,   59,    2, 0x0a /* Public */,
+       3,    0,   60,    2, 0x0a /* Public */,
+       4,    0,   61,    2, 0x0a /* Public */,
+       5,    0,   62,    2, 0x0a /* Public */,
+       6,    1,   63,    2, 0x0a /* Public */,
+       8,    2,   66,    2, 0x0a /* Public */,
+      11,    0,   71,    2, 0x0a /* Public */,
+      12,    1,   72,    2, 0x0a /* Public */,
+      14,    1,   75,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -93,8 +89,6 @@ static const uint qt_meta_data_GameWindow[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   13,
     QMetaType::Void, QMetaType::Int,   15,
-    QMetaType::Void,
-    QMetaType::Void,
 
        0        // eod
 };
@@ -114,8 +108,6 @@ void GameWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 6: _t->cancel(); break;
         case 7: _t->giveCommand((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 8: _t->selectCommand((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 9: _t->randomLocation(); break;
-        case 10: _t->removeHP(); break;
         default: ;
         }
     }
@@ -146,13 +138,13 @@ int GameWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 11)
+        if (_id < 9)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 11;
+        _id -= 9;
     }
     return _id;
 }

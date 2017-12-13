@@ -14,7 +14,6 @@
 
 cmdMenuIcon::cmdMenuIcon(int type, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
     cmdtype = type;
-	//setPixmap(QPixmap(":/graphics/cmdicon.png"));
     if (type == 0) {
         setPixmap(QPixmap(":/graphics/cmdicon0.png"));
     }

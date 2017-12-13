@@ -17,17 +17,9 @@ BuildingItem::BuildingItem(int buildingtype, bool ready, int health, QGraphicsIt
 	if (readiness == false && type != 0) {
 		setPixmap(QPixmap(":/graphics/constructionsite.png"));
 	}
-	else if (hp == 0 && type != 0) {
-		setPixmap(QPixmap(":/graphics/destroyedbuilding.png"));
-	}
 	else {
 		if (type == 0) {
-			if (hp != 0) {
-				setPixmap(QPixmap(":/graphics/tree.png"));
-			}
-			else {
-				setPixmap(QPixmap(":/graphics/cut_tree.png"));
-			}
+			setPixmap(QPixmap(":/graphics/tree.png"));
 		}
 		else if (type == 1) {
 			setPixmap(QPixmap(":/graphics/house.png"));
