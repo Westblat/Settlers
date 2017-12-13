@@ -37,5 +37,8 @@
         <file>cmdicon6.png</file>
         <file>cmdicon7.png</file>
         <file>cmdicon8.png</file>
+        <file>menuicon_quit.png</file>
+        <file>menuicon_newgame.png</file>
+        <file>menuicon_resumegame.png</file>
     </qresource>
 </RCC>

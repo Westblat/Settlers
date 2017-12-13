@@ -10,8 +10,16 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
  
     // button that shows the main menu
     menu_button = new QPushButton("Main Menu");
+    /*
+    menu_button = new QPushButton();
+    menu_button->setIcon(QIcon(":/graphics/menuicon.png"));
+    menu_button->setIconSize(QSize(300,50));
+    menu_button->setFlat(true);
+    // yeah um this didn't really look good
+    */
     //grid->addWidget(menu_button, 0, 10);
     grid->addWidget(menu_button, 0, 0);
+    //grid->addWidget(menu_button, 0, 10);
     connect(menu_button, SIGNAL (clicked()), this , SLOT (ShowMainMenu()));
  
     // GAMEMAP
@@ -43,18 +51,6 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
       buildscene->addItem(icon);
       connect(icon, SIGNAL(clicked(int)), this, SLOT(selectBuildingType(int)));
     }
- /*
-    // RESOURCES
-    // scene for viewing resourcecount
-    resscene = new QGraphicsScene(this);
-    resview = new QGraphicsView(resscene);
-    resview->show();
-    grid->addWidget(resview, 1, 1, 1, 1);
-    QLabel *reslabel = new QLabel(this); // text above the buildingselection
-    reslabel->setText(QString("Resources"));
-    reslabel->show();
-    grid->addWidget(reslabel, 0, 1);
- */
  
     // COMMANDMENU
     // scene for viewing commands
@@ -63,10 +59,12 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     commandview = new QGraphicsView(commandscene);
     commandview->show();
     grid->addWidget(commandview, 1, 4, 1, 9);
+    //grid->addWidget(commandview, 1, 2, 1, 7);
     QLabel *cmdlabel = new QLabel(this);
     cmdlabel->setText(QString("Commands"));
     cmdlabel->show();
-    grid->addWidget(cmdlabel, 0, 4);
+    //grid->addWidget(cmdlabel, 0, 4);
+    grid->addWidget(cmdlabel, 1, 3);
     for (int i = 0; i < 9; i++) {
       cmdMenuIcon *icon = new cmdMenuIcon(i);
       icon->setPos(tilesize*i, 0);

@@ -400,43 +400,46 @@ compiler_rcc_make_all: qrc_media.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_media.cpp
 qrc_media.cpp: media.qrc \
-		keepicon.png \
-		warehouse.png \
-		keep.png \
-		blacksmith.png \
 		water.png \
-		cut_tree.png \
-		warehouseicon.png \
-		tree.png \
-		mountain.png \
-		constructionsite.png \
-		blacksmithicon.png \
 		road3icon.png \
+		blacksmith.png \
+		cmdicon5.png \
 		stonecuttericon.png \
-		beach.png \
+		warehouse.png \
 		road1icon.png \
-		settler.png \
+		houseicon.png \
+		cmdicon4.png \
 		stonecutter.png \
-		mineicon.png \
-		destroyedbuilding.png \
+		mountain.png \
 		house.png \
-		cmdicon0.png \
+		grass.png \
+		cmdicon3.png \
+		menuicon_quit.png \
+		cmdicon2.png \
+		mineicon.png \
+		keepicon.png \
+		constructionsite.png \
+		keep.png \
 		stone.png \
 		cmdicon1.png \
-		road1.png \
-		cmdicon2.png \
-		houseicon.png \
-		road2.png \
-		cmdicon3.png \
+		blacksmithicon.png \
+		warehouseicon.png \
+		cmdicon0.png \
+		menuicon_resumegame.png \
+		destroyedbuilding.png \
 		road3.png \
-		cmdicon4.png \
-		cmdicon5.png \
-		mine.png \
-		cmdicon6.png \
-		grass.png \
+		cmdicon8.png \
+		cut_tree.png \
+		settler.png \
+		road2.png \
 		road2icon.png \
 		cmdicon7.png \
-		cmdicon8.png
+		tree.png \
+		menuicon_newgame.png \
+		road1.png \
+		beach.png \
+		mine.png \
+		cmdicon6.png
 	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name media media.qrc -o qrc_media.cpp
 
 compiler_moc_header_make_all: moc_mainwindow.cpp moc_gamewindow.cpp moc_terrainitem.cpp moc_settleritem.cpp moc_buildmenuicon.cpp moc_cmdmenuicon.cpp
