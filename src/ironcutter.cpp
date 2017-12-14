@@ -3,6 +3,7 @@
 Ironcutter::Ironcutter(Terrain *terrain, bool initialize) : Building(4, 10, initialize), terrain(terrain){
     terrain->placeBuilding(this);
     if(!initialize){
+        
         for(int i = 0; i < 10; i++){
             inventory.first.push_back(0);
         }

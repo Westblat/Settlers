@@ -235,6 +235,7 @@ void GameWindow::refresh() {
 	*/
 	//DEBUG
     //----------------------------------------------------------
+    std::cout << "------------------------------------------------------------------------------------------------" << std::endl;
 	std::pair<std::vector<int>, int> inventory = buildings.back()->getInventory();
     std::cout << "Building inventory: " << std::endl;
     for (auto i : inventory.first) {

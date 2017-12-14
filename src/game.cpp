@@ -273,7 +273,7 @@ void Game::buildBuilding(Settler *settler){
         Building *warehouse = map->getTerrain(settler->getLocation())->getBuilding();
         for(int it = 0; it != (int)warehouse->getInventory().first.size(); it++){
             if(warehouse->getInventory().first[it] == requirements[0]){
-                settler->addItem(it);
+                settler->addItem(requirements[0]);
                 warehouse->removeItem(it);
                 it--;
                 return;
