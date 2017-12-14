@@ -90,21 +90,11 @@ void GameWindow::getSiteLocation(int x, int y) {
 
 		BuildingItem *buildingitem;
 
-		if (newBuildingType >= 7) {
-			game.addBuilding(7, terrain_map[x][y]->getLocation(), true);
-		}
-		else {
-			game.addBuilding(newBuildingType, terrain_map[x][y]->getLocation(), false);
-		}
+		game.addBuilding(newBuildingType, terrain_map[x][y]->getLocation(), false);
 
 		buildings = game.getBuildings();
 
-		if (newBuildingType >= 7) {
-			buildingitem = new BuildingItem(newBuildingType, buildings.back()->getReadiness(), buildings.back()->getHp());
-		}
-		else {
-			buildingitem = new BuildingItem(buildings.back()->getType(), buildings.back()->getReadiness(), buildings.back()->getHp());
-		}
+		buildingitem = new BuildingItem(buildings.back()->getType(), buildings.back()->getReadiness(), buildings.back()->getHp());
 
 		buildingitem->setPos(tilesize*buildings.back()->getLocation()->getX(), tilesize*buildings.back()->getLocation()->getY());
 		if (newBuildingType >= 7) {

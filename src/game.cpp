@@ -59,6 +59,9 @@ void Game::addBuilding(int type, Coordinates *location, bool initialize){
     4: Mine
     5: Blacksmith
     6: Keep
+    7: Road, vertical
+    8: Road, horizontal
+    9: Road, crossroads
 */  
     if(type == 0) {
         Tree *building = new Tree(map->getTerrain(location), initialize);
@@ -96,9 +99,16 @@ void Game::addBuilding(int type, Coordinates *location, bool initialize){
         Blacksmith *blacksmith = new Blacksmith(map->get_map()[location->getX()][location->getY()], initialize);
         buildings.push_back(blacksmith);
     } else if(type == 6){
+        //Keep
         
     } else if(type == 7){
-        Road *road = new Road(map->get_map()[location->getX()][location->getY()], initialize);
+        Road *road = new Road(map->get_map()[location->getX()][location->getY()], initialize, type);
+        buildings.push_back(road);
+    } else if(type == 8){
+        Road *road = new Road(map->get_map()[location->getX()][location->getY()], initialize, type);
+        buildings.push_back(road);
+    } else if(type == 9){
+        Road *road = new Road(map->get_map()[location->getX()][location->getY()], initialize, type);
         buildings.push_back(road);
     }
 }
