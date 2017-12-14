@@ -225,12 +225,31 @@ void GameWindow::refresh() {
 	game.simulate(); // drives game one step forward
 
 	//DEBUG
+	/*
 	//-----------------------------------------------------------------------------
 	for (auto building : buildings) {
 		int items = building->getInventory().first.size();
 		std::cout << "Buildingtype: " << building->getType() << " Inventory: " << items << std::endl;
 	}
 	//-----------------------------------------------------------------------------
+	*/
+	//DEBUG
+    //----------------------------------------------------------
+	std::pair<std::vector<int>, int> inventory = buildings.back()->getInventory();
+    std::cout << "Building inventory: " << std::endl;
+    for (auto i : inventory.first) {
+        std::cout << "Item type: " << i << std::endl;
+    }
+    std::cout << std::endl;
+    for (auto settler : settlers) {
+    	std::cout << "Settler name " << settler->getName() << std::endl;
+    	for (auto i : settler->getItems()) {
+    		std::cout << "Item type: " << i << std::endl;
+    	}
+    	std::cout << std::endl;
+    }
+
+    //----------------------------------------------------------
 
 	// REFRESH BUILDINGS
 	// if amount of buildings changes, redraw the buildings
