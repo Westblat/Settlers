@@ -220,9 +220,10 @@ void Game::cutStone(Settler *settler) {
 		}
 		settler->emptyInventory();
 	}
-	else if (settler->inventoryFull())
-		pathToNearbyBuilding(settler, 2);
-
+	else if (settler->inventoryFull()) {
+        std::cout << "Stonecutter inventory: " << settler->getItems().size() << std::endl;
+        pathToNearbyBuilding(settler, 2);
+    }
 	else {
 		pathToNearbyBuilding(settler, 3);
 	}
@@ -249,8 +250,9 @@ void Game::cutIron(Settler *settler) {
 		}
 		settler->emptyInventory();
 	}
-	else if (settler->inventoryFull())
+	else if (settler->inventoryFull()) {
 		pathToNearbyBuilding(settler, 2);
+    }
 
 	else {
 		pathToNearbyBuilding(settler, 4);
