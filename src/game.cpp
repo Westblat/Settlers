@@ -260,7 +260,7 @@ void Game::cutIron(Settler *settler) {
 void Game::buildBuilding(Settler *settler){
     
     if((int)notReady.size() == 0){
-        pathToNearbyBuilding(settler, 0);
+        pathToNearbyBuilding(settler, 1);
         return;
     }
     Building *buildThis = notReady[0];
