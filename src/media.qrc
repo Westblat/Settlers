@@ -1,0 +1,44 @@
+<RCC>
+    <qresource prefix="/graphics">
+        <file>grass.png</file>
+        <file>beach.png</file>
+        <file>mountain.png</file>
+        <file>stone.png</file>
+        <file>water.png</file>
+        <file>settler.png</file>
+        <file>tree.png</file>
+        <file>house.png</file>
+        <file>houseicon.png</file>
+        <file>warehouse.png</file>
+        <file>warehouseicon.png</file>
+        <file>stonecutter.png</file>
+        <file>stonecuttericon.png</file>
+        <file>mine.png</file>
+        <file>mineicon.png</file>
+        <file>blacksmith.png</file>
+        <file>blacksmithicon.png</file>
+        <file>keep.png</file>
+        <file>keepicon.png</file>
+        <file>constructionsite.png</file>
+        <file>cut_tree.png</file>
+        <file>destroyedbuilding.png</file>
+        <file>road1.png</file>
+        <file>road1icon.png</file>
+        <file>road2.png</file>
+        <file>road2icon.png</file>
+        <file>road3.png</file>
+        <file>road3icon.png</file>
+        <file>cmdicon0.png</file>
+        <file>cmdicon1.png</file>
+        <file>cmdicon2.png</file>
+        <file>cmdicon3.png</file>
+        <file>cmdicon4.png</file>
+        <file>cmdicon5.png</file>
+        <file>cmdicon6.png</file>
+        <file>cmdicon7.png</file>
+        <file>cmdicon8.png</file>
+        <file>menuicon_quit.png</file>
+        <file>menuicon_newgame.png</file>
+        <file>menuicon_resumegame.png</file>
+    </qresource>
+</RCC>

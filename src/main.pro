@@ -30,26 +30,48 @@ SOURCES += \
         terrain.cpp \
         map.cpp \
         game.cpp \
-	settler.cpp \
+        gamewindow.cpp \
+        terrainitem.cpp \
+        buildingitem.cpp \
+        settleritem.cpp \
+        settler.cpp \
         building.cpp \
         house.cpp \
         tree.cpp \
         warehouse.cpp \
         priorityqueue.cpp \
+	blacksmith.cpp \
+        road.cpp \
+        buildmenuicon.cpp \
+        stonecutter.cpp \
+        cmdmenuicon.cpp \
+        ironcutter.cpp \
 
 HEADERS += \
         mainwindow.h \
         coordinates.h \
         terrain.h \
         map.h \
-        priorityqueue.h \
         game.h \
+        gamewindow.h \
+        terrainitem.h \
+        buildingitem.h \
+        settleritem.h \
+        priorityqueue.h \
         settler.h \
         building.h \
         house.h \
         tree.h \
         warehouse.h \
- 
+ 	blacksmith.h \
+        road.h \
+        buildmenuicon.h \
+        stonecutter.h \
+        cmdmenuicon.h \
+        ironcutter.h \
+
+RESOURCES += \
+    media.qrc
 
 
 FORMS +=

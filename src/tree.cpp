@@ -1,7 +1,15 @@
 #include "tree.h"
 
-Tree::Tree(Terrain *terrain): Building(0, 20), terrain(terrain) { this->setReady(); }
+Tree::Tree(Terrain *terrain, bool initialize) : Building(0, 20, initialize), terrain(terrain) { 
+    this->setReady();
+    terrain->placeBuilding(this);
+    this->inventory.second = 0;
+    }
 
-void Tree::build() {return;}
+Tree::~Tree() {
+    this->terrain->setBuildingType(-1);
+}
 
-Tree::~Tree() { }
+Coordinates* Tree::getLocation() {
+	return terrain->getLocation();
+}

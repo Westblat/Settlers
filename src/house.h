@@ -4,11 +4,12 @@
 #include "terrain.h"
 #include "settler.h"
 
-class House: public Building {
+class House : public Building {
 public:
-    House(Terrain *terrain);
-    void build();
+    House(Terrain *terrain, bool initialize);
+    ~House();
     void addSettler(Settler *settler);
+    Coordinates* getLocation();
 private:
     Terrain *terrain;
     std::vector<Settler*> habitants;

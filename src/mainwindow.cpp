@@ -1,55 +1,48 @@
 #include "mainwindow.h"
+#include "gamewindow.h"
+
+Window::Window(QWidget *parent) : QWidget(parent) {
+    setWindowTitle("The Settlers");
+    setMinimumSize(300, 200);
 
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent)
-{
-    this->setWindowTitle("Le Settlers");
+    grid = new QGridLayout;
+    setLayout(grid);
 
-    initToolBar();
-    initCentralWidget();
+    quit_button = new QPushButton();
+    quit_button->setIcon(QIcon(":/graphics/menuicon_quit.png"));
+    quit_button->setIconSize(QSize(300,50));
+    quit_button->setFlat(true);
 
+    start_button = new QPushButton();
+    start_button->setIcon(QIcon(":/graphics/menuicon_newgame.png"));
+    start_button->setIconSize(QSize(300,50));
+    start_button->setFlat(true);
+
+    grid->addWidget(quit_button, 0, 0);
+    grid->addWidget(start_button, 1, 0);
+
+    connect(quit_button, SIGNAL (clicked()), this, SLOT (close()));
+
+    connect(start_button, SIGNAL (clicked()), this , SLOT (NewGame()));
 }
 
-MainWindow::~MainWindow() {
+void Window::NewGame() {
+    gamewindow = new GameWindow(this);
+    gamewindow->show();
 
+    // hide "New game"-button
+    start_button->hide();
+
+    // add a button for resuming the game
+    resume_button =  new QPushButton();
+    resume_button->setIcon(QIcon(":/graphics/menuicon_resumegame.png"));
+    resume_button->setIconSize(QSize(300,50));
+    resume_button->setFlat(true);
+    grid->addWidget(resume_button, 1, 0);
+    connect(resume_button, SIGNAL(clicked()), this, SLOT(ResumeGame()));
 }
 
-
-void MainWindow::initToolBar() {
-
-    QToolBar * tb = new QToolBar(this);
-    tb->setMovable(false);
-
-    QAction * tb_exit = new QAction("Exit", tb);
-    QAction * tb_help = new QAction("Help", tb);
-
-    tb->addAction(tb_exit);
-    tb->addAction(tb_help);
-    this->addToolBar(tb);
-}
-
-
-void MainWindow::initCentralWidget() {
-
-    QWidget * centralWidget = new QWidget(this);
-    QStackedLayout * stackedLayout = new QStackedLayout(centralWidget);
-
-    QWidget * mm_widget = new QWidget(centralWidget); //mm stands for main menu
-    mm_widget->setMinimumSize(120,120);
-
-    QHBoxLayout * mm_layout = new QHBoxLayout(mm_widget);
-    QGroupBox * mm_box = new QGroupBox("Start a new game", mm_widget);
-    QGridLayout * mm_grid = new QGridLayout(mm_box);
-    QPushButton * mm_button = new QPushButton("Play", mm_widget);
-
-    mm_grid->addWidget(mm_button);
-    mm_box->setLayout(mm_grid);
-    mm_box->setMaximumSize(150,90);
-    mm_layout->addWidget(mm_box);
-    mm_widget->setLayout(mm_layout);
-
-    stackedLayout->addWidget(mm_widget);
-    centralWidget->setLayout(stackedLayout);
-    this->setCentralWidget(centralWidget);
+void Window::ResumeGame() {
+    gamewindow->show();
 }

@@ -35,7 +35,7 @@ Private:
 	int hp //Current HitPoints
 	int maxHp //Max value for HP
 	Building *home //Building Settler is tied to, !!might be unneeded!!
-	pair<vector<int> items, int maxsize> //Inventory, first part is content, second max size "-1 for unlimtited, 0 for 0, pos item for defined size"
+	pair<vector<int> items, int maxsize> //Inventory, first part is content, second max size "-1 for unlimited, 0 for 0, pos item for defined size"
 	bool playerControlled //Determines if player can control this settler
 	Coordinates location //Settlers keep track of their location
 	std::stack<pair<int,int> > path //Movement path, contains directions 
