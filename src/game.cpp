@@ -224,7 +224,7 @@ void Game::cutStone(Settler *settler) {
 		pathToNearbyBuilding(settler, 2);
 
 	else {
-		pathToNearbyBuilding(settler, 0);
+		pathToNearbyBuilding(settler, 3);
 	}
 }
 
@@ -253,7 +253,7 @@ void Game::cutIron(Settler *settler) {
 		pathToNearbyBuilding(settler, 2);
 
 	else {
-		pathToNearbyBuilding(settler, 0);
+		pathToNearbyBuilding(settler, 4);
 	}
 }
 
@@ -268,7 +268,7 @@ void Game::buildBuilding(Settler *settler){
     
     if(map->getTerrain(settler->getLocation())->getBuildingType() == 2 && !(settler->inventoryFull()) && map->getTerrain(settler->getLocation())->getBuilding()->getReadiness()){
         //gets items from 
-        std::cout << "enterinf warehouse" << std::endl;
+        std::cout << "entering warehouse" << std::endl;
         Building *warehouse = map->getTerrain(settler->getLocation())->getBuilding();
         for(int it = 0; it != (int)warehouse->getInventory().first.size(); it++){
             if(warehouse->getInventory().first[it] == requirements[0]){
