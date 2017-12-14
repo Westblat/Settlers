@@ -9,7 +9,7 @@ public:
     Ironcutter(Terrain *terrain, bool initialize);
     ~Ironcutter();
     Coordinates* getLocation();
-    void setReady();
+    virtual void setReady();
 private:
     Terrain *terrain;
 

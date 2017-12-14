@@ -14,7 +14,7 @@ public:
     bool build(int item); //Returns if building isReady
     bool addItem(int item);
 	bool removeItem(int item);
-	void setReady();
+	virtual void setReady();
     bool getReadiness() {return isReady;}
 	int getType();
     int getHp() {return hp;}

@@ -224,6 +224,14 @@ void GameWindow::refresh() {
 
 	game.simulate(); // drives game one step forward
 
+	//DEBUG
+	//-----------------------------------------------------------------------------
+	for (auto building : buildings) {
+		int items = building->getInventory().first.size();
+		std::cout << "Buildingtype: " << building->getType() << " Inventory: " << items << std::endl;
+	}
+	//-----------------------------------------------------------------------------
+
 	// REFRESH BUILDINGS
 	// if amount of buildings changes, redraw the buildings
 	std::vector<Building*> newbuildings = game.getBuildings();

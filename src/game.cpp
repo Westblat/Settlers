@@ -221,7 +221,6 @@ void Game::cutStone(Settler *settler) {
 		settler->emptyInventory();
 	}
 	else if (settler->inventoryFull()) {
-        std::cout << "Stonecutter inventory: " << settler->getItems().size() << std::endl;
         pathToNearbyBuilding(settler, 2);
     }
 	else {
@@ -291,6 +290,7 @@ void Game::buildBuilding(Settler *settler){
         if(settler->getItems()[0] == requirements[0]){
             settler->removeItem(requirements[0]);
             if(buildThis->build(requirements[0])){
+                buildThis->setReady();
                 notReady.erase(notReady.begin());
             }
         }
