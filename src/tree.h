@@ -10,6 +10,7 @@ public:
     Tree(Terrain *terrain, bool initialize);
     ~Tree();
     Coordinates* getLocation();
+    
 private:
     Terrain *terrain;
 };

@@ -114,7 +114,7 @@ void Game::addBuilding(int type, Coordinates *location, bool initialize){
 }
 
 void Game::addSettler(House *house, Coordinates *location) {
-    Settler *settler = new Settler("John Cena", new Coordinates(*location));
+    Settler *settler = new Settler("John Cena" + std::to_string(settlers.size()), new Coordinates(*location));
     house->addSettler(settler);
     settlers.push_back(settler);
 }
@@ -125,6 +125,7 @@ std::vector<Building*> Game::getBuildings() {return buildings;}
 
 bool Game::simulate(){
     for(std::vector<Settler*>::iterator it = settlers.begin(); it !=settlers.end(); it++){
+       std::cout<<"Moi"<<std::endl;
        if((**it).getDelay() > 0 ){
         (**it).reduceDelay();
        }else{
@@ -322,6 +323,12 @@ void Game::enemy(Settler *settler){
     
     if ( map->getTerrain(settler->getLocation())->getBuildingType() != -1){
         if(map->getTerrain(settler->getLocation())->getBuilding()->takeDamage()){
+            std::cout<<"plz ei"<<std::endl;
+            std::vector<Settler*> tobeDeleted = map->getTerrain(settler->getLocation())->getBuilding()->getHabitants();
+            for(std::vector<Settler*>::iterator it = tobeDeleted.begin(); it != tobeDeleted.end(); it++){
+
+            }
+            
             removeBuilding( map->getTerrain(settler->getLocation())->getBuilding());
         }
 

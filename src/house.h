@@ -10,6 +10,7 @@ public:
     ~House();
     void addSettler(Settler *settler);
     Coordinates* getLocation();
+    std::vector<Settler*> getHabitants();
 private:
     Terrain *terrain;
     std::vector<Settler*> habitants;

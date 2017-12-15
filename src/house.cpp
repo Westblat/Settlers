@@ -15,6 +15,7 @@ House::House(Terrain *terrain, bool initialize) : Building(1,10,initialize), ter
 
 House::~House(){
     for(std::vector<Settler*>::iterator it = habitants.begin(); it!= habitants.end(); it++){
+        std::cout << "asdasd" << std::endl;
         delete *it;
     }
     
@@ -30,4 +31,8 @@ void House::addSettler(Settler *settler) {
 
 Coordinates* House::getLocation() {
     return terrain->getLocation();
+}
+
+std::vector<Settler*> House::getHabitants(){
+    return habitants;
 }
