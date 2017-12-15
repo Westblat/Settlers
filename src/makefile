@@ -33,7 +33,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = launch1.0.0
-DISTDIR = /home/joonas/settlers-2/src/.tmp/launch1.0.0
+DISTDIR = /home/joonas/settlers-2/src/obj/launch1.0.0
 LINK          = g++
 LFLAGS        = -m64 -Wl,-O1
 LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -44,7 +44,7 @@ STRIP         = strip
 
 ####### Output directory
 
-OBJECTS_DIR   = ./
+OBJECTS_DIR   = obj/
 
 ####### Files
 
@@ -77,36 +77,36 @@ SOURCES       = main.cpp \
 		moc_settleritem.cpp \
 		moc_buildmenuicon.cpp \
 		moc_cmdmenuicon.cpp
-OBJECTS       = main.o \
-		mainwindow.o \
-		coordinates.o \
-		terrain.o \
-		map.o \
-		game.o \
-		gamewindow.o \
-		terrainitem.o \
-		buildingitem.o \
-		settleritem.o \
-		settler.o \
-		building.o \
-		house.o \
-		tree.o \
-		warehouse.o \
-		priorityqueue.o \
-		blacksmith.o \
-		road.o \
-		buildmenuicon.o \
-		stonecutter.o \
-		cmdmenuicon.o \
-		ironcutter.o \
-		keep.o \
-		qrc_media.o \
-		moc_mainwindow.o \
-		moc_gamewindow.o \
-		moc_terrainitem.o \
-		moc_settleritem.o \
-		moc_buildmenuicon.o \
-		moc_cmdmenuicon.o
+OBJECTS       = obj/main.o \
+		obj/mainwindow.o \
+		obj/coordinates.o \
+		obj/terrain.o \
+		obj/map.o \
+		obj/game.o \
+		obj/gamewindow.o \
+		obj/terrainitem.o \
+		obj/buildingitem.o \
+		obj/settleritem.o \
+		obj/settler.o \
+		obj/building.o \
+		obj/house.o \
+		obj/tree.o \
+		obj/warehouse.o \
+		obj/priorityqueue.o \
+		obj/blacksmith.o \
+		obj/road.o \
+		obj/buildmenuicon.o \
+		obj/stonecutter.o \
+		obj/cmdmenuicon.o \
+		obj/ironcutter.o \
+		obj/keep.o \
+		obj/qrc_media.o \
+		obj/moc_mainwindow.o \
+		obj/moc_gamewindow.o \
+		obj/moc_terrainitem.o \
+		obj/moc_settleritem.o \
+		obj/moc_buildmenuicon.o \
+		obj/moc_cmdmenuicon.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -461,6 +461,7 @@ moc_mainwindow.cpp: game.h \
 		stonecutter.h \
 		ironcutter.h \
 		tree.h \
+		keep.h \
 		road.h \
 		blacksmith.h \
 		mainwindow.h
@@ -478,6 +479,7 @@ moc_gamewindow.cpp: game.h \
 		stonecutter.h \
 		ironcutter.h \
 		tree.h \
+		keep.h \
 		road.h \
 		blacksmith.h \
 		terrainitem.h \
@@ -516,7 +518,7 @@ compiler_clean: compiler_rcc_clean compiler_moc_header_clean
 
 ####### Compile
 
-main.o: main.cpp mainwindow.h \
+obj/main.o: main.cpp mainwindow.h \
 		game.h \
 		map.h \
 		priorityqueue.h \
@@ -529,6 +531,7 @@ main.o: main.cpp mainwindow.h \
 		stonecutter.h \
 		ironcutter.h \
 		tree.h \
+		keep.h \
 		road.h \
 		blacksmith.h \
 		gamewindow.h \
@@ -537,9 +540,9 @@ main.o: main.cpp mainwindow.h \
 		settleritem.h \
 		buildmenuicon.h \
 		cmdmenuicon.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/main.o main.cpp
 
-mainwindow.o: mainwindow.cpp mainwindow.h \
+obj/mainwindow.o: mainwindow.cpp mainwindow.h \
 		game.h \
 		map.h \
 		priorityqueue.h \
@@ -552,6 +555,7 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		stonecutter.h \
 		ironcutter.h \
 		tree.h \
+		keep.h \
 		road.h \
 		blacksmith.h \
 		gamewindow.h \
@@ -560,24 +564,24 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		settleritem.h \
 		buildmenuicon.h \
 		cmdmenuicon.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/mainwindow.o mainwindow.cpp
 
-coordinates.o: coordinates.cpp coordinates.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o coordinates.o coordinates.cpp
+obj/coordinates.o: coordinates.cpp coordinates.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/coordinates.o coordinates.cpp
 
-terrain.o: terrain.cpp terrain.h \
+obj/terrain.o: terrain.cpp terrain.h \
 		coordinates.h \
 		building.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o terrain.o terrain.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/terrain.o terrain.cpp
 
-map.o: map.cpp map.h \
+obj/map.o: map.cpp map.h \
 		priorityqueue.h \
 		terrain.h \
 		coordinates.h \
 		building.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o map.o map.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/map.o map.cpp
 
-game.o: game.cpp game.h \
+obj/game.o: game.cpp game.h \
 		map.h \
 		priorityqueue.h \
 		terrain.h \
@@ -589,11 +593,12 @@ game.o: game.cpp game.h \
 		stonecutter.h \
 		ironcutter.h \
 		tree.h \
+		keep.h \
 		road.h \
 		blacksmith.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o game.o game.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/game.o game.cpp
 
-gamewindow.o: gamewindow.cpp gamewindow.h \
+obj/gamewindow.o: gamewindow.cpp gamewindow.h \
 		game.h \
 		map.h \
 		priorityqueue.h \
@@ -606,6 +611,7 @@ gamewindow.o: gamewindow.cpp gamewindow.h \
 		stonecutter.h \
 		ironcutter.h \
 		tree.h \
+		keep.h \
 		road.h \
 		blacksmith.h \
 		terrainitem.h \
@@ -613,109 +619,109 @@ gamewindow.o: gamewindow.cpp gamewindow.h \
 		settleritem.h \
 		buildmenuicon.h \
 		cmdmenuicon.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gamewindow.o gamewindow.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/gamewindow.o gamewindow.cpp
 
-terrainitem.o: terrainitem.cpp terrainitem.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o terrainitem.o terrainitem.cpp
+obj/terrainitem.o: terrainitem.cpp terrainitem.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/terrainitem.o terrainitem.cpp
 
-buildingitem.o: buildingitem.cpp buildingitem.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildingitem.o buildingitem.cpp
+obj/buildingitem.o: buildingitem.cpp buildingitem.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/buildingitem.o buildingitem.cpp
 
-settleritem.o: settleritem.cpp settleritem.h \
+obj/settleritem.o: settleritem.cpp settleritem.h \
 		settler.h \
 		coordinates.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o settleritem.o settleritem.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/settleritem.o settleritem.cpp
 
-settler.o: settler.cpp settler.h \
+obj/settler.o: settler.cpp settler.h \
 		coordinates.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o settler.o settler.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/settler.o settler.cpp
 
-building.o: building.cpp building.h \
+obj/building.o: building.cpp building.h \
 		coordinates.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o building.o building.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/building.o building.cpp
 
-house.o: house.cpp house.h \
+obj/house.o: house.cpp house.h \
 		building.h \
 		coordinates.h \
 		terrain.h \
 		settler.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o house.o house.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/house.o house.cpp
 
-tree.o: tree.cpp tree.h \
+obj/tree.o: tree.cpp tree.h \
 		building.h \
 		coordinates.h \
 		terrain.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tree.o tree.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/tree.o tree.cpp
 
-warehouse.o: warehouse.cpp warehouse.h \
+obj/warehouse.o: warehouse.cpp warehouse.h \
 		building.h \
 		coordinates.h \
 		terrain.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o warehouse.o warehouse.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/warehouse.o warehouse.cpp
 
-priorityqueue.o: priorityqueue.cpp priorityqueue.h \
+obj/priorityqueue.o: priorityqueue.cpp priorityqueue.h \
 		terrain.h \
 		coordinates.h \
 		building.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o priorityqueue.o priorityqueue.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/priorityqueue.o priorityqueue.cpp
 
-blacksmith.o: blacksmith.cpp blacksmith.h \
+obj/blacksmith.o: blacksmith.cpp blacksmith.h \
 		building.h \
 		coordinates.h \
 		terrain.h \
 		settler.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o blacksmith.o blacksmith.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/blacksmith.o blacksmith.cpp
 
-road.o: road.cpp road.h \
+obj/road.o: road.cpp road.h \
 		building.h \
 		coordinates.h \
 		terrain.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o road.o road.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/road.o road.cpp
 
-buildmenuicon.o: buildmenuicon.cpp buildmenuicon.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildmenuicon.o buildmenuicon.cpp
+obj/buildmenuicon.o: buildmenuicon.cpp buildmenuicon.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/buildmenuicon.o buildmenuicon.cpp
 
-stonecutter.o: stonecutter.cpp stonecutter.h \
+obj/stonecutter.o: stonecutter.cpp stonecutter.h \
 		building.h \
 		coordinates.h \
 		terrain.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stonecutter.o stonecutter.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/stonecutter.o stonecutter.cpp
 
-cmdmenuicon.o: cmdmenuicon.cpp cmdmenuicon.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cmdmenuicon.o cmdmenuicon.cpp
+obj/cmdmenuicon.o: cmdmenuicon.cpp cmdmenuicon.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/cmdmenuicon.o cmdmenuicon.cpp
 
-ironcutter.o: ironcutter.cpp ironcutter.h \
+obj/ironcutter.o: ironcutter.cpp ironcutter.h \
 		building.h \
 		coordinates.h \
 		terrain.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ironcutter.o ironcutter.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ironcutter.o ironcutter.cpp
 
-keep.o: keep.cpp keep.h \
+obj/keep.o: keep.cpp keep.h \
 		building.h \
 		coordinates.h \
 		terrain.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o keep.o keep.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/keep.o keep.cpp
 
-qrc_media.o: qrc_media.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_media.o qrc_media.cpp
+obj/qrc_media.o: qrc_media.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/qrc_media.o qrc_media.cpp
 
-moc_mainwindow.o: moc_mainwindow.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+obj/moc_mainwindow.o: moc_mainwindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/moc_mainwindow.o moc_mainwindow.cpp
 
-moc_gamewindow.o: moc_gamewindow.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_gamewindow.o moc_gamewindow.cpp
+obj/moc_gamewindow.o: moc_gamewindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/moc_gamewindow.o moc_gamewindow.cpp
 
-moc_terrainitem.o: moc_terrainitem.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_terrainitem.o moc_terrainitem.cpp
+obj/moc_terrainitem.o: moc_terrainitem.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/moc_terrainitem.o moc_terrainitem.cpp
 
-moc_settleritem.o: moc_settleritem.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_settleritem.o moc_settleritem.cpp
+obj/moc_settleritem.o: moc_settleritem.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/moc_settleritem.o moc_settleritem.cpp
 
-moc_buildmenuicon.o: moc_buildmenuicon.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_buildmenuicon.o moc_buildmenuicon.cpp
+obj/moc_buildmenuicon.o: moc_buildmenuicon.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/moc_buildmenuicon.o moc_buildmenuicon.cpp
 
-moc_cmdmenuicon.o: moc_cmdmenuicon.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_cmdmenuicon.o moc_cmdmenuicon.cpp
+obj/moc_cmdmenuicon.o: moc_cmdmenuicon.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/moc_cmdmenuicon.o moc_cmdmenuicon.cpp
 
 ####### Install
 
