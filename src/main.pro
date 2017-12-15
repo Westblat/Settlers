@@ -77,3 +77,5 @@ RESOURCES += \
 
 
 FORMS +=
+
+OBJECTS_DIR = obj

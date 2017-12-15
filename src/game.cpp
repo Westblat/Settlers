@@ -6,8 +6,7 @@ Game::Game() {
     //std::cout << *map<<std::endl;
     settlers.push_back(new Settler("Bob", new Coordinates(20,20)));
     settlers[0]->setEnemy();
-    settlers[0]->setDelay(10000000000000000);
-    Game::addBuilding(5, (map->get_map()[1][1])->getLocation(), true);
+    settlers[0]->setDelay(200);
 }
 
 Game::~Game() {
@@ -290,38 +289,32 @@ void Game::cutSwords(Settler *settler){
     Building *bm = map->getTerrain(bm_loc)->getBuilding();
 
     if(map->getTerrain(settler->getLocation())->getBuildingType() == 5){
-        std::cout << "making swords" << std::endl;
         if(settler->removeItem(2)){
             settler->addItem(3);
         }else{
-            std::cout << "going to warehouse" << std::endl;
             pathToNearbyBuilding(settler, 2);
         }
     }
     else if (!settler->inventoryFull() && map->getTerrain(s_loc)->getBuildingType() == 2){
-                    std::cout << "going to warehouse" << std::endl;
         Building *warehouse = map->getTerrain(settler->getLocation())->getBuilding();
         for(int it = 0; it != (int)warehouse->getInventory().first.size(); it++){
             if(warehouse->getInventory().first[it] == 2){
                 settler->addItem(2);
-                warehouse->removeItem(it);
+                warehouse->removeItem(2);
                 it--;
                 return;
             }
         }
     }
     else if (settler->inventoryFull() && settler->getItems()[4] == 2){
-        std::cout << "going to smith" << std::endl;
         pathToNearbyBuilding(settler, 5);
     }
     else if (!settler->inventoryEmpty() && settler->getItems()[4] != 2 && map->getTerrain(s_loc)->getBuildingType() == 2){
-        std::cout << "mpty items" << std::endl;
         for(int i = 0; i != (int)(settler->getItems().size()); i++) {
             map->getTerrain(s_loc)->getBuilding()->addItem(settler->getItems()  [i]);
         }
         settler->emptyInventory();
     } else {
-        std::cout<<"toThewarehouse"<<std::endl;
         pathToNearbyBuilding(settler, 2);
     }
     //std::cout << "fuck this shit" << std::endl;
@@ -344,7 +337,7 @@ void Game::buildBuilding(Settler *settler){
         for(int it = 0; it != (int)warehouse->getInventory().first.size(); it++){
             if(warehouse->getInventory().first[it] == requirements[0]){
                 settler->addItem(requirements[0]);
-                warehouse->removeItem(it);
+                warehouse->removeItem(requirements[0]);
                 it--;
                 return;
             }
@@ -439,10 +432,9 @@ void Game::combat(Settler *settler){
                 if(i->getReadiness()){
                     for(auto it : i->getInventory().first){
                         if(it == 3){
-                            if(def_loc == i->getLocation()){
+                            if(*def_loc == (*i->getLocation())){
                                 i->removeItem(3);
                                 settler->addItem(3);
-                                std::cout<<"Got a sword"<<std::endl;
                                 break;
                             }
                             else{
