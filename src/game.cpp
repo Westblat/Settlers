@@ -330,6 +330,7 @@ void Game::enemy(Settler *settler){
     }
 
     if ( map->getTerrain(settler->getLocation())->getBuildingType() != -1){
+        
         if(map->getTerrain(settler->getLocation())->getBuilding()->takeDamage()){
 
             House *destroyed;
@@ -363,10 +364,21 @@ void Game::enemy(Settler *settler){
     }
 }
 
+/*void Game::combat(Settler *settler){
+    if(settler->getLocation() == Enemies[0].getLocation()){
+        if(Enemies[0]->removeHp(2) == 0){
+            Enemies[0]
+        }
+    }
+}*/
+
+
 void Game::test(){
     addBuilding(1, (map->get_map()[3][3])->getLocation(), true);
+    addBuilding(1, (map->get_map()[6][6])->getLocation(), true);
     Settler *settler = new Settler("John Cena", new Coordinates(1,1));
     settlers.push_back(settler);
-    settlers[2]->setEnemy();
-
+    //settlers[2]->setEnemy();
+    settlers[1]->teleport(5,5);
+    settlers[0]->teleport(4,5);
 }
