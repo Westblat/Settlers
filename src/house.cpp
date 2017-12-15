@@ -16,7 +16,7 @@ House::House(Terrain *terrain, bool initialize) : Building(1,10,initialize), ter
 House::~House(){
     for(std::vector<Settler*>::iterator it = habitants.begin(); it!= habitants.end(); it++){
         std::cout << "asdasd" << std::endl;
-        delete *it;
+        //delete *it;
     }
     
     /*for(auto i : this->habitants){

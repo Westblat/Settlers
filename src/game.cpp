@@ -128,15 +128,18 @@ bool Game::simulate(){
     for(std::vector<Settler*>::iterator it = settlers.begin(); it !=settlers.end(); it++){
        std::cout<<"Moi"<<std::endl;
        if((**it).getDelay() > 0 ){
+        std::cout<<"Moi1"<<std::endl;
         (**it).reduceDelay();
        }else{
            if((**it).move()){
+               std::cout<<"Moi2"<<std::endl;
                (**it).setDelay(0);
            }else {
+               std::cout<<"Moi3"<<std::endl;
                checkTask((**it).getTask(), *it);
            }
        }
-        //std::cout << **it << std::endl;        
+        std::cout << **it << std::endl;        
     }
     return true;
 }
@@ -321,29 +324,34 @@ void Game::buildBuilding(Settler *settler){
 }
 
 void Game::enemy(Settler *settler){
-    
+    std::cout<<"hyi"<<std::endl;
     if ( map->getTerrain(settler->getLocation())->getBuildingType() != -1){
         if(map->getTerrain(settler->getLocation())->getBuilding()->takeDamage()){
-            
+
             for(std::vector<House*>::iterator it = houses.begin(); it != houses.end(); it++){
+                
                 if((**it) == *(map->getTerrain(settler->getLocation())->getBuilding())){
+                    
                     std::vector<Settler*> tobeDeleted = (*it)->getHabitants();
-                    for(std::vector<Settler*>::iterator it = settlers.begin(); it != settlers.end(); it++){
+                    
+                    for(std::vector<Settler*>::iterator ite = settlers.begin(); ite != settlers.end(); ite++){
+                        
                         for(std::vector<Settler*>::iterator iter = tobeDeleted.begin(); iter != tobeDeleted.end(); iter++){
-                            if((**iter) == (**it)){
+                            if((**iter) == (**ite)){
                                 std::cout<<"plz ei"<<std::endl;
-                                settlers.erase(it);
-                                delete *it;
+                                settlers.erase(ite);
+                                delete *iter;
+                                
                             }
+                            
                         }
+                        
                     }
                     
                     
 
                 }
             }
-            
-            
             
             removeBuilding( map->getTerrain(settler->getLocation())->getBuilding());
         }
