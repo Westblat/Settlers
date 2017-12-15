@@ -137,7 +137,9 @@ bool Game::simulate(){
        }else{
            if((**it).move()){
                std::cout<<"Moi2"<<std::endl;
-               (**it).setDelay(0);
+               if((*it)->controlled()){
+                   (**it).setDelay(0);
+               }else{(**it).setDelay(1);}
            }else {
                std::cout<<"Moi3"<<std::endl;
                checkTask((**it).getTask(), *it);
@@ -189,7 +191,9 @@ int Game::checkTask(int task, Settler *settler) {
         cutStone(settler);
     } else if (task == 4){
         cutIron(settler);
-    } 
+    } else if (task == 8){
+        combat(settler);
+    }
     return 0;
 }
 
@@ -430,7 +434,10 @@ void Game::combat(Settler *settler){
             }
         }
         else {
-            settler->setPath(map->solvePath(def_loc,bob_loc));
+            std::stack<std::pair<int, int> > path = map->solvePath(def_loc,bob_loc);
+            std::stack<std::pair<int, int> > step;
+            step.push(path.top());
+            settler->setPath(step);
         }
     }
 }
