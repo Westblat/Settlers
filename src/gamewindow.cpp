@@ -159,6 +159,7 @@ void GameWindow::draw_terrain(QGraphicsScene *scene) {
 		x += tilesize;
 		connect(titem, SIGNAL(clicked(int, int)), this, SLOT(getSiteLocation(int, int)));
 		connect(titem, SIGNAL(rightclicked(int, int)), this, SLOT(cancel()));
+        terrainitems.push_back(titem);
     }
     //next row
     y += tilesize;
@@ -234,8 +235,14 @@ void GameWindow::refresh() {
 		for (auto i : buildingitems) {
 			scene->removeItem(i);
 		}
-		buildingitems.clear();
-		draw_buildings(scene);
+        buildingitems.clear();
+
+        for (auto i : terrainitems) {
+            scene->removeItem(i);
+        }
+        terrainitems.clear();
+        draw_terrain(scene);
+        draw_buildings(scene);
 	}
 
 	// REFRESH SETTLERS

@@ -64,6 +64,7 @@ private:
 	std::vector<BuildingItem*> buildingitems;
     std::vector<Settler*> settlers;
     std::vector<SettlerItem*> settleritems;
+    std::vector<TerrainItem*> terrainitems;
 
 	int tilesize = 64; // images used are 64x64 pixels
 	int refresh_time = 200; // milliseconds, after how much time locations update on screen, 100 ms = 10 fps
