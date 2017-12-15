@@ -67,7 +67,7 @@ private:
     std::vector<TerrainItem*> terrainitems;
 
 	int tilesize = 64; // images used are 64x64 pixels
-	int refresh_time = 200; // milliseconds, after how much time locations update on screen, 100 ms = 10 fps
+	int refresh_time = 400; // milliseconds, after how much time locations update on screen, 100 ms = 10 fps
 
 	QPushButton *menu_button;
 

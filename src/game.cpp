@@ -6,7 +6,7 @@ Game::Game() {
     //std::cout << *map<<std::endl;
     settlers.push_back(new Settler("Bob", new Coordinates(20,20)));
     settlers[0]->setEnemy();
-    settlers[0]->setDelay(200);
+    settlers[0]->setDelay(1000);
 }
 
 Game::~Game() {
@@ -285,8 +285,6 @@ void Game::cutIron(Settler *settler) {
 
 void Game::cutSwords(Settler *settler){
     Coordinates *s_loc = settler->getLocation();
-    Coordinates *bm_loc = map->findNearby(s_loc, 5);
-    Building *bm = map->getTerrain(bm_loc)->getBuilding();
 
     if(map->getTerrain(settler->getLocation())->getBuildingType() == 5){
         if(settler->removeItem(2)){
@@ -458,14 +456,14 @@ void Game::combat(Settler *settler){
                 if(settlers[0]->removeHP(2) == 0){
                     settlers[0]->teleport(20,20);
                     settlers[0]->addHP(12);
-                    settlers[0]->setDelay(100);
+                    settlers[0]->setDelay(500);
                 }
             }
             else{
                 if(settlers[0]->removeHP(4) == 0){
                     settlers[0]->teleport(20,20);
                     settlers[0]->addHP(14);
-                    settlers[0]->setDelay(1000);
+                    settlers[0]->setDelay(500);
                 }
             }
         }
