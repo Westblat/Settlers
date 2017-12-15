@@ -325,36 +325,37 @@ void Game::buildBuilding(Settler *settler){
 }
 
 void Game::enemy(Settler *settler){
-    std::cout<<"hyi"<<std::endl;
+    if(!map->contains(settler->location())){
+        //settler->teleport(20,13);
+    }
+
     if ( map->getTerrain(settler->getLocation())->getBuildingType() != -1){
         if(map->getTerrain(settler->getLocation())->getBuilding()->takeDamage()){
 
-            for(std::vector<House*>::iterator it = houses.begin(); it != houses.end(); it++){
-                
-                if((**it) == *(map->getTerrain(settler->getLocation())->getBuilding())){
-                    
-                    std::vector<Settler*> tobeDeleted = (*it)->getHabitants();
-                    
-                    for(std::vector<Settler*>::iterator ite = tobeDeleted.begin(); ite != tobeDeleted.end(); ite++){
-                        
-                        for(std::vector<Settler*>::iterator iter = settlers.begin(); iter != settlers.end(); iter++){
-                            if((**iter) == (**ite)){
-                                std::cout<<"plz ei"<<std::endl;
-                                settlers.erase(iter);
-                                delete *iter;
-                                break;                                
-                            }
-                            
-                        }
-                        
-                    }
-                    
-                    
+            House *destroyed;
 
+            //Find house located where attacker is
+            for(std::vector<House*>::iterator it = houses.begin(); it != houses.end(); it++){
+                if((**it) == *(map->getTerrain(settler->getLocation())->getBuilding())){
+                    destroyed = *it;
+                    break;
                 }
             }
-            
-            removeBuilding( map->getTerrain(settler->getLocation())->getBuilding());
+
+            //Settlers living in house are killed even though they are not there
+            std::vector<Settler*> tobeDeleted = destroyed->getHabitants();
+
+            //Removes settlers from settler vector, so they can be deleted safely
+            for(std::vector<Settler*>::iterator ite = tobeDeleted.begin(); ite != tobeDeleted.end(); ite++){
+                for(std::vector<Settler*>::iterator iter = settlers.begin(); iter != settlers.end(); iter++){
+                    if((**iter) == (**ite)){
+                    settlers.erase(iter);
+                    break;
+                    }
+                }
+            }
+            removeBuilding(destroyed);
+            settler->setDelay(5);
         }
 
     } else {
