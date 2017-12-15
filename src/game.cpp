@@ -99,11 +99,17 @@ void Game::addBuilding(int type, Coordinates *location, bool initialize){
         notReady.push_back(building);
     }
     } else if(type == 5){
-        Blacksmith *blacksmith = new Blacksmith(map->getTerrain(location), initialize);
-        buildings.push_back(blacksmith);
+        Blacksmith *building = new Blacksmith(map->getTerrain(location), initialize);
+        buildings.push_back(building);
+        if(!initialize){
+        notReady.push_back(building);
+    }
     } else if(type == 6){
-        Keep *keep = new Keep(map->getTerrain(location), initialize);
-        buildings.push_back(keep);
+        Keep *building = new Keep(map->getTerrain(location), initialize);
+        buildings.push_back(building);
+        if(!initialize){
+        notReady.push_back(building);
+    }
     } else if(type == 7){
         Road *road = new Road(map->getTerrain(location), initialize, type);
         buildings.push_back(road);
