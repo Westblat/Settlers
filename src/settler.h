@@ -57,4 +57,7 @@ private:
 
 std::ostream& operator <<(std::ostream& os, Settler& settler);
 
+bool operator==(Settler &a, Settler &b);
+
+
 #endif

@@ -38,6 +38,7 @@ private:
     std::vector<Building*> buildings;
     std::vector<Settler*> settlers;
     std::vector<Building*> notReady;
+    std::vector<House*> houses;
     /* Types for task:
     0 = idle
     1 = build

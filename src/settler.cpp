@@ -151,3 +151,8 @@ std::ostream& operator <<(std::ostream& os, Settler& settler){
 	os << "His name is "<< settler.getName();
 	return os;
 }
+
+bool operator==(Settler &a, Settler &b){
+    return a.getName() == b.getName();
+}
+

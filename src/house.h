@@ -16,4 +16,6 @@ private:
     std::vector<Settler*> habitants;
 };
 
+bool operator==(House &a, Building &b);
+
 #endif

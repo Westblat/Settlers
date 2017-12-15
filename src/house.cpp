@@ -36,3 +36,7 @@ Coordinates* House::getLocation() {
 std::vector<Settler*> House::getHabitants(){
     return habitants;
 }
+
+bool operator==(House &a, Building &b){
+    return a.getLocation() == b.getLocation();
+}

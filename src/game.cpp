@@ -74,6 +74,7 @@ void Game::addBuilding(int type, Coordinates *location, bool initialize){
         buildings.push_back(building);
         addSettler(building,location);
         addSettler(building,location);
+        houses.push_back(building);
         if(!initialize){
         notReady.push_back(building);
     }
@@ -323,11 +324,26 @@ void Game::enemy(Settler *settler){
     
     if ( map->getTerrain(settler->getLocation())->getBuildingType() != -1){
         if(map->getTerrain(settler->getLocation())->getBuilding()->takeDamage()){
-            std::cout<<"plz ei"<<std::endl;
-            std::vector<Settler*> tobeDeleted = map->getTerrain(settler->getLocation())->getBuilding()->getHabitants();
-            for(std::vector<Settler*>::iterator it = tobeDeleted.begin(); it != tobeDeleted.end(); it++){
+            
+            for(std::vector<House*>::iterator it = houses.begin(); it != houses.end(); it++){
+                if((**it) == *(map->getTerrain(settler->getLocation())->getBuilding())){
+                    std::vector<Settler*> tobeDeleted = (*it)->getHabitants();
+                    for(std::vector<Settler*>::iterator it = settlers.begin(); it != settlers.end(); it++){
+                        for(std::vector<Settler*>::iterator iter = tobeDeleted.begin(); iter != tobeDeleted.end(); iter++){
+                            if((**iter) == (**it)){
+                                std::cout<<"plz ei"<<std::endl;
+                                settlers.erase(it);
+                                delete *it;
+                            }
+                        }
+                    }
+                    
+                    
 
+                }
             }
+            
+            
             
             removeBuilding( map->getTerrain(settler->getLocation())->getBuilding());
         }
