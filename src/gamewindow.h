@@ -45,8 +45,6 @@ public:
 	QGraphicsView *buildview;
 	QGraphicsScene *commandscene;
 	QGraphicsView *commandview;
-	QGraphicsScene *resscene;
-	QGraphicsView *resview;
 
 	bool buildmode;
 	int newBuildingType = -1;
