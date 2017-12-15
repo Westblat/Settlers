@@ -147,6 +147,10 @@ bool Settler::reduceDelay() {
 // Returns the delay
 int Settler::getDelay() { return actionDelay; }
 
+void Settler::teleport(int x, int y){
+	location->updateCoords(x,y);
+}
+
 std::ostream& operator <<(std::ostream& os, Settler& settler){
 	os << "His name is "<< settler.getName();
 	return os;

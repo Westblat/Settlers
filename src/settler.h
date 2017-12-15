@@ -41,6 +41,7 @@ public:
 	void setDelay(int time);
 	bool reduceDelay();
 	int getDelay();
+    void teleport(int x, int y);
 
 private:
 	std::string name; // Settlers name
