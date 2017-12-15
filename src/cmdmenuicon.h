@@ -9,11 +9,13 @@
 class cmdMenuIcon : public QObject, public QGraphicsPixmapItem {
 	Q_OBJECT
 public:
-	cmdMenuIcon(QGraphicsItem *parent = 0);
+	cmdMenuIcon(int type, QGraphicsItem *parent = 0);
+	void mousePressEvent(QGraphicsSceneMouseEvent *event);
 private:
+	int cmdtype;
 
 signals:
-	
+	void clicked(int cmdtype);
 };
 
 #endif

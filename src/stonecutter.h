@@ -9,7 +9,7 @@ public:
     Stonecutter(Terrain *terrain, bool initialize);
     ~Stonecutter();
     Coordinates* getLocation();
-    void setReady();
+    virtual void setReady();
 private:
     Terrain *terrain;
 

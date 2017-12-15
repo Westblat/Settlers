@@ -21,7 +21,8 @@
 #include "cmdmenuicon.h"
 
 /*
-Imagefiles taken from kenney.nl!
+Imagefiles taken from kenney.nl and other "free use"-places!
+Most are slightly modified.
 */
 
 class Map;
@@ -33,6 +34,7 @@ class GameWindow : public QWidget {
 
 public:
 	explicit GameWindow(QWidget *parent = 0);
+
 	void draw_terrain(QGraphicsScene* scene);
 	void draw_buildings(QGraphicsScene* scene);
 	void draw_settlers(QGraphicsScene* scene);
@@ -43,11 +45,12 @@ public:
 	QGraphicsView *buildview;
 	QGraphicsScene *commandscene;
 	QGraphicsView *commandview;
-	QGraphicsScene *resscene;
-	QGraphicsView *resview;
 
 	bool buildmode;
 	int newBuildingType = -1;
+
+	bool commandmode;
+	int selectedSettler = -1;
 
 private:
 	Game game; // creates the game
@@ -63,25 +66,21 @@ private:
     std::vector<SettlerItem*> settleritems;
 
 	int tilesize = 64; // images used are 64x64 pixels
-	int refresh_time = 1000; // milliseconds, after how much time locations update on screen, 40 ms = roughly 25 fps
-
-	//int x; //used for debugging timer
+	int refresh_time = 200; // milliseconds, after how much time locations update on screen, 100 ms = 10 fps
 
 	QPushButton *menu_button;
 
 public slots:
 	void ShowMainMenu();
-	void refresh();
-	void moveSettlers();
-	void refreshBuildings();
+	void refresh();								// refreshes building- and settlervectors
+	void moveSettlers();						// moves the settlers
+	void refreshBuildings();					// checks readiness of buildings and changes image accordingly
 
-	void selectBuildingLocation(int type);
-	void getSiteLocation(Terrain *terrain);
-	void cancelBuild();
-	void giveCommand();
-
-	void randomLocation(); //debug function, gives settlers and buildings random new locations
-	void removeHP(); //debug, destroys buildings
+	void selectBuildingType(int type);			// sets buildmode to true, selects the type of building
+	void getSiteLocation(int x, int y);			// builds a new building in the left-clicked location
+	void cancel();								// sets both modes to false
+	void giveCommand(int n);					// selects a settler
+	void selectCommand(int cmd);				// selects the command and gives this command to the selected settler
 };
 
 #endif

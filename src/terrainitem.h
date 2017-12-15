@@ -6,22 +6,19 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QObject>
 
-#include "terrain.h"
-
 class TerrainItem : public QObject, public QGraphicsPixmapItem {
 	Q_OBJECT
 public:
-	TerrainItem(int type, Terrain *terrainptr, QGraphicsItem *parent = 0);
-	Terrain *getTerrain() {return terrain;};
+	TerrainItem(int type, int coord_x, int coord_y, QGraphicsItem *parent = 0);
 	void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
 private:
-	Terrain *terrain;
+	int x;
+	int y;
 
 signals:
-	void clicked(Terrain *terrain);
-	void rightclicked(Terrain *terrain);
-	//void clicked(int i);
+	void clicked(int x, int y);
+	void rightclicked(int x, int y);
 };
 
 #endif

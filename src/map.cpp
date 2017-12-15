@@ -132,7 +132,7 @@ std::stack<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates* 
                         else if(v->getType() == 3){new_distance = distances[uposindex] + 3;}
                         else{new_distance = distances[uposindex] + 10;}
                     }
-                    else if (v->getBuildingType() == 7){new_distance = distances[uposindex] + 1;}
+                    else if (v->getBuildingType() == 7 || v->getBuildingType() == 8 || v->getBuildingType() == 9){new_distance = distances[uposindex] + 1;}
                     else{new_distance = distances[uposindex] + 4;}
                     //__________________________________________________________________*/
                     if (new_distance < distances[vposindex]) {
@@ -233,7 +233,7 @@ Coordinates* Map::findNearby(Coordinates *s, int building){
                         else if(v->getType() == 3){new_distance = distances[uposindex] + 3;}
                         else{new_distance = distances[uposindex] + 10;}
                     }
-                    else if (v->getBuildingType() == 7){new_distance = distances[uposindex] + 1;}
+                    else if (v->getBuildingType() == 7 || v->getBuildingType() == 8 || v->getBuildingType() == 9){new_distance = distances[uposindex] + 1;}
                     else{new_distance = distances[uposindex] + 4;}
                     //__________________________________________________________________*/
                     if (new_distance < distances[vposindex]) {
