@@ -4,6 +4,10 @@ Game::Game() {
     map = new Map(21,21);
     map->setMap();
     //std::cout << *map<<std::endl;
+    Settler *settler = new Settler("Bob", new Coordinates(20,20));
+    settler->setEnemy();
+    settler->setDelay(100);
+    settlers.push_back(settler);
 }
 
 Game::~Game() {
@@ -125,7 +129,7 @@ std::vector<Settler*> Game::getSettlers() {return settlers;}
 std::vector<Building*> Game::getBuildings() {return buildings;}
 
 bool Game::simulate(){
-    for(std::vector<Settler*>::iterator it = settlers.begin(); it !=settlers.end(); it++){
+    for(std::vector<Settler*>::reverse_iterator it = settlers.rbegin(); it !=settlers.rend(); it++){
        std::cout<<"Moi"<<std::endl;
        std::cout<< (*it)->getDelay() << std::endl;
        if((**it).getDelay() > 0 ){
@@ -325,8 +329,10 @@ void Game::buildBuilding(Settler *settler){
 }
 
 void Game::enemy(Settler *settler){
-    if(!map->contains(settler->location())){
-        //settler->teleport(20,13);
+    if(*(settler->getLocation())==*(map->getTerrain(20,20)->getLocation())){
+        std::cout<<"tp";
+        settler->teleport(20,13);
+        return;
     }
 
     if ( map->getTerrain(settler->getLocation())->getBuildingType() != -1){
@@ -376,9 +382,5 @@ void Game::enemy(Settler *settler){
 void Game::test(){
     addBuilding(1, (map->get_map()[3][3])->getLocation(), true);
     addBuilding(1, (map->get_map()[6][6])->getLocation(), true);
-    Settler *settler = new Settler("John Cena", new Coordinates(1,1));
-    settlers.push_back(settler);
-    //settlers[2]->setEnemy();
-    settlers[1]->teleport(5,5);
-    settlers[0]->teleport(4,5);
+
 }
