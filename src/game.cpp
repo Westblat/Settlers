@@ -127,6 +127,7 @@ std::vector<Building*> Game::getBuildings() {return buildings;}
 bool Game::simulate(){
     for(std::vector<Settler*>::iterator it = settlers.begin(); it !=settlers.end(); it++){
        std::cout<<"Moi"<<std::endl;
+       std::cout<< (*it)->getDelay() << std::endl;
        if((**it).getDelay() > 0 ){
         std::cout<<"Moi1"<<std::endl;
         (**it).reduceDelay();
@@ -138,7 +139,7 @@ bool Game::simulate(){
                std::cout<<"Moi3"<<std::endl;
                checkTask((**it).getTask(), *it);
            }
-       }
+       }    
         std::cout << **it << std::endl;        
     }
     return true;
@@ -334,14 +335,14 @@ void Game::enemy(Settler *settler){
                     
                     std::vector<Settler*> tobeDeleted = (*it)->getHabitants();
                     
-                    for(std::vector<Settler*>::iterator ite = settlers.begin(); ite != settlers.end(); ite++){
+                    for(std::vector<Settler*>::iterator ite = tobeDeleted.begin(); ite != tobeDeleted.end(); ite++){
                         
-                        for(std::vector<Settler*>::iterator iter = tobeDeleted.begin(); iter != tobeDeleted.end(); iter++){
+                        for(std::vector<Settler*>::iterator iter = settlers.begin(); iter != settlers.end(); iter++){
                             if((**iter) == (**ite)){
                                 std::cout<<"plz ei"<<std::endl;
-                                settlers.erase(ite);
+                                settlers.erase(iter);
                                 delete *iter;
-                                
+                                break;                                
                             }
                             
                         }

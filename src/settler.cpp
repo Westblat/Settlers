@@ -153,6 +153,7 @@ std::ostream& operator <<(std::ostream& os, Settler& settler){
 }
 
 bool operator==(Settler &a, Settler &b){
-    return a.getName() == b.getName();
+    
+	return a.getName().compare(b.getName()) == 0;
 }
 
