@@ -226,8 +226,8 @@ void GameWindow::refresh() {
 
 	game.simulate(); // drives game one step forward
 
-	// REFRESH BUILDINGS
-	// if amount of buildings changes, redraw the buildings
+    // REFRESH BUILDINGS AND TERRAIN
+    // if amount of buildings changes, redraw the buildings and terrain
 	std::vector<Building*> newbuildings = game.getBuildings();
 	if (buildings.size() != newbuildings.size()) {
 		buildings.clear();
