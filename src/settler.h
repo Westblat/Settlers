@@ -26,6 +26,8 @@ public:
     void emptyInventory();
     bool inventoryFull();
     bool inventoryEmpty();
+    bool controlled() {return playerControlled;};
+    void setEnemy();
 
 	int getHP();
 	int removeHP(int hpChange);

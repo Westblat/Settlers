@@ -31,6 +31,8 @@ public:
     void cutStone(Settler *settler);
     void cutIron(Settler *settler);
     void buildBuilding(Settler *settler);
+    void enemy(Settler *settler);
+    void test();
 private:
     Map *map;
     std::vector<Building*> buildings;

@@ -77,6 +77,10 @@ bool Settler::inventoryEmpty(){
 	}
 }
 
+void Settler::setEnemy(){
+	this->playerControlled = false;
+}
+
 int Settler::getHP() { return hp; }
 
 // Function that removes a given value from the settlers hp and returns the health the settler has after the addition, if the health were to go below 0 it is set to 0

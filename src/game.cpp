@@ -125,7 +125,7 @@ std::vector<Building*> Game::getBuildings() {return buildings;}
 
 bool Game::simulate(){
     for(std::vector<Settler*>::iterator it = settlers.begin(); it !=settlers.end(); it++){
-       if((**it).getDelay() > 0){
+       if((**it).getDelay() > 0 ){
         (**it).reduceDelay();
        }else{
            if((**it).move()){
@@ -148,6 +148,7 @@ bool Game::simulate(){
     6 = empty inventory
     7 = get item
     8 = combat
+    9 = enemy
     */
 
 void Game::pathToNearbyBuilding(Settler *settler, int building){
@@ -167,6 +168,10 @@ bool Game::atWarehouse(Settler *settler){
 }
 
 int Game::checkTask(int task, Settler *settler) {
+    if(!(settler->controlled())){
+        enemy(settler);
+    }
+    
     if(task == 1){
         buildBuilding(settler);
     }else if(task == 2){
@@ -311,4 +316,24 @@ void Game::buildBuilding(Settler *settler){
         std::cout <<(*(*settler).getLocation()) <<std::endl;
         std::cout <<(*(*buildThis).getLocation()) <<std::endl;
     }
+}
+
+void Game::enemy(Settler *settler){
+    
+    if ( map->getTerrain(settler->getLocation())->getBuildingType() != -1){
+        if(map->getTerrain(settler->getLocation())->getBuilding()->takeDamage()){
+            removeBuilding( map->getTerrain(settler->getLocation())->getBuilding());
+        }
+
+    } else {
+        pathToNearbyBuilding(settler, 1);
+    }
+}
+
+void Game::test(){
+    addBuilding(1, (map->get_map()[3][3])->getLocation(), true);
+    Settler *settler = new Settler("John Cena", new Coordinates(1,1));
+    settlers.push_back(settler);
+    settlers[2]->setEnemy();
+
 }
