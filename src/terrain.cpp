@@ -43,6 +43,9 @@ std::vector<int> Terrain::availableBuildings(){
             available.push_back(2);
             available.push_back(5);
             available.push_back(6);
+            available.push_back(7);
+            available.push_back(8);
+            available.push_back(9);
         }
         else if (type == 1){
             available.push_back(3);
