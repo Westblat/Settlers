@@ -6,8 +6,6 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QObject>
 
-#include "terrain.h"
-
 class TerrainItem : public QObject, public QGraphicsPixmapItem {
 	Q_OBJECT
 public:
