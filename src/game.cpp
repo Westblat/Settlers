@@ -289,7 +289,7 @@ void Game::cutSwords(Settler *settler){
     Coordinates *bm_loc = map->findNearby(s_loc, 5);
     Building *bm = map->getTerrain(bm_loc)->getBuilding();
 
-    if(s_loc == bm_loc){
+    if(map->getTerrain(settler->getLocation())->getBuildingType() == 5){
         std::cout << "making swords" << std::endl;
         if(settler->removeItem(2)){
             settler->addItem(3);
@@ -297,31 +297,6 @@ void Game::cutSwords(Settler *settler){
             std::cout << "going to warehouse" << std::endl;
             pathToNearbyBuilding(settler, 2);
         }
-        
-        
-       /* if(bm->removeItem(2)){
-            if(bm->addItem(3)){
-                std::cout<<"Sword made"<<std::endl;
-                settler->setDelay(5);
-            }
-            else{
-                std::cout<<"Unexpected result making swords, no sword created"<<std::endl;
-            }
-        }*/
-        /*else if(!settler->inventoryEmpty()){
-            for(int i = 0; i != (int)(settler->getItems().size()); i++) {
-                bm->addItem(items[i]);
-            }
-            settler->emptyInventory();
-        }*/
-        /*else{
-            while(bm->getInventory().first.size() > 0 && !(settler->inventoryFull())) {
-                if(settler->addItem(bm->getInventory().first[0])){
-                    bm->removeItem(bm->getInventory().first[0]);
-                }else{break;}
-            }
-            pathToNearbyBuilding(settler, 2);
-        }*/
     }
     else if (!settler->inventoryFull() && map->getTerrain(s_loc)->getBuildingType() == 2){
                     std::cout << "going to warehouse" << std::endl;
@@ -336,8 +311,7 @@ void Game::cutSwords(Settler *settler){
         }
     }
     else if (settler->inventoryFull() && settler->getItems()[4] == 2){
-                    std::cout << "going to smith" << std::endl;
-
+        std::cout << "going to smith" << std::endl;
         pathToNearbyBuilding(settler, 5);
     }
     else if (!settler->inventoryEmpty() && settler->getItems()[4] != 2 && map->getTerrain(s_loc)->getBuildingType() == 2){
@@ -346,8 +320,11 @@ void Game::cutSwords(Settler *settler){
             map->getTerrain(s_loc)->getBuilding()->addItem(settler->getItems()  [i]);
         }
         settler->emptyInventory();
+    } else {
+        std::cout<<"toThewarehouse"<<std::endl;
+        pathToNearbyBuilding(settler, 2);
     }
-    std::cout << "fuck this shit" << std::endl;
+    //std::cout << "fuck this shit" << std::endl;
 
 }
 
