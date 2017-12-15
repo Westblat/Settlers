@@ -4,6 +4,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
 
 	setWindowTitle("The Settlers");
     setFixedSize(1000, 800);
+    this->move(50,50);
  
     QGridLayout *grid = new QGridLayout;
     setLayout(grid);
@@ -84,15 +85,25 @@ void GameWindow::selectBuildingType(int type) {
 }
  
 void GameWindow::getSiteLocation(int x, int y) {
-	// Builds a new building in the given location
+    // Builds a new building in the given location, if terrain allows
 
-	if (buildmode == true) {
+    buildmode = false;
+    std::vector<int> av_buildings = terrain_map[x][y]->availableBuildings();
+
+    for(std::vector<int>::iterator type = av_buildings.begin(); type != av_buildings.end(); type++){
+        if(*type == newBuildingType){
+            std::cout<<*type;
+            buildmode = true;
+        }
+    }
+
+    if (buildmode == true) {
 
 		BuildingItem *buildingitem;
 
 		game.addBuilding(newBuildingType, terrain_map[x][y]->getLocation(), false);
 
-		buildings = game.getBuildings();
+        buildings = game.getBuildings();
 
 		buildingitem = new BuildingItem(buildings.back()->getType(), buildings.back()->getReadiness(), buildings.back()->getHp());
 
