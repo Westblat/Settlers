@@ -4,10 +4,9 @@ Game::Game() {
     map = new Map(21,21);
     map->setMap();
     //std::cout << *map<<std::endl;
-    Settler *settler = new Settler("Bob", new Coordinates(20,20));
-    settler->setEnemy();
-    settler->setDelay(100);
-    settlers.push_back(settler);
+    settlers.push_back(new Settler("Bob", new Coordinates(20,20)));
+    settlers[0]->setEnemy();
+    settlers[0]->setDelay(100);
 }
 
 Game::~Game() {
@@ -182,7 +181,7 @@ int Game::checkTask(int task, Settler *settler) {
     if(!(settler->controlled())){
         enemy(settler);
     }
-    
+
     if(task == 1){
         buildBuilding(settler);
     }else if(task == 2){
@@ -284,6 +283,57 @@ void Game::cutIron(Settler *settler) {
 	else {
 		pathToNearbyBuilding(settler, 4);
 	}
+}
+
+void Game::cutSwords(Settler *settler){
+    Coordinates *s_loc = settler->getLocation();
+    Coordinates *bm_loc = map->findNearby(s_loc, 5);
+    Building *bm = map->getTerrain(bm_loc)->getBuilding();
+
+    if(s_loc == bm_loc){
+        if(bm->removeItem(2)){
+            if(bm->addItem(3)){
+                std::cout<<"Sword made"<<std::endl;
+                settler->setDelay(5);
+            }
+            else{
+                std::cout<<"Unexpected result making swords, no sword created"<<std::endl;
+            }
+        }
+        else if(!settler->inventoryEmpty()){
+            for(int i = 0; i != (int)(settler->getItems().size()); i++) {
+                bm->addItem(items[i]);
+            }
+            settler->emptyInventory();
+        }
+        else{
+            while(bm->getInventory().first.size() > 0 && !(settler->inventoryFull())) {
+                if(settler->addItem(bm->getInventory().first[0])){
+                    bm->removeItem(bm->getInventory().first[0]);
+                }else{break;}
+            }
+            pathToNearbyBuilding(settler, 2);
+        }
+    }
+    else if (settler->inventoryFull() && settler->getItems()[0] == 2){
+        pathToNearbyBuilding(settler, 5);
+    }
+    else if (!settler->inventoryEmpty() && settler->getItems()[0] != 2 && map->getTerrain(s_loc)->getBuildingType() == 2){
+        for(int i = 0; i != (int)(settler->getItems().size()); i++) {
+            map->getTerrain(s_loc)->getBuilding()->addItem(items[i]);
+        }
+        settler->emptyInventory();
+    }
+    else if (!settler->inventoryFull() && map->getTerrain(s_loc)->getBuildingType() == 2){
+        for(int it = 0; it != (int)map->getTerrain(s_loc)->getBuildingType()->getInventory().first.size(); it++){
+            if(warehouse->getInventory().first[it] == requirements[0]){
+                settler->addItem(requirements[0]);
+                warehouse->removeItem(it);
+                it--;
+                return;
+            }
+        }
+    }
 }
 
 void Game::buildBuilding(Settler *settler){
@@ -400,6 +450,8 @@ void Game::combat(Settler *settler){
                             if(def_loc == i->getLocation()){
                                 i->removeItem(3);
                                 settler->addItem(3);
+                                std::cout<<"Got a sword"<<std::endl;
+                                break;
                             }
                             else{
                                 settler->setPath(map->solvePath(def_loc,i->getLocation()));
@@ -422,7 +474,7 @@ void Game::combat(Settler *settler){
                 if(settlers[0]->removeHP(2) == 0){
                     settlers[0]->teleport(20,20);
                     settlers[0]->addHP(12);
-                    settlers[0]->setDelay(1000);
+                    settlers[0]->setDelay(100);
                 }
             }
             else{

@@ -31,6 +31,7 @@ public:
     void cutTree(Settler *settler);
     void cutStone(Settler *settler);
     void cutIron(Settler *settler);
+    void cutSwords(Settler *settler);
     void buildBuilding(Settler *settler);
     void enemy(Settler *settler);
     void combat(Settler *settler);

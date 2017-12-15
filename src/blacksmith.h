@@ -8,8 +8,7 @@
 class Blacksmith : public Building {
 public:
 	Blacksmith(Terrain *terrain, bool initialize);
-	void addSettler(Settler *settler);
-    bool makeWeapon();
+    void addSettler(Settler *settler);
     Coordinates* getLocation();
 private:
     Terrain *terrain;
