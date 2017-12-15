@@ -7,6 +7,7 @@
 #include "stonecutter.h"
 #include "ironcutter.h"
 #include "tree.h"
+#include "keep.h"
 #include "road.h"
 #include "blacksmith.h"
 
@@ -32,7 +33,7 @@ public:
     void cutIron(Settler *settler);
     void buildBuilding(Settler *settler);
     void enemy(Settler *settler);
-    void test();
+    void combat(Settler *settler);
 private:
     Map *map;
     std::vector<Building*> buildings;

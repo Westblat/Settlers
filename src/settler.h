@@ -26,7 +26,7 @@ public:
     void emptyInventory();
     bool inventoryFull();
     bool inventoryEmpty();
-    bool controlled() {return playerControlled;};
+    bool controlled() {return playerControlled;}
     void setEnemy();
 
 	int getHP();

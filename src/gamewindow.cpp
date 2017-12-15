@@ -59,8 +59,7 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent, Qt::Window) {
     }
  
     // the buildings the player starts with
-    //game.setBuildings();
-    game.test();
+    game.setBuildings();
     buildings = game.getBuildings();
     settlers = game.getSettlers();
 

@@ -11,7 +11,6 @@ Game::Game() {
 }
 
 Game::~Game() {
-    
     for(std::vector<Building*>::iterator iter = buildings.begin(); iter!= buildings.end();iter++){
         delete *iter;
     }
@@ -101,19 +100,19 @@ void Game::addBuilding(int type, Coordinates *location, bool initialize){
         notReady.push_back(building);
     }
     } else if(type == 5){
-        Blacksmith *blacksmith = new Blacksmith(map->get_map()[location->getX()][location->getY()], initialize);
+        Blacksmith *blacksmith = new Blacksmith(map->getTerrain(location), initialize);
         buildings.push_back(blacksmith);
     } else if(type == 6){
-        //Keep
-        
+        Keep *keep = new Keep(map->getTerrain(location), initialize);
+        buildings.push_back(keep);
     } else if(type == 7){
-        Road *road = new Road(map->get_map()[location->getX()][location->getY()], initialize, type);
+        Road *road = new Road(map->getTerrain(location), initialize, type);
         buildings.push_back(road);
     } else if(type == 8){
-        Road *road = new Road(map->get_map()[location->getX()][location->getY()], initialize, type);
+        Road *road = new Road(map->getTerrain(location), initialize, type);
         buildings.push_back(road);
     } else if(type == 9){
-        Road *road = new Road(map->get_map()[location->getX()][location->getY()], initialize, type);
+        Road *road = new Road(map->getTerrain(location), initialize, type);
         buildings.push_back(road);
     }
 }
@@ -328,6 +327,7 @@ void Game::buildBuilding(Settler *settler){
     }
 }
 
+//Bob is your enemy, he is on an island, but he will find a way and wreck your houses
 void Game::enemy(Settler *settler){
     if(*(settler->getLocation())==*(map->getTerrain(20,20)->getLocation())){
         std::cout<<"tp";
@@ -370,17 +370,68 @@ void Game::enemy(Settler *settler){
     }
 }
 
-/*void Game::combat(Settler *settler){
-    if(settler->getLocation() == Enemies[0].getLocation()){
-        if(Enemies[0]->removeHp(2) == 0){
-            Enemies[0]
+void Game::combat(Settler *settler){
+    Coordinates *def_loc = settler->getLocation();
+    Coordinates *bob_loc = settlers[0]->getLocation();
+
+    if(settler->inventoryEmpty() || settler->getItems()[0] != 3){
+        if(!settler->inventoryEmpty()){
+            if(map->getTerrain(def_loc)->getType() == 2){
+                Building *building = map->getTerrain(def_loc)->getBuilding();
+                std::vector<int> items = settler->getItems();
+                for (int i = 0; i != (int)items.size(); i++){
+                    building->addItem(items[i]);
+                }
+                settler->emptyInventory();;
+            }
+            else{
+                pathToNearbyBuilding(settler, 2);
+            }
+        }
+        else{
+            for(auto i : buildings) {
+                if(i->getReadiness()){
+                    for(auto it : i->getInventory().first){
+                        if(it == 3){
+                            if(def_loc == i->getLocation()){
+                                i->removeItem(3);
+                                settler->addItem(3);
+                            }
+                            else{
+                                settler->setPath(map->solvePath(def_loc,i->getLocation()));
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
-}*/
 
-
-void Game::test(){
-    addBuilding(1, (map->get_map()[3][3])->getLocation(), true);
-    addBuilding(1, (map->get_map()[6][6])->getLocation(), true);
-
+    //If sword is not found or settler has a sword he starts to wonder if Bob is nearby
+    if(*(bob_loc) == *(map->getTerrain(20,20)->getLocation())){
+        pathToNearbyBuilding(settler, 6);
+    }
+    else{
+        if(*def_loc == *bob_loc){
+            if(settler->inventoryEmpty() || settler->getItems()[0] != 3){
+                if(settlers[0]->removeHP(2) == 0){
+                    settlers[0]->teleport(20,20);
+                    settlers[0]->addHP(12);
+                    settlers[0]->setDelay(1000);
+                }
+            }
+            else{
+                if(settlers[0]->removeHP(4) == 0){
+                    settlers[0]->teleport(20,20);
+                    settlers[0]->addHP(14);
+                    settlers[0]->setDelay(1000);
+                }
+            }
+        }
+        else {
+            settler->setPath(map->solvePath(def_loc,bob_loc));
+        }
+    }
 }
+
