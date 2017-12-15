@@ -77,6 +77,10 @@ bool Settler::inventoryEmpty(){
 	}
 }
 
+void Settler::setEnemy(){
+	this->playerControlled = false;
+}
+
 int Settler::getHP() { return hp; }
 
 // Function that removes a given value from the settlers hp and returns the health the settler has after the addition, if the health were to go below 0 it is set to 0
@@ -143,7 +147,17 @@ bool Settler::reduceDelay() {
 // Returns the delay
 int Settler::getDelay() { return actionDelay; }
 
+void Settler::teleport(int x, int y){
+	location->updateCoords(x,y);
+}
+
 std::ostream& operator <<(std::ostream& os, Settler& settler){
 	os << "His name is "<< settler.getName();
 	return os;
 }
+
+bool operator==(Settler &a, Settler &b){
+    
+	return a.getName().compare(b.getName()) == 0;
+}
+

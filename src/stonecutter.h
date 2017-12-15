@@ -10,6 +10,7 @@ public:
     ~Stonecutter();
     Coordinates* getLocation();
     virtual void setReady();
+    
 private:
     Terrain *terrain;
 

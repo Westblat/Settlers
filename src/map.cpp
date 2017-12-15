@@ -114,7 +114,7 @@ std::stack<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates* 
         int uposindex = upos->getX()*this->width + upos->getY();
 
         if (distances[uposindex] == INT_MAX) {break;} //Unable to find path
-        if (upos == endpos ){std::cout<<"Path found:";break;} //Search is completed
+        if (upos == endpos ){/*std::cout<<"Path found:";*/break;} //Search is completed
 
         for(auto iter = directions.begin(); iter!=directions.end(); ++iter) {
             int tempX = upos->getX()+(*iter).first;
@@ -159,12 +159,12 @@ std::stack<std::pair<int, int> > Map::solvePath(Coordinates* unit, Coordinates* 
     Terrain *cur = end;
     Terrain *prev;
     while (cur != start) {
-        std::cout<<"("<<cur->getLocation()->getX()<<","<<cur->getLocation()->getY()<<")"<<" ";
+        //std::cout<<"("<<cur->getLocation()->getX()<<","<<cur->getLocation()->getY()<<")"<<" ";
         prev = previous[cur->getLocation()->getX()*this->width + cur->getLocation()->getY()];
         temp.push(std::pair<int, int> (cur->getLocation()->getX() - prev->getLocation()->getX(), cur->getLocation()->getY() - prev->getLocation()->getY()));
         cur = prev;
     }
-    std::cout<<*(this->getTerrain(8,5))<<std::endl;
+    //std::cout<<*(this->getTerrain(8,5))<<std::endl;
 
 
     for (std::vector<Node*>::iterator it = nodes.begin(); it != nodes.end(); ++it){
@@ -214,7 +214,7 @@ Coordinates* Map::findNearby(Coordinates *s, int building){
 
         if (distances[uposindex] == INT_MAX) {break;} //Unable to find path
         if (u->getBuildingType() == building && u->getBuilding()->getReadiness()){temp = u->getLocation();
-            std::cout<<"Target found: ("<<upos->getX()<<","<<upos->getY()<<")"<<std::endl;
+            //std::cout<<"Target found: ("<<upos->getX()<<","<<upos->getY()<<")"<<std::endl;
             break;} //Search is completed
 
         for(auto iter = directions.begin(); iter!=directions.end(); ++iter) {

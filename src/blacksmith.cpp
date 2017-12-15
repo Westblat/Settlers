@@ -14,17 +14,9 @@ Blacksmith::Blacksmith(Terrain *terrain, bool initialize) : Building(5, 10, init
         }
     }
     
-    inventory.second = 10; //Sets max inventory size
-						  //Adds required materials to inventory, if house is not initialized as ready building
+    inventory.second = -1;
 }
 
-bool Blacksmith::makeWeapon() {
-    //Removes one iron from inventory and adds one sword
-    if(this->removeItem(2)){
-        return addItem(3);
-    }
-    else{return false;}
-}
 
 Coordinates* Blacksmith::getLocation() {
     return terrain->getLocation();

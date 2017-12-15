@@ -7,6 +7,7 @@
 #include "stonecutter.h"
 #include "ironcutter.h"
 #include "tree.h"
+#include "keep.h"
 #include "road.h"
 #include "blacksmith.h"
 
@@ -30,12 +31,16 @@ public:
     void cutTree(Settler *settler);
     void cutStone(Settler *settler);
     void cutIron(Settler *settler);
+    void cutSwords(Settler *settler);
     void buildBuilding(Settler *settler);
+    void enemy(Settler *settler);
+    void combat(Settler *settler);
 private:
     Map *map;
     std::vector<Building*> buildings;
     std::vector<Settler*> settlers;
     std::vector<Building*> notReady;
+    std::vector<House*> houses;
     /* Types for task:
     0 = idle
     1 = build

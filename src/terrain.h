@@ -27,7 +27,6 @@ public:
     void setBuildingType(int newtype);
     Building* getBuilding();
 
-
 private:
     Coordinates *location;
     int type;

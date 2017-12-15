@@ -26,6 +26,8 @@ public:
     void emptyInventory();
     bool inventoryFull();
     bool inventoryEmpty();
+    bool controlled() {return playerControlled;}
+    void setEnemy();
 
 	int getHP();
 	int removeHP(int hpChange);
@@ -39,6 +41,7 @@ public:
 	void setDelay(int time);
 	bool reduceDelay();
 	int getDelay();
+    void teleport(int x, int y);
 
 private:
 	std::string name; // Settlers name
@@ -54,5 +57,8 @@ private:
 };
 
 std::ostream& operator <<(std::ostream& os, Settler& settler);
+
+bool operator==(Settler &a, Settler &b);
+
 
 #endif

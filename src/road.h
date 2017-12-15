@@ -10,6 +10,7 @@ public:
     Road(Terrain* terrain, bool initialize, int roadtype);
     ~Road();
     Coordinates* getLocation();
+    
 private:
     Terrain* terrain;
 };

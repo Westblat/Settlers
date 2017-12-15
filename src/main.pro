@@ -46,6 +46,7 @@ SOURCES += \
         stonecutter.cpp \
         cmdmenuicon.cpp \
         ironcutter.cpp \
+        keep.cpp \
 
 HEADERS += \
         mainwindow.h \
@@ -69,9 +70,12 @@ HEADERS += \
         stonecutter.h \
         cmdmenuicon.h \
         ironcutter.h \
+        keep.h \
 
 RESOURCES += \
     media.qrc
 
 
 FORMS +=
+
+OBJECTS_DIR = obj
