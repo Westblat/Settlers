@@ -388,6 +388,7 @@ void Game::enemy(Settler *settler){
             for(std::vector<House*>::iterator it = houses.begin(); it != houses.end(); it++){
                 if((**it) == *(map->getTerrain(settler->getLocation())->getBuilding())){
                     destroyed = *it;
+                    houses.erase(it);
                     break;
                 }
             }
